@@ -18,7 +18,7 @@ public class BusinessController implements ApplicationContextAware {
 
    @RequestMapping(value = "/{businessId:\\d+}")
    public String getBusiness(){
-      return "got a business";
+      return "got a business again";
    }
 
    @Override
