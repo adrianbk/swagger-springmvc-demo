@@ -95,7 +95,7 @@
             <version>6.1.26</version>
             <configuration>
                <webAppConfig>
-                  <contextPath>/</contextPath>
+                  <contextPath>/swagger-springmvc-demo</contextPath>
                </webAppConfig>
                <connectors>
                   <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">

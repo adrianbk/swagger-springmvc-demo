@@ -1,19 +1,19 @@
 package com.ak.swaggermvc.demo.config;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
 import com.mangofactory.swagger.core.ControllerResourceGroupingStrategy;
 import com.mangofactory.swagger.core.SwaggerApiResourceListing;
 import com.mangofactory.swagger.scanners.ApiListingReferenceScanner;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.context.annotation.Import;
-import org.springframework.http.converter.json.MappingJackson2HttpMessageConverter;
 import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
-import scala.reflect.BeanDescription;
 
+import javax.annotation.Resource;
 import java.lang.annotation.Annotation;
+import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
@@ -22,7 +22,13 @@ import java.util.Map;
 @Import(SpringSwaggerConfig.class)
 public class SwaggerConfig {
 
-   private List<Class<? extends Annotation>> defaultExcludeAnnotations;
+   /*
+   * Autowire wont work on generic collections - @Resource will
+   * http://stackoverflow.com/questions/1363310/auto-wiring-a-list-using-util-schema-gives-nosuchbeandefinitionexception
+   */
+   @Resource(name="defaultExcludeAnnotations")
+   private List defaultExcludeAnnotations;
+
    @Autowired
    private ControllerResourceGroupingStrategy defaultControllerResourceGroupingStrategy;
 
