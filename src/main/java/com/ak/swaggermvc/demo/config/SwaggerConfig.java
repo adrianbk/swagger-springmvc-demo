@@ -1,12 +1,15 @@
 package com.ak.swaggermvc.demo.config;
 
+import com.google.common.collect.Multimaps;
 import com.mangofactory.swagger.configuration.JacksonScalaSupport;
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
 import com.mangofactory.swagger.core.ControllerResourceGroupingStrategy;
 import com.mangofactory.swagger.core.SwaggerApiResourceListing;
 import com.mangofactory.swagger.scanners.ApiListingReferenceScanner;
+import com.mangofactory.swagger.scanners.ApiListingScanner;
 import com.wordnik.swagger.model.ApiInfo;
 import com.wordnik.swagger.model.ApiKey;
+import com.wordnik.swagger.model.ApiListing;
 import com.wordnik.swagger.model.AuthorizationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,10 +20,9 @@ import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandl
 
 import javax.annotation.Resource;
 import java.lang.annotation.Annotation;
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+
+import static com.google.common.collect.Maps.newHashMap;
 
 @Configuration
 @Import(SpringSwaggerConfig.class)
@@ -57,12 +59,18 @@ public class SwaggerConfig {
       swaggerApiResourceListing.setApiInfo(apiInfo());
       swaggerApiResourceListing.setAuthorizationTypes(authorizationTypes());
 
-      ApiListingReferenceScanner apiListingReferenceScanner = new ApiListingReferenceScanner();
-      apiListingReferenceScanner.setHandlerMappings(handlerMappings);
-      apiListingReferenceScanner.setExcludeAnnotations(defaultExcludeAnnotations);
-      apiListingReferenceScanner.setControllerNamingStrategy(defaultControllerResourceGroupingStrategy);
+      ApiListingReferenceScanner apiListingReferenceScanner = apiListingReferenceScanner();
       swaggerApiResourceListing.setApiListingReferenceScanner(apiListingReferenceScanner);
       return swaggerApiResourceListing;
+   }
+
+   @Bean
+   public ApiListingReferenceScanner apiListingReferenceScanner() {
+      ApiListingReferenceScanner apiListingReferenceScanner = new ApiListingReferenceScanner();
+      apiListingReferenceScanner.setRequestMappingHandlerMapping(handlerMappings);
+      apiListingReferenceScanner.setExcludeAnnotations(defaultExcludeAnnotations);
+      apiListingReferenceScanner.setControllerNamingStrategy(defaultControllerResourceGroupingStrategy);
+      return apiListingReferenceScanner;
    }
 
    private List<AuthorizationType> authorizationTypes() {
@@ -91,18 +99,11 @@ public class SwaggerConfig {
       return swaggerApiResourceListings;
    }
 
-//   def jackson2 = new MappingJackson2HttpMessageConverter()
-//   ObjectMapper mapper = new ObjectMapper()
-//   mapper.registerModule(new DefaultScalaModule())
-//
-//         jackson2.setObjectMapper(mapper)
+   @Bean
+   public Map<String, Map<String, ApiListing>> swaggerApiListings() {
+      Map<String, Map<String, ApiListing>> swaggerApiListings = newHashMap();
+      swaggerApiListings.put("default", swaggerApiResourceListing().getSwaggerApiListings() );
+      return swaggerApiListings;
+   }
 
-//   <bean id="swaggerApiResourceListing" class="com.mangofactory.swagger.core.SwaggerApiResourceListing">
-//   <property name="apiListingReferenceScanner">
-//   <bean class="com.mangofactory.swagger.scanners.ApiListingReferenceScanner">
-//   <property name="controllerNamingStrategy" ref="defaultControllerResourceGroupingStrategy"/>
-//   </bean>
-//   </property>
-//
-//   </bean>
 }
