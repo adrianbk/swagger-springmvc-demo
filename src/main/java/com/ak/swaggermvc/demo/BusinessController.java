@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import static org.springframework.web.bind.annotation.RequestMethod.PATCH;
+
 @RequestMapping(value = "/businesses", produces = MediaType.APPLICATION_JSON_VALUE)
 @Controller
 public class BusinessController implements ApplicationContextAware {
@@ -17,10 +19,19 @@ public class BusinessController implements ApplicationContextAware {
    private ApplicationContext ctx;
 
    @RequestMapping(method = RequestMethod.GET)
-   public void list(){}
+   public void list() {
+   }
 
    @RequestMapping(value = {"/{businessId:\\d+}", "/{businessId:\\w+}"})
-    public String getBusiness(@PathVariable("businessId") String businessId){
+   public String getBusiness(@PathVariable("businessId") String businessId) {
+      return "got a business again";
+   }
+
+   @ApiOperation(value = "Value is the summary",
+                 notes = "Gives more detailed info on the api operation",
+                 httpMethod = "PATCH")
+   @RequestMapping(value = {"/withHttpMethodOverride"})
+   public String getBusinessWithHttpMethod(@PathVariable("businessId") String businessId) {
       return "got a business again";
    }
 
