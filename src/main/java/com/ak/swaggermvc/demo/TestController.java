@@ -13,6 +13,7 @@ public class TestController {
 
    @ApiOperation(value = "summary", httpMethod = "GET", position = 1, notes = "some detail on the endpoint")
    @RequestMapping(value = "position1", method = RequestMethod.GET)
+
    public void position2() {
    }
 

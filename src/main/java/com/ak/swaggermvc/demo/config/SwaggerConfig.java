@@ -1,61 +1,41 @@
 package com.ak.swaggermvc.demo.config;
 
-import com.google.common.collect.Multimaps;
 import com.mangofactory.swagger.configuration.JacksonScalaSupport;
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
-import com.mangofactory.swagger.core.ControllerResourceGroupingStrategy;
 import com.mangofactory.swagger.core.SwaggerApiResourceListing;
 import com.mangofactory.swagger.scanners.ApiListingReferenceScanner;
-import com.mangofactory.swagger.scanners.ApiListingScanner;
 import com.wordnik.swagger.model.ApiInfo;
 import com.wordnik.swagger.model.ApiKey;
-import com.wordnik.swagger.model.ApiListing;
 import com.wordnik.swagger.model.AuthorizationType;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.context.annotation.Import;
-import org.springframework.web.servlet.mvc.method.annotation.RequestMappingHandlerMapping;
 
-import javax.annotation.Resource;
-import java.lang.annotation.Annotation;
-import java.util.*;
-
-import static com.google.common.collect.Maps.newHashMap;
+import java.util.ArrayList;
+import java.util.List;
 
 @Configuration
-@Import(SpringSwaggerConfig.class)
 public class SwaggerConfig {
 
-   /*
-   * Autowire wont work on generic collections - @Resource will
-   * http://stackoverflow.com/questions/1363310/auto-wiring-a-list-using-util-schema-gives-nosuchbeandefinitionexception
-   */
-   @Resource(name = "defaultExcludeAnnotations")
-   private List defaultExcludeAnnotations;
-
    @Autowired
-   private ControllerResourceGroupingStrategy defaultControllerResourceGroupingStrategy;
+   private SpringSwaggerConfig springSwaggerConfig;
 
-   @Autowired
-   private List<RequestMappingHandlerMapping> handlerMappings;
-
-   @Bean
    /**
     * Adds the jackson scala module to the MappingJackson2HttpMessageConverter registered with spring
+    * Swagger  core models are scala so we need to be able to convert to JSON
     */
+   @Bean
    public JacksonScalaSupport jacksonScalaSupport(){
       JacksonScalaSupport jacksonScalaSupport = new JacksonScalaSupport();
-      jacksonScalaSupport.setRegisterScalaModule(true);
+      jacksonScalaSupport.setRegisterScalaModule(true); //Set to false to disable
       return jacksonScalaSupport;
    }
 
    @Bean
    @Autowired
    public SwaggerApiResourceListing swaggerApiResourceListing() {
-      SwaggerApiResourceListing swaggerApiResourceListing = new SwaggerApiResourceListing();
-
+      SwaggerApiResourceListing swaggerApiResourceListing = new SwaggerApiResourceListing(springSwaggerConfig.swaggerCache(), "default");
+      swaggerApiResourceListing.setSwaggerPathProvider(springSwaggerConfig.defaultSwaggerPathProvider());
       swaggerApiResourceListing.setApiInfo(apiInfo());
       swaggerApiResourceListing.setAuthorizationTypes(authorizationTypes());
 
@@ -67,9 +47,10 @@ public class SwaggerConfig {
    @Bean
    public ApiListingReferenceScanner apiListingReferenceScanner() {
       ApiListingReferenceScanner apiListingReferenceScanner = new ApiListingReferenceScanner();
-      apiListingReferenceScanner.setRequestMappingHandlerMapping(handlerMappings);
-      apiListingReferenceScanner.setExcludeAnnotations(defaultExcludeAnnotations);
-      apiListingReferenceScanner.setControllerNamingStrategy(defaultControllerResourceGroupingStrategy);
+      apiListingReferenceScanner.setRequestMappingHandlerMapping(springSwaggerConfig.swaggerRequestMappingHandlerMappings());
+      apiListingReferenceScanner.setExcludeAnnotations(springSwaggerConfig.defaultExcludeAnnotations());
+      apiListingReferenceScanner.setControllerNamingStrategy(springSwaggerConfig.defaultControllerResourceNamingStrategy()
+      );
       return apiListingReferenceScanner;
    }
 
@@ -90,20 +71,4 @@ public class SwaggerConfig {
       );
       return apiInfo;
    }
-
-   @Bean
-   public Map<String, SwaggerApiResourceListing> swaggerApiResourceListingMap() {
-      Map<String, SwaggerApiResourceListing> swaggerApiResourceListings = new
-            LinkedHashMap<String, SwaggerApiResourceListing>();
-      swaggerApiResourceListings.put("default", swaggerApiResourceListing());
-      return swaggerApiResourceListings;
-   }
-
-   @Bean
-   public Map<String, Map<String, ApiListing>> swaggerApiListings() {
-      Map<String, Map<String, ApiListing>> swaggerApiListings = newHashMap();
-      swaggerApiListings.put("default", swaggerApiResourceListing().getSwaggerApiListings() );
-      return swaggerApiListings;
-   }
-
 }
