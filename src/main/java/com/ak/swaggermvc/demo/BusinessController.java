@@ -10,25 +10,29 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-@RequestMapping(value = "/businesses", produces = MediaType.APPLICATION_JSON_VALUE)
+import java.util.List;
+
+import static com.google.common.collect.Lists.newArrayList;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
+import static org.springframework.web.bind.annotation.RequestMethod.GET;
+
 @Controller
 public class BusinessController {
 
-   @RequestMapping(method = RequestMethod.GET)
-   public void list() {
-   }
-
-   @RequestMapping(value = {"{businessId:\\d+}", "{businessId:\\w+}"})
+   @ApiOperation(value = "get a list of businesses", notes = "Gets 20 default businesses")
+   @RequestMapping(value = "/businesses", method = GET)
    @ResponseBody
-   public Business getBusiness(@PathVariable("businessId") String businessId) {
-      Business business = new Business();
-      business.name = "Widgets Ltd.";
-      return business;
+   public List<Business> list() {
+      List<Business> businessList = newArrayList();
+      for(int i = 0; i < 20; i++){
+         businessList.add(new Business());
+      }
+      return businessList;
    }
 
-   @ApiOperation(value = "Value is the summary",
-                 notes = "Gives more detailed info on the api operation")
-   @RequestMapping(value = {"withHttpMethodOverride"}, method = RequestMethod.GET)
+
+   @ApiOperation(value = "Value is the summary", notes = "Gives more detailed info on the api operation")
+   @RequestMapping(value = {"/businesses/1"}, method = GET, produces = APPLICATION_JSON_VALUE)
    @ResponseBody
    public Business getBusinessWithHttpMethod() {
       Business business = new Business();

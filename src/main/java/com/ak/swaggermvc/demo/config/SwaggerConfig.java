@@ -10,6 +10,7 @@ import com.wordnik.swagger.model.AuthorizationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import scala.actors.threadpool.Arrays;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -27,14 +28,15 @@ public class SwaggerConfig {
    @Bean
    public JacksonScalaSupport jacksonScalaSupport(){
       JacksonScalaSupport jacksonScalaSupport = new JacksonScalaSupport();
-      jacksonScalaSupport.setRegisterScalaModule(true); //Set to false to disable
+      //Set to false to disable
+      jacksonScalaSupport.setRegisterScalaModule(true);
       return jacksonScalaSupport;
    }
 
    @Bean
    @Autowired
    public SwaggerApiResourceListing swaggerApiResourceListing() {
-      SwaggerApiResourceListing swaggerApiResourceListing = new SwaggerApiResourceListing(springSwaggerConfig.swaggerCache(), "default");
+      SwaggerApiResourceListing swaggerApiResourceListing = new SwaggerApiResourceListing(springSwaggerConfig.swaggerCache(), "business-api");
       swaggerApiResourceListing.setSwaggerPathProvider(springSwaggerConfig.defaultSwaggerPathProvider());
       swaggerApiResourceListing.setApiInfo(apiInfo());
       swaggerApiResourceListing.setAuthorizationTypes(authorizationTypes());
@@ -49,7 +51,14 @@ public class SwaggerConfig {
       ApiListingReferenceScanner apiListingReferenceScanner = new ApiListingReferenceScanner();
       apiListingReferenceScanner.setRequestMappingHandlerMapping(springSwaggerConfig.swaggerRequestMappingHandlerMappings());
       apiListingReferenceScanner.setExcludeAnnotations(springSwaggerConfig.defaultExcludeAnnotations());
-      apiListingReferenceScanner.setControllerNamingStrategy(springSwaggerConfig.defaultControllerResourceNamingStrategy()
+      apiListingReferenceScanner.setControllerNamingStrategy(springSwaggerConfig.defaultControllerResourceNamingStrategy());
+      //Must match the swagger group set on SwaggerApiResourceListing
+      apiListingReferenceScanner.setSwaggerGroup("business-api");
+      //Only add the businesses endpoints to this api listing
+      apiListingReferenceScanner.setIncludePatterns(
+            Arrays.asList(new String[]{
+                  "/business.*"
+            })
       );
       return apiListingReferenceScanner;
    }
