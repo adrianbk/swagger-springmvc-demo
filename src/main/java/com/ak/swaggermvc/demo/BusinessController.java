@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
@@ -22,7 +23,7 @@ public class BusinessController {
    @ApiOperation(value = "get a list of businesses", notes = "Gets 20 default businesses")
    @RequestMapping(value = "/businesses", method = GET)
    @ResponseBody
-   public List<Business> list() {
+   public List<Business> list(HttpServletRequest request) {
       List<Business> businessList = newArrayList();
       for(int i = 0; i < 20; i++){
          businessList.add(new Business());
