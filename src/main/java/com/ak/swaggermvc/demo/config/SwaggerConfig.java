@@ -41,6 +41,7 @@ public class SwaggerConfig {
       swaggerApiResourceListing.setSwaggerPathProvider(springSwaggerConfig.defaultSwaggerPathProvider());
       swaggerApiResourceListing.setApiInfo(apiInfo());
       swaggerApiResourceListing.setAuthorizationTypes(authorizationTypes());
+      swaggerApiResourceListing.setIgnorableParameterTypes(springSwaggerConfig.defaultIgnorableParameterTypes());
 
       ApiListingReferenceScanner apiListingReferenceScanner = apiListingReferenceScanner();
       swaggerApiResourceListing.setApiListingReferenceScanner(apiListingReferenceScanner);

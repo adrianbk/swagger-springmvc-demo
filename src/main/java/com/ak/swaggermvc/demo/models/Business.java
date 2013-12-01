@@ -7,6 +7,7 @@ import java.util.Date;
 
 public class Business {
    //No getters or setters for testing purposes
+   public int id;
    public String name;
    public String owner;
    public LocalDate inception;
