@@ -43,6 +43,20 @@ public class BusinessController {
       return new ArrayList<Business>(businessCache.values());
    }
 
+   @ApiOperation(value = "get a number of businesses", notes = "Returns all businesses based on the supplied ids")
+   @RequestMapping(value = "/businesses/specificBusinesses", method = GET)
+   @ResponseBody
+   public List<Business> getByIds(@RequestParam String[] ids) {
+      return new ArrayList<Business>(businessCache.values());
+   }
+
+   @ApiOperation(value = "get all businesses by type", notes = "Returns all businesses based on the business type")
+   @RequestMapping(value = "/businesses/product", method = GET)
+   @ResponseBody
+   public List<Business> getByIds(@RequestParam Business.BusinessType businessType) {
+      return new ArrayList<Business>(businessCache.values());
+   }
+
    @ApiOperation(value = "Value is the summary", notes = "Gives more detailed info on the api operation")
    @RequestMapping(value = {"/businesses/{businessId}"}, method = GET, produces = APPLICATION_JSON_VALUE)
    @ResponseBody
