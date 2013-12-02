@@ -2,6 +2,7 @@ package com.ak.swaggermvc.demo.config;
 
 import com.mangofactory.swagger.configuration.JacksonScalaSupport;
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
+import com.mangofactory.swagger.configuration.SpringSwaggerModelConfig;
 import com.mangofactory.swagger.core.DefaultSwaggerPathProvider;
 import com.mangofactory.swagger.core.SwaggerApiResourceListing;
 import com.mangofactory.swagger.scanners.ApiListingReferenceScanner;
@@ -11,6 +12,7 @@ import com.wordnik.swagger.model.AuthorizationType;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import scala.actors.threadpool.Arrays;
 
 import java.util.ArrayList;
@@ -21,6 +23,8 @@ public class SwaggerConfig {
 
    @Autowired
    private SpringSwaggerConfig springSwaggerConfig;
+   @Autowired
+   private SpringSwaggerModelConfig springSwaggerModelConfig;
 
    /**
     * Adds the jackson scala module to the MappingJackson2HttpMessageConverter registered with spring
@@ -42,6 +46,7 @@ public class SwaggerConfig {
       swaggerApiResourceListing.setApiInfo(apiInfo());
       swaggerApiResourceListing.setAuthorizationTypes(authorizationTypes());
       swaggerApiResourceListing.setIgnorableParameterTypes(springSwaggerConfig.defaultIgnorableParameterTypes());
+      swaggerApiResourceListing.setParameterDataTypes(springSwaggerModelConfig.defaultParameterDataTypes());
 
       ApiListingReferenceScanner apiListingReferenceScanner = apiListingReferenceScanner();
       swaggerApiResourceListing.setApiListingReferenceScanner(apiListingReferenceScanner);
@@ -60,7 +65,8 @@ public class SwaggerConfig {
       //Only add the businesses endpoints to this api listing
       apiListingReferenceScanner.setIncludePatterns(
             Arrays.asList(new String[]{
-                  "/business.*"
+                  "/business.*",
+                  "/operations.*"
             })
       );
       return apiListingReferenceScanner;
