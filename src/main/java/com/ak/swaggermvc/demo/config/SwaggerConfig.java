@@ -3,6 +3,7 @@ package com.ak.swaggermvc.demo.config;
 import com.mangofactory.swagger.configuration.JacksonScalaSupport;
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
 import com.mangofactory.swagger.configuration.SpringSwaggerModelConfig;
+import com.mangofactory.swagger.configuration.SwaggerGlobalSettings;
 import com.mangofactory.swagger.core.DefaultSwaggerPathProvider;
 import com.mangofactory.swagger.core.SwaggerApiResourceListing;
 import com.mangofactory.swagger.scanners.ApiListingReferenceScanner;
@@ -45,12 +46,20 @@ public class SwaggerConfig {
       swaggerApiResourceListing.setSwaggerPathProvider(springSwaggerConfig.defaultSwaggerPathProvider());
       swaggerApiResourceListing.setApiInfo(apiInfo());
       swaggerApiResourceListing.setAuthorizationTypes(authorizationTypes());
-      swaggerApiResourceListing.setIgnorableParameterTypes(springSwaggerConfig.defaultIgnorableParameterTypes());
-      swaggerApiResourceListing.setParameterDataTypes(springSwaggerModelConfig.defaultParameterDataTypes());
+      swaggerApiResourceListing.setSwaggerGlobalSettings(swaggerGlobalSettings());
 
       ApiListingReferenceScanner apiListingReferenceScanner = apiListingReferenceScanner();
       swaggerApiResourceListing.setApiListingReferenceScanner(apiListingReferenceScanner);
       return swaggerApiResourceListing;
+   }
+
+   @Bean
+   public SwaggerGlobalSettings swaggerGlobalSettings(){
+      SwaggerGlobalSettings swaggerGlobalSettings = new SwaggerGlobalSettings();
+      swaggerGlobalSettings.setGlobalResponseMessages(springSwaggerConfig.defaultResponseMessages());
+      swaggerGlobalSettings.setIgnorableParameterTypes(springSwaggerConfig.defaultIgnorableParameterTypes());
+      swaggerGlobalSettings.setParameterDataTypes(springSwaggerModelConfig.defaultParameterDataTypes());
+      return  swaggerGlobalSettings;
    }
 
    @Bean
