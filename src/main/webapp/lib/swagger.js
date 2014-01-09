@@ -633,7 +633,9 @@
       }
       if (this.type != null) {
         this.responseClassSignature = this.getSignature(this.type, this.resource.models);
+      console.log("this.responseClassSignature" + this.responseClassSignature);
         this.responseSampleJSON = this.getSampleJSON(this.type, this.resource.models);
+          console.log("this.responseSampleJSON:" + this.responseSampleJSON);
       }
       this.responseMessages = this.responseMessages || [];
       _ref1 = this.parameters;
