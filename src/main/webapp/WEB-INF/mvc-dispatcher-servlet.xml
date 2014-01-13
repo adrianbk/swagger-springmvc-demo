@@ -29,7 +29,7 @@
       </mvc:message-converters>
    </mvc:annotation-driven>
 
-   <mvc:default-servlet-handler/>
+
 
    <context:annotation-config/>
    <context:component-scan base-package="com.ak.swaggermvc.demo"/>
@@ -40,4 +40,12 @@
    <!-- Pick up the bundled spring config-->
    <context:component-scan base-package="com.mangofactory.swagger.configuration"/>
 
+   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+      <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
+      <property name="prefix" value="/WEB-INF/pages/"/>
+      <property name="suffix" value=".jsp"/>
+   </bean>
+
+   <mvc:view-controller path="/swaggerBusiness" view-name="swaggerBusiness" />
+   <mvc:default-servlet-handler/>
 </beans>
