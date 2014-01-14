@@ -1,9 +1,10 @@
 package com.ak.swaggermvc.demo.pages
 
+import com.ak.swaggermvc.demo.modules.ResourceListingModule
 import geb.Page
 
 class SwaggerApiPage extends Page {
-   static url = "swaggerBusiness"
+   static url = ""
    static at = { title == "Swagger UI" }
 
    static content = {
@@ -13,6 +14,8 @@ class SwaggerApiPage extends Page {
       contact        { $('div', class: 'info_contact') }
       license        { $('div', class: 'info_license') }
       footer         { $(".footer h4") }
+      resourceListing { index -> module ResourceListingModule , $('#resources_container #resources .resource', index) }
+
    }
 
 }

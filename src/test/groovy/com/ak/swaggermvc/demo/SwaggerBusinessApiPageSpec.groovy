@@ -7,16 +7,27 @@ public class SwaggerBusinessApiPageSpec extends GebSpec {
 
    def "Swagger UI Static Content"() {
     when:
-      to SwaggerApiPage
-    then:
+      SwaggerApiPage.url = "${baseUrl()}/swaggerBusiness"
+      to(SwaggerApiPage)
+
+    then: "Title"
       title == "Swagger UI"
+    and: "API Meta data"
+
       page.heading.text() == "Demo Spring MVC swagger 1.2 api"
-      page.description .text() == "Sample spring mvc api based on the swagger 1.2 spec"
+      page.description.text() == "Sample spring mvc api based on the swagger 1.2 spec"
       page.termsOfService.text() == "Terms of service"
       page.contact.text() == "Contact the developer"
       page.license.text() == "Apache 2.0"
+
+    and: "footer"
       page.footer.text().replaceAll(' ', '') == "[baseurl:http://127.0.0.1:8080/swagger-springmvc-demo/api-docs/business-api,apiversion:1]"
+
+    and: "contains business resource listing"
+      page.resourceListing(1).name == 'businesses : businesses'
    }
 
-
+   private String baseUrl() {
+      return browser.config.rawConfig.baseUrl
+   }
 }

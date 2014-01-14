@@ -192,7 +192,6 @@
                   <geb.build.baseUrl>http://127.0.0.1:8080/swagger-springmvc-demo/</geb.build.baseUrl>
                   <geb.build.reportsDir>target/test-reports/geb</geb.build.reportsDir>
                </systemPropertyVariables>
-
             </configuration>
          </plugin>
          <plugin>
@@ -223,21 +222,7 @@
                   </goals>
                </execution>
             </executions>
-
          </plugin>
-
-
-
-
-
-
-
-
-
-
-
-
-
-      </plugins>
+   </plugins>
    </build>
 </project>
