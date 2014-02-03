@@ -15,6 +15,7 @@
       <groovy-all.version>2.1.5</groovy-all.version>
       <slf4j-api.version>1.7.5</slf4j-api.version>
       <jcl-over-slf4j.version>1.7.5</jcl-over-slf4j.version>
+       <http.port>8097</http.port>
    </properties>
 
    <repositories>
@@ -105,8 +106,13 @@
          <version>1.0.13</version>
       </dependency>
 
+       <dependency>
+           <groupId>org.apache.ant</groupId>
+           <artifactId>ant</artifactId>
+           <version>1.9.3</version>
+       </dependency>
 
-      <dependency>
+       <dependency>
          <groupId>junit</groupId>
          <artifactId>junit</artifactId>
          <version>4.11</version>
@@ -141,7 +147,12 @@
          <version>2.33.0</version>
          <scope>test</scope>
       </dependency>
-      <dependency>
+       <dependency>
+           <groupId>org.seleniumhq.selenium</groupId>
+           <artifactId>selenium-chrome-driver</artifactId>
+           <version>2.37.1</version>
+       </dependency>
+       <dependency>
          <groupId>org.seleniumhq.selenium</groupId>
          <artifactId>selenium-support</artifactId>
          <version>2.33.0</version>
@@ -169,7 +180,7 @@
                </webAppConfig>
                <connectors>
                   <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
-                     <port>8080</port>
+                     <port>${http.port}</port>
                      <maxIdleTime>60000</maxIdleTime>
                   </connector>
                </connectors>
@@ -189,7 +200,7 @@
 
                </includes>
                <systemPropertyVariables>
-                  <geb.build.baseUrl>http://127.0.0.1:8080/swagger-springmvc-demo/</geb.build.baseUrl>
+                  <geb.build.baseUrl>http://127.0.0.1:${http.port}/swagger-springmvc-demo/</geb.build.baseUrl>
                   <geb.build.reportsDir>target/test-reports/geb</geb.build.reportsDir>
                </systemPropertyVariables>
             </configuration>

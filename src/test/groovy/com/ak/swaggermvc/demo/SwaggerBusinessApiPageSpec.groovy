@@ -21,7 +21,7 @@ public class SwaggerBusinessApiPageSpec extends GebSpec {
       page.license.text() == "Apache 2.0"
 
     and: "footer"
-      page.footer.text().replaceAll(' ', '') == "[baseurl:http://127.0.0.1:8080/swagger-springmvc-demo/api-docs/business-api,apiversion:1]"
+      page.footer.text().replaceAll(' ', '') == "[baseurl:${baseUrl()}/api-docs/business-api,apiversion:1]"
 
     and: "contains business resource listing"
       page.resourceListing(1).name == 'businesses : businesses'

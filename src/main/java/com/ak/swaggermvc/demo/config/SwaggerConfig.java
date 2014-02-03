@@ -41,7 +41,7 @@ public class SwaggerConfig {
    @Autowired
    public SwaggerApiResourceListing swaggerApiResourceListing() {
       SwaggerApiResourceListing swaggerApiResourceListing = new SwaggerApiResourceListing(springSwaggerConfig.swaggerCache(), "business-api");
-      swaggerApiResourceListing.setSwaggerPathProvider(springSwaggerConfig.defaultSwaggerPathProvider());
+      swaggerApiResourceListing.setSwaggerPathProvider(demoPathProvider());
       swaggerApiResourceListing.setApiInfo(apiInfo());
       swaggerApiResourceListing.setAuthorizationTypes(authorizationTypes());
       swaggerApiResourceListing.setSwaggerGlobalSettings(swaggerGlobalSettings());
@@ -66,7 +66,8 @@ public class SwaggerConfig {
       apiListingReferenceScanner.setRequestMappingHandlerMapping(springSwaggerConfig.swaggerRequestMappingHandlerMappings());
       apiListingReferenceScanner.setExcludeAnnotations(springSwaggerConfig.defaultExcludeAnnotations());
       apiListingReferenceScanner.setControllerNamingStrategy(springSwaggerConfig.defaultControllerResourceNamingStrategy());
-      apiListingReferenceScanner.setSwaggerPathProvider(springSwaggerConfig.defaultSwaggerPathProvider());
+//      apiListingReferenceScanner.setSwaggerPathProvider(springSwaggerConfig.defaultSwaggerPathProvider());
+      apiListingReferenceScanner.setSwaggerPathProvider(demoPathProvider());
       //Must match the swagger group set on SwaggerApiResourceListing
       apiListingReferenceScanner.setSwaggerGroup("business-api");
       //Only add the businesses endpoints to this api listing
@@ -79,7 +80,14 @@ public class SwaggerConfig {
       return apiListingReferenceScanner;
    }
 
-   private List<AuthorizationType> authorizationTypes() {
+    @Bean
+    public DemoPathProvider demoPathProvider(){
+        DemoPathProvider demoPathProvider = new DemoPathProvider();
+        demoPathProvider.setDefaultSwaggerPathProvider(springSwaggerConfig.defaultSwaggerPathProvider());
+        return demoPathProvider;
+    }
+
+    private List<AuthorizationType> authorizationTypes() {
       ArrayList<AuthorizationType> authorizationTypes = new ArrayList<AuthorizationType>();
       authorizationTypes.add(new ApiKey("x-auth-token", "header"));
       return authorizationTypes;
