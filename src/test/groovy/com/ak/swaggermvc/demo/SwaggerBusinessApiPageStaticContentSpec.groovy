@@ -3,7 +3,7 @@ package com.ak.swaggermvc.demo
 import com.ak.swaggermvc.demo.pages.SwaggerApiPage
 import geb.spock.GebSpec;
 
-public class SwaggerBusinessApiPageSpec extends GebSpec {
+public class SwaggerBusinessApiPageStaticContentSpec extends GebSpec {
 
    def "Swagger UI Static Content"() {
     when:
@@ -24,7 +24,7 @@ public class SwaggerBusinessApiPageSpec extends GebSpec {
       page.footer.text().replaceAll(' ', '') == "[baseurl:${baseUrl()}/api-docs/business-api,apiversion:1]"
 
     and: "contains business resource listing"
-      page.resourceListing(1).name == 'businesses : businesses'
+      page.resourceListing('businesses').name == 'businesses : businesses'
    }
 
    private String baseUrl() {
