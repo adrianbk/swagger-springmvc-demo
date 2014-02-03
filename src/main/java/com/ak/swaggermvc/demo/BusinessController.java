@@ -66,6 +66,17 @@ public class BusinessController {
       return businessCache.get(businessId);
    }
 
+
+   @ApiOperation(value = "Business with annotated model", notes = "Annotated model annotation")
+   @RequestMapping(value = {"/businessesAnnotated/{businessId}"}, method = GET, produces = APPLICATION_JSON_VALUE)
+   @ResponseBody
+   public Business getBusinessAnnotated(
+           @ApiParam(defaultValue = "1", value = "The id of the business to return")
+           @PathVariable Integer businessId) {
+      return businessCache.get(businessId);
+   }
+
+
    @RequestMapping(value = {"/businesses"}, method = POST, consumes = APPLICATION_JSON_VALUE , produces = APPLICATION_JSON_VALUE)
    @ResponseBody
    public ResponseEntity<Business> createBusiness(@RequestBody Business business){

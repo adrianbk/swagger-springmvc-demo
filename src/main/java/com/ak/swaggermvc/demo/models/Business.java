@@ -5,6 +5,7 @@ import org.joda.time.LocalDate;
 import java.util.Date;
 
 
+
 public class Business {
    //not private - just for testing
    public int id;
