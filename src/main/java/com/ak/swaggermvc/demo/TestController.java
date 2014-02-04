@@ -18,26 +18,28 @@ public class TestController {
 
    @ApiOperation(value = "summary", httpMethod = "GET", position = 1, notes = "some detail on the endpoint")
    @RequestMapping(value = "position1", method = RequestMethod.GET)
-
-   public void position2() {
+   public String position2() {
+      return "";
    }
-
 
    @ApiOperation(value = "summary", position = 0, httpMethod = "GET", notes = "some detail on the endpoint")
    @RequestMapping(value = "position0", method = RequestMethod.GET)
-   public void position1() {
+   public String position1() {
+      return "";
    }
 
    @RequestMapping(value = "springMediaTypes", method = RequestMethod.GET,
                    produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-   public void springProducesMediaTypes() {
+   public String springProducesMediaTypes() {
+      return "";
    }
 
    @ApiOperation(value = "swaggerMediaTypes", produces = "application/xml, application/json, application/pdf",
                  consumes= "application/xml, application/json, application/pdf ")
    @RequestMapping(value = "swaggerMediaTypes", method = RequestMethod.GET,
                    produces = {MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
-   public void swaggerMediaTypes() {
+   public String swaggerMediaTypes() {
+      return "";
    }
 
 //   @RequestMapping(value = {"{businessId:\\d+}", "{businessId:\\w+}"}, method = GET)

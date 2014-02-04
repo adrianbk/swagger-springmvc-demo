@@ -88,7 +88,13 @@
          <version>2.1.1</version>
       </dependency>
 
-      <dependency>
+       <dependency>
+           <groupId>com.fasterxml.jackson.core</groupId>
+           <artifactId>jackson-annotations</artifactId>
+           <version>2.2.1</version>
+       </dependency>
+
+       <dependency>
          <groupId>org.slf4j</groupId>
          <artifactId>slf4j-api</artifactId>
          <version>${slf4j-api.version}</version>
@@ -113,11 +119,19 @@
        </dependency>
 
        <dependency>
+           <groupId>org.hibernate</groupId>
+           <artifactId>hibernate-validator</artifactId>
+           <version>5.0.2.Final</version>
+       </dependency>
+
+       <dependency>
          <groupId>junit</groupId>
          <artifactId>junit</artifactId>
          <version>4.11</version>
          <scope>test</scope>
       </dependency>
+
+
 
       <!--Geb Integration Tests-->
       <dependency>
