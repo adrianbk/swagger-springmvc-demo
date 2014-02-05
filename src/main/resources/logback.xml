@@ -12,6 +12,8 @@
    </appender>
 
    <logger name="com.ak" level="debug" />
+   <logger name="com.mangofactory" level="debug" />
+   <logger name="com.wordnik" level="debug" />
    <logger name="org.springframework" level="debug" />
    <logger name="org.springframework.beans" level="debug" />
 

@@ -74,7 +74,7 @@ public class SwaggerConfig {
       apiListingReferenceScanner.setIncludePatterns(
             Arrays.asList(new String[]{
                   "/business.*",
-                  "/operations.*",
+//                  "/operations.*",
                    "/contacts.*"
             })
       );
