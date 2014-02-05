@@ -10,6 +10,6 @@ A sample app using https://github.com/adrianbk/swagger-springmvc/tree/swagger-sp
 ```mvn jetty:run```
 
 - Swagger UI
-http://127.0.0.1:8080/swagger-springmvc-demo/swaggerBusiness
-http://127.0.0.1:8080/swagger-springmvc-demo/index.html
+http://127.0.0.1:8097/swagger-springmvc-demo/swaggerBusiness
+http://127.0.0.1:8097/swagger-springmvc-demo/index.html
 

@@ -38,7 +38,6 @@ public class SwaggerConfig {
    }
 
    @Bean
-   @Autowired
    public SwaggerApiResourceListing swaggerApiResourceListing() {
       SwaggerApiResourceListing swaggerApiResourceListing = new SwaggerApiResourceListing(springSwaggerConfig.swaggerCache(), "business-api");
       swaggerApiResourceListing.setSwaggerPathProvider(demoPathProvider());
