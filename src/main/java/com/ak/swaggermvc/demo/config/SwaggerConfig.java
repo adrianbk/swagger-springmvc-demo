@@ -34,6 +34,7 @@ public class SwaggerConfig {
       "/some.*",
       "/contacts.*"
   });
+  public static final String SWAGGER_GROUP = "business-api";
 
   @Autowired
   private SpringSwaggerConfig springSwaggerConfig;
@@ -43,6 +44,7 @@ public class SwaggerConfig {
   /**
    * Adds the jackson scala module to the MappingJackson2HttpMessageConverter registered with spring
    * Swagger core models are scala so we need to be able to convert to JSON
+   * Also registers som custom serializers needed to transform swagger models to swagger-ui required json format
    */
   @Bean
   public JacksonScalaSupport jacksonScalaSupport() {
@@ -54,7 +56,7 @@ public class SwaggerConfig {
 
   @Bean
   public SwaggerApiResourceListing swaggerApiResourceListing() {
-    SwaggerApiResourceListing swaggerApiResourceListing = new SwaggerApiResourceListing(springSwaggerConfig.swaggerCache(), "business-api");
+    SwaggerApiResourceListing swaggerApiResourceListing = new SwaggerApiResourceListing(springSwaggerConfig.swaggerCache(), SWAGGER_GROUP);
     swaggerApiResourceListing.setSwaggerPathProvider(demoPathProvider());
     swaggerApiResourceListing.setApiInfo(apiInfo());
     swaggerApiResourceListing.setAuthorizationTypes(authorizationTypes());
@@ -81,9 +83,8 @@ public class SwaggerConfig {
     apiListingReferenceScanner.setRequestMappingHandlerMapping(springSwaggerConfig.swaggerRequestMappingHandlerMappings());
     apiListingReferenceScanner.setExcludeAnnotations(springSwaggerConfig.defaultExcludeAnnotations());
     apiListingReferenceScanner.setResourceGroupingStrategy(springSwaggerConfig.defaultResourceGroupingStrategy());
-//      apiListingReferenceScanner.setSwaggerPathProvider(springSwaggerConfig.defaultSwaggerPathProvider());
     apiListingReferenceScanner.setSwaggerPathProvider(demoPathProvider());
-    //Must match the swagger group set on SwaggerApiResourceListing
+    //Must match the swagger group set on the SwaggerApiResourceListing
     apiListingReferenceScanner.setSwaggerGroup("business-api");
     //Only add the businesses endpoints to this api listing
     apiListingReferenceScanner.setIncludePatterns(DEFAULT_INCLUDE_PATTERNS);
@@ -99,7 +100,6 @@ public class SwaggerConfig {
 
   private List<AuthorizationType> authorizationTypes() {
     ArrayList<AuthorizationType> authorizationTypes = new ArrayList<AuthorizationType>();
-//    authorizationTypes.add(new ApiKey("x-auth-token", "header"));
 
     List<AuthorizationScope> authorizationScopeList = newArrayList();
     authorizationScopeList.add(new AuthorizationScope("global", "access all"));
