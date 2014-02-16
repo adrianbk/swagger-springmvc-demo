@@ -1,6 +1,5 @@
 package com.ak.swaggermvc.demo.config;
 
-import com.mangofactory.swagger.core.DefaultSwaggerPathProvider;
 import com.mangofactory.swagger.core.SwaggerPathProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.util.UriComponentsBuilder;
@@ -35,7 +34,12 @@ public class DemoPathProvider implements SwaggerPathProvider {
                 .toString();
     }
 
-    public void setDefaultSwaggerPathProvider(SwaggerPathProvider defaultSwaggerPathProvider) {
+   @Override
+   public String getRequestMappingEndpoint(String requestMappingPattern) {
+      return defaultSwaggerPathProvider.getRequestMappingEndpoint(requestMappingPattern);
+   }
+
+   public void setDefaultSwaggerPathProvider(SwaggerPathProvider defaultSwaggerPathProvider) {
         this.defaultSwaggerPathProvider = defaultSwaggerPathProvider;
     }
 }

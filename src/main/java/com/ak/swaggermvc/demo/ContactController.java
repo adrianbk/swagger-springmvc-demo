@@ -31,7 +31,7 @@ public class ContactController {
 
    @ApiOperation(value = "Gets all of the contacts for a business without response class override" )
    @ResponseBody
-   @RequestMapping(value = "/contacts/withoutRespClass", method = {RequestMethod.GET})
+   @RequestMapping(value = "/contacts/withoutRespClass/{businessId}", method = {RequestMethod.GET})
    public PagedApiDto<ContactApiDto> getContactsForBusinessWoAnn(
            @PathVariable Integer businessId,
            @RequestParam(required = false) Integer page,

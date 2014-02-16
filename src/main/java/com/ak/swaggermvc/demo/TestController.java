@@ -1,16 +1,10 @@
 package com.ak.swaggermvc.demo;
 
 
-import com.ak.swaggermvc.demo.models.Business;
 import com.wordnik.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.ResponseBody;
-
-import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
 //@RequestMapping(value = "/test")
 //@Controller
