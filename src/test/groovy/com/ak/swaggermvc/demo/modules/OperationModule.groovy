@@ -6,5 +6,6 @@ class OperationModule extends Module {
 
     static content = {
         httpMethod { $('.heading > h3 .http_method').text() }
+//      executeButton {$('.content')}
     }
 }

@@ -24,7 +24,7 @@ public class SwaggerBusinessApiPageStaticContentSpec extends GebSpec {
       page.footer.text().replaceAll(' ', '') == "[baseurl:${baseUrl()}/api-docs/business-api,apiversion:1]"
 
     and: "contains business resource listing"
-      page.resourceListing('businesses').name == 'businesses : businesses'
+      page.resourceListing('Businesses').name == 'Businesses : Businesses'
    }
 
    private String baseUrl() {
