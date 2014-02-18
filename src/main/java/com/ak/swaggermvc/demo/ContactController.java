@@ -2,12 +2,14 @@ package com.ak.swaggermvc.demo;
 
 import com.ak.swaggermvc.demo.models.ContactApiDto;
 import com.ak.swaggermvc.demo.models.PagedApiDto;
+import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 @Controller
+@Api(value = "Contacts")
 public class ContactController {
 
 

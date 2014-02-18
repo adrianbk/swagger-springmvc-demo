@@ -44,7 +44,7 @@ public class SwaggerConfig {
   /**
    * Adds the jackson scala module to the MappingJackson2HttpMessageConverter registered with spring
    * Swagger core models are scala so we need to be able to convert to JSON
-   * Also registers som custom serializers needed to transform swagger models to swagger-ui required json format
+   * Also registers some custom serializers needed to transform swagger models to swagger-ui required json format
    */
   @Bean
   public JacksonScalaSupport jacksonScalaSupport() {
@@ -54,20 +54,10 @@ public class SwaggerConfig {
     return jacksonScalaSupport;
   }
 
-  @Bean
-  public SwaggerApiResourceListing swaggerApiResourceListing() {
-    SwaggerApiResourceListing swaggerApiResourceListing = new SwaggerApiResourceListing(springSwaggerConfig.swaggerCache(), SWAGGER_GROUP);
-    swaggerApiResourceListing.setSwaggerPathProvider(demoPathProvider());
-    swaggerApiResourceListing.setApiInfo(apiInfo());
-    swaggerApiResourceListing.setAuthorizationTypes(authorizationTypes());
-    swaggerApiResourceListing.setSwaggerGlobalSettings(swaggerGlobalSettings());
-    swaggerApiResourceListing.setAuthorizationContext(authorizationContext());
 
-    ApiListingReferenceScanner apiListingReferenceScanner = apiListingReferenceScanner();
-    swaggerApiResourceListing.setApiListingReferenceScanner(apiListingReferenceScanner);
-    return swaggerApiResourceListing;
-  }
-
+  /**
+   * Global swagger settings
+   */
   @Bean
   public SwaggerGlobalSettings swaggerGlobalSettings() {
     SwaggerGlobalSettings swaggerGlobalSettings = new SwaggerGlobalSettings();
@@ -77,66 +67,9 @@ public class SwaggerConfig {
     return swaggerGlobalSettings;
   }
 
-  @Bean
-  public ApiListingReferenceScanner apiListingReferenceScanner() {
-    ApiListingReferenceScanner apiListingReferenceScanner = new ApiListingReferenceScanner();
-    apiListingReferenceScanner.setRequestMappingHandlerMapping(springSwaggerConfig.swaggerRequestMappingHandlerMappings());
-    apiListingReferenceScanner.setExcludeAnnotations(springSwaggerConfig.defaultExcludeAnnotations());
-    apiListingReferenceScanner.setResourceGroupingStrategy(springSwaggerConfig.defaultResourceGroupingStrategy());
-    apiListingReferenceScanner.setSwaggerPathProvider(demoPathProvider());
-    //Must match the swagger group set on the SwaggerApiResourceListing
-    apiListingReferenceScanner.setSwaggerGroup("business-api");
-    //Only add the businesses endpoints to this api listing
-    apiListingReferenceScanner.setIncludePatterns(DEFAULT_INCLUDE_PATTERNS);
-    return apiListingReferenceScanner;
-  }
-
-  @Bean
-  public DemoPathProvider demoPathProvider() {
-    DemoPathProvider demoPathProvider = new DemoPathProvider();
-    demoPathProvider.setDefaultSwaggerPathProvider(springSwaggerConfig.defaultSwaggerPathProvider());
-    return demoPathProvider;
-  }
-
-  private List<AuthorizationType> authorizationTypes() {
-    ArrayList<AuthorizationType> authorizationTypes = new ArrayList<AuthorizationType>();
-
-    List<AuthorizationScope> authorizationScopeList = newArrayList();
-    authorizationScopeList.add(new AuthorizationScope("global", "access all"));
-
-    LoginEndpoint loginEndpoint = new LoginEndpoint("https://logmein.com");
-
-    List<GrantType> grantTypes = newArrayList();
-    grantTypes.add(new ImplicitGrant(loginEndpoint, "AccessToken"));
-
-    OAuth oAuth = new OAuthBuilder()
-        .scopes(authorizationScopeList)
-        .grantTypes(grantTypes)
-        .build();
-
-    authorizationTypes.add(oAuth);
-
-    return authorizationTypes;
-  }
-
-  @Bean
-  public AuthorizationContext authorizationContext() {
-    List<Authorization> authorizations = newArrayList();
-
-    AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
-    AuthorizationScope[] authorizationScopes = new AuthorizationScope[]{authorizationScope};
-
-    authorizations.add(new Authorization("oauth2", authorizationScopes));
-
-    AuthorizationContext authorizationContext =
-        new AuthorizationContext.AuthorizationContextBuilder(authorizations)
-            .withIncludePatterns(DEFAULT_INCLUDE_PATTERNS)
-            .build();
-
-
-    return authorizationContext;
-  }
-
+  /**
+   * API Info as it appears on the swagger-ui page
+   */
   private ApiInfo apiInfo() {
     ApiInfo apiInfo = new ApiInfo(
         "Demo Spring MVC swagger 1.2 api",
@@ -147,5 +80,107 @@ public class SwaggerConfig {
         "http://www.apache.org/licenses/LICENSE-2.0.html"
     );
     return apiInfo;
+  }
+
+  /**
+   * Configure a SwaggerApiResourceListing for each swagger instance within your app. e.g. 1. private  2. external apis
+   * Required to be a spring bean as spring will call the postConstruct method to bootstrap swagger scanning.
+   *
+   * @return
+   */
+  @Bean
+  public SwaggerApiResourceListing swaggerApiResourceListing() {
+    //The group name is important and should match the group set on ApiListingReferenceScanner
+    //Note that swaggerCache() is by DefaultSwaggerController to serve the swagger json
+    SwaggerApiResourceListing swaggerApiResourceListing = new SwaggerApiResourceListing(springSwaggerConfig.swaggerCache(), SWAGGER_GROUP);
+
+    //Set the required swagger settings
+    swaggerApiResourceListing.setSwaggerGlobalSettings(swaggerGlobalSettings());
+
+    //Use a custom path provider or springSwaggerConfig.defaultSwaggerPathProvider()
+    swaggerApiResourceListing.setSwaggerPathProvider(demoPathProvider());
+
+    //Supply the API Info as it should appear on swagger-ui web page
+    swaggerApiResourceListing.setApiInfo(apiInfo());
+
+    //Global authorization - see the swagger documentation
+    swaggerApiResourceListing.setAuthorizationTypes(authorizationTypes());
+
+    //Sets up an auth context - i.e. which controller request paths to apply global auth to
+    swaggerApiResourceListing.setAuthorizationContext(authorizationContext());
+
+    //Every SwaggerApiResourceListing needs an ApiListingReferenceScanner to scan the spring request mappings
+    swaggerApiResourceListing.setApiListingReferenceScanner(apiListingReferenceScanner());
+    return swaggerApiResourceListing;
+  }
+
+  @Bean
+  /**
+   * The ApiListingReferenceScanner does most of the work.
+   * Scans the appropriate spring RequestMappingHandlerMappings
+   * Applies the correct absolute paths to the generated swagger resources
+   */
+  public ApiListingReferenceScanner apiListingReferenceScanner() {
+    ApiListingReferenceScanner apiListingReferenceScanner = new ApiListingReferenceScanner();
+
+    //Picks up all of the registered spring RequestMappingHandlerMappings for scanning
+    apiListingReferenceScanner.setRequestMappingHandlerMapping(springSwaggerConfig.swaggerRequestMappingHandlerMappings());
+
+    //Excludes any controllers with the supplied annotations
+    apiListingReferenceScanner.setExcludeAnnotations(springSwaggerConfig.defaultExcludeAnnotations());
+
+    //
+    apiListingReferenceScanner.setResourceGroupingStrategy(springSwaggerConfig.defaultResourceGroupingStrategy());
+
+    //Path provider used to generate the appropriate uri's
+    apiListingReferenceScanner.setSwaggerPathProvider(demoPathProvider());
+
+    //Must match the swagger group set on the SwaggerApiResourceListing
+    apiListingReferenceScanner.setSwaggerGroup(SWAGGER_GROUP);
+
+    //Only include paths that match the supplied regular expressions
+    apiListingReferenceScanner.setIncludePatterns(DEFAULT_INCLUDE_PATTERNS);
+
+    return apiListingReferenceScanner;
+  }
+
+  /**
+   * Example of a custom path provider
+   */
+  @Bean
+  public DemoPathProvider demoPathProvider() {
+    DemoPathProvider demoPathProvider = new DemoPathProvider();
+    demoPathProvider.setDefaultSwaggerPathProvider(springSwaggerConfig.defaultSwaggerPathProvider());
+    return demoPathProvider;
+  }
+
+
+  private List<AuthorizationType> authorizationTypes() {
+    ArrayList<AuthorizationType> authorizationTypes = new ArrayList<AuthorizationType>();
+
+    List<AuthorizationScope> authorizationScopeList = newArrayList();
+    authorizationScopeList.add(new AuthorizationScope("global", "access all"));
+    LoginEndpoint loginEndpoint = new LoginEndpoint("https://logmein.com");
+    List<GrantType> grantTypes = newArrayList();
+    grantTypes.add(new ImplicitGrant(loginEndpoint, "AccessToken"));
+    OAuth oAuth = new OAuthBuilder()
+        .scopes(authorizationScopeList)
+        .grantTypes(grantTypes)
+        .build();
+    authorizationTypes.add(oAuth);
+    return authorizationTypes;
+  }
+
+  @Bean
+  public AuthorizationContext authorizationContext() {
+    List<Authorization> authorizations = newArrayList();
+    AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
+    AuthorizationScope[] authorizationScopes = new AuthorizationScope[]{authorizationScope};
+    authorizations.add(new Authorization("oauth2", authorizationScopes));
+    AuthorizationContext authorizationContext =
+        new AuthorizationContext.AuthorizationContextBuilder(authorizations)
+            .withIncludePatterns(DEFAULT_INCLUDE_PATTERNS)
+            .build();
+    return authorizationContext;
   }
 }
