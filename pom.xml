@@ -27,17 +27,17 @@
   </repositories>
 
   <dependencies>
-    <dependency>
-    <groupId>com.mangofactory</groupId>
-    <artifactId>swagger-springmvc</artifactId>
-    <version>0.8.1</version>
-    </dependency>
-
     <!--<dependency>-->
-      <!--<groupId>com.mangofactory</groupId>-->
-      <!--<artifactId>swagger-springmvc</artifactId>-->
-      <!--<version>0.8.1-SNAPSHOT</version>-->
+    <!--<groupId>com.mangofactory</groupId>-->
+    <!--<artifactId>swagger-springmvc</artifactId>-->
+    <!--<version>0.8.1</version>-->
     <!--</dependency>-->
+
+    <dependency>
+      <groupId>com.mangofactory</groupId>
+      <artifactId>swagger-springmvc</artifactId>
+      <version>0.8.2-SNAPSHOT</version>
+    </dependency>
 
     <dependency>
       <groupId>org.springframework</groupId>

@@ -9,6 +9,7 @@ import com.mangofactory.swagger.core.SwaggerApiResourceListing;
 import com.mangofactory.swagger.scanners.ApiListingReferenceScanner;
 import com.wordnik.swagger.model.ApiInfo;
 import com.wordnik.swagger.model.Authorization;
+import com.wordnik.swagger.model.AuthorizationCodeGrant;
 import com.wordnik.swagger.model.AuthorizationScope;
 import com.wordnik.swagger.model.AuthorizationType;
 import com.wordnik.swagger.model.GrantType;
@@ -16,6 +17,8 @@ import com.wordnik.swagger.model.ImplicitGrant;
 import com.wordnik.swagger.model.LoginEndpoint;
 import com.wordnik.swagger.model.OAuth;
 import com.wordnik.swagger.model.OAuthBuilder;
+import com.wordnik.swagger.model.TokenEndpoint;
+import com.wordnik.swagger.model.TokenRequestEndpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -158,15 +161,27 @@ public class SwaggerConfig {
   private List<AuthorizationType> authorizationTypes() {
     ArrayList<AuthorizationType> authorizationTypes = new ArrayList<AuthorizationType>();
 
+
     List<AuthorizationScope> authorizationScopeList = newArrayList();
     authorizationScopeList.add(new AuthorizationScope("global", "access all"));
-    LoginEndpoint loginEndpoint = new LoginEndpoint("https://logmein.com");
+
+
     List<GrantType> grantTypes = newArrayList();
-    grantTypes.add(new ImplicitGrant(loginEndpoint, "AccessToken"));
+
+    LoginEndpoint loginEndpoint = new LoginEndpoint("http://petstore.swagger.wordnik.com/oauth/dialog");
+    grantTypes.add(new ImplicitGrant(loginEndpoint, "access_token"));
+
+    TokenRequestEndpoint tokenRequestEndpoint = new TokenRequestEndpoint("http://petstore.swagger.wordnik.com/oauth/requestToken", "client_id", "client_secret");
+    TokenEndpoint tokenEndpoint = new TokenEndpoint("http://petstore.swagger.wordnik.com/oauth/token", "auth_code");
+
+    AuthorizationCodeGrant authorizationCodeGrant = new AuthorizationCodeGrant(tokenRequestEndpoint, tokenEndpoint);
+    grantTypes.add(authorizationCodeGrant);
+
     OAuth oAuth = new OAuthBuilder()
         .scopes(authorizationScopeList)
         .grantTypes(grantTypes)
         .build();
+
     authorizationTypes.add(oAuth);
     return authorizationTypes;
   }
@@ -174,6 +189,7 @@ public class SwaggerConfig {
   @Bean
   public AuthorizationContext authorizationContext() {
     List<Authorization> authorizations = newArrayList();
+
     AuthorizationScope authorizationScope = new AuthorizationScope("global", "accessEverything");
     AuthorizationScope[] authorizationScopes = new AuthorizationScope[]{authorizationScope};
     authorizations.add(new Authorization("oauth2", authorizationScopes));
@@ -183,4 +199,5 @@ public class SwaggerConfig {
             .build();
     return authorizationContext;
   }
+
 }
