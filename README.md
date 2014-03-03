@@ -21,5 +21,8 @@ This repo is tagged in the following format in an attempt to keep track of chang
 -- e.g. swagger-springmvc--0.8.2-SNAPSHOT-swagger-ui--oauth
 
 - Swagger UI
+http://127.0.0.1:8097/swagger-springmvc-demo/swaggerBusiness
+
+
 http://127.0.0.1:8097/swagger-springmvc-demo/api-docs/business-api
 
