@@ -42,6 +42,7 @@
   <context:component-scan base-package="com.mangofactory.swagger.configuration"/>
 
 
+  <mvc:resources mapping="o2c.html" location="/" />
 
   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
     <property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>
