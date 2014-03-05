@@ -5,7 +5,9 @@ import com.mangofactory.swagger.configuration.JacksonScalaSupport;
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
 import com.mangofactory.swagger.configuration.SpringSwaggerModelConfig;
 import com.mangofactory.swagger.configuration.SwaggerGlobalSettings;
+import com.mangofactory.swagger.core.DefaultSwaggerPathProvider;
 import com.mangofactory.swagger.core.SwaggerApiResourceListing;
+import com.mangofactory.swagger.core.SwaggerPathProvider;
 import com.mangofactory.swagger.scanners.ApiListingReferenceScanner;
 import com.wordnik.swagger.model.ApiInfo;
 import com.wordnik.swagger.model.Authorization;
@@ -38,6 +40,7 @@ public class SwaggerConfig {
       "/contacts.*"
   });
   public static final String SWAGGER_GROUP = "business-api";
+  public static final String RELATIVE_GROUP = "relative-group";
 
   @Autowired
   private SpringSwaggerConfig springSwaggerConfig;
@@ -199,5 +202,43 @@ public class SwaggerConfig {
             .build();
     return authorizationContext;
   }
+
+  //Relative path example
+  @Bean
+  public SwaggerApiResourceListing relativeSwaggerApiResourceListing() {
+    SwaggerApiResourceListing swaggerApiResourceListing = new SwaggerApiResourceListing(springSwaggerConfig.swaggerCache(), RELATIVE_GROUP);
+    swaggerApiResourceListing.setSwaggerGlobalSettings(swaggerGlobalSettings());
+    swaggerApiResourceListing.setSwaggerPathProvider(relativeSwaggerPathProvider());
+    swaggerApiResourceListing.setApiListingReferenceScanner(relativeApiListingReferenceScanner());
+    return swaggerApiResourceListing;
+  }
+
+  @Bean
+  public ApiListingReferenceScanner relativeApiListingReferenceScanner() {
+    ApiListingReferenceScanner apiListingReferenceScanner = new ApiListingReferenceScanner();
+    apiListingReferenceScanner.setRequestMappingHandlerMapping(springSwaggerConfig.swaggerRequestMappingHandlerMappings());
+    apiListingReferenceScanner.setExcludeAnnotations(springSwaggerConfig.defaultExcludeAnnotations());
+    apiListingReferenceScanner.setResourceGroupingStrategy(springSwaggerConfig.defaultResourceGroupingStrategy());
+    apiListingReferenceScanner.setSwaggerPathProvider(relativeSwaggerPathProvider());
+    apiListingReferenceScanner.setSwaggerGroup(RELATIVE_GROUP);
+    apiListingReferenceScanner.setIncludePatterns(DEFAULT_INCLUDE_PATTERNS);
+    return apiListingReferenceScanner;
+  }
+
+  @Bean
+  public SwaggerPathProvider relativeSwaggerPathProvider() {
+    return new DemoRelativeSwaggerPathProvider();
+  }
+
+  private class DemoRelativeSwaggerPathProvider extends DefaultSwaggerPathProvider{
+    @Override public String getAppBasePath() {
+      return "/swagger-springmvc-demo";
+    }
+
+    @Override public String getSwaggerDocumentationBasePath() {
+      return "/api-docs";
+    }
+  }
+
 
 }

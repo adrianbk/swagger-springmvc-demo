@@ -42,6 +42,7 @@
   <context:component-scan base-package="com.mangofactory.swagger.configuration"/>
 
 
+  <!-- Direct static mappings -->
   <mvc:resources mapping="o2c.html" location="/" />
 
   <bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
@@ -51,5 +52,6 @@
   </bean>
 
   <mvc:view-controller path="/swaggerBusiness" view-name="swaggerBusiness"/>
+  <mvc:view-controller path="/swaggerRelative" view-name="swaggerRelative"/>
   <mvc:default-servlet-handler/>
 </beans>

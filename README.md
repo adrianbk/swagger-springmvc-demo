@@ -26,3 +26,7 @@ http://127.0.0.1:8097/swagger-springmvc-demo/swaggerBusiness
 
 http://127.0.0.1:8097/swagger-springmvc-demo/api-docs/business-api
 
+- Relative URL example :
+Note: relative urls are not recommended
+
+http://127.0.0.1:8097/swagger-springmvc-demo/sstatwaggerRelative
