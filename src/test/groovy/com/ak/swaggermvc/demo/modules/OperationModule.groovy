@@ -4,8 +4,21 @@ import geb.Module
 
 class OperationModule extends Module {
 
-    static content = {
-        httpMethod { $('.heading > h3 .http_method').text() }
-//      executeButton {$('.content')}
+  static content = {
+    httpMethod { $('.heading > h3 .http_method').text() }
+    path { $('.heading > h3 .path').text() }
+    summary { $('.heading .options >li a').text() }
+    expandLink { $('.heading .options >li a') }
+  }
+
+  def expand() {
+    expandLink.click()
+  }
+
+  def implementationNotes() {
+    waitFor {
+      $('.content >p').text()
     }
+  }
+
 }

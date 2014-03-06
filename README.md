@@ -27,3 +27,7 @@ http://127.0.0.1:8097/swagger-springmvc-demo/swaggerBusiness
 
 ## Relative URL example (Relative URLS not recommended)
 http://127.0.0.1:8097/swagger-springmvc-demo/swaggerRelative
+
+## Functional Tests
+1. Run the app: mvn jetty:tun
+2. Run the functional tests: mvn test
