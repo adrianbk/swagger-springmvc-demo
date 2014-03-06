@@ -15,6 +15,7 @@ Update swagger-oauth.js as appropriate to your app
 var redirectUrl = host.protocol + '//' + host.host + "/swagger-springmvc-demo/o2c.html";
 ```
 
+
 ## Versions
 
 This repo is tagged in the following format in an attempt to keep track of changing swagger-springmvc and swagger-ui versions
