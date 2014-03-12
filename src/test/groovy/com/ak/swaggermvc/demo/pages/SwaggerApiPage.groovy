@@ -14,8 +14,7 @@ class SwaggerApiPage extends Page {
       contact        { $('div', class: 'info_contact') }
       license        { $('div', class: 'info_license') }
       footer         { $(".footer h4") }
-      resourceListing { resourceName-> module ResourceListingModule , $("#resources_container  #resources #resource_${resourceName}")}
-
+      resourceListing(required: false) { resourceName-> module ResourceListingModule , $("#resources_container  #resources #resource_${resourceName}")}
    }
 
 }

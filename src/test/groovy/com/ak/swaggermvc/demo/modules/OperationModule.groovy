@@ -9,7 +9,8 @@ class OperationModule extends Module {
     path { $('.heading > h3 .path').text() }
     summary { $('.heading .options >li a').text() }
     expandLink { $('.heading .options >li a') }
-  }
+    responseModel { module ModelSchemaModule, $('.content p span.model-signature') }
+    }
 
   def expand() {
     expandLink.click()

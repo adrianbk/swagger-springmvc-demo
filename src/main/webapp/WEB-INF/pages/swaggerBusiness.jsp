@@ -27,7 +27,6 @@
       window.swaggerUi = new SwaggerUi({
             url: docLocation,
             dom_id: "swagger-ui-container",
-            supportedSubmitMethods: ['get', 'post', 'put', 'delete'],
             onComplete: function(swaggerApi, swaggerUi) {
               if (typeof initOAuth == "function")
                 initOAuth();

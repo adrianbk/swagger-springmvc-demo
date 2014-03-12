@@ -41,7 +41,7 @@ public class BusinessController {
       businessCache.put(businessId, business);
    }
 
-   @ApiOperation(value = "get a list of businesses", notes = "Returns all businesses in the cache")
+   @ApiOperation(value = "get a list of businesses", response = Business.class, notes = "Returns all businesses in the cache")
    @RequestMapping(value = "/businesses", method = GET)
    @ResponseBody
    public List<Business> list(HttpServletRequest request) {
