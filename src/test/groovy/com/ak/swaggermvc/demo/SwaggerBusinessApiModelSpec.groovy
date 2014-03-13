@@ -19,7 +19,7 @@ class SwaggerBusinessApiModelSpec extends GebSpec {
     resourceListingModule.expand()
 
   then:
-    resourceListingModule.operations.size() == 6
+    resourceListingModule.operations.size() == 7
     OperationModule operation = resourceListingModule.operationById('Businesses_list_get_0')
     operation.httpMethod == 'GET'
     operation.path == '/businesses'

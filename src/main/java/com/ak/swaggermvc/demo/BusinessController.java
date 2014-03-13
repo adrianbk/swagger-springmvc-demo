@@ -48,6 +48,12 @@ public class BusinessController {
       return new ArrayList<Business>(businessCache.values());
    }
 
+  @RequestMapping(value = "/businesses/withColon:{someParam:\\w+}", method = GET)
+  @ResponseBody
+  public void businessWithSemicolonInPath (@PathVariable("someParam") String someParam) {
+
+  }
+
    @ApiOperation(value = "get a number of businesses", notes = "Returns all businesses based on the supplied ids")
    @RequestMapping(value = "/businesses/specificBusinesses", method = GET)
    @ResponseBody
