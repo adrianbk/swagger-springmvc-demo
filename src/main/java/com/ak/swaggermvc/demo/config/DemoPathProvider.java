@@ -26,20 +26,11 @@ public class DemoPathProvider implements SwaggerPathProvider {
     }
 
     @Override
-    public String getSwaggerDocumentationBasePath() {
-        return UriComponentsBuilder
-                .fromHttpUrl(getAppBasePath())
-                .pathSegment("api-docs/")
-                .build()
-                .toString();
+    public String sanitizeRequestMappingPattern(String requestMappingPattern) {
+        return defaultSwaggerPathProvider.sanitizeRequestMappingPattern(requestMappingPattern);
     }
 
-   @Override
-   public String getRequestMappingEndpoint(String requestMappingPattern) {
-      return defaultSwaggerPathProvider.getRequestMappingEndpoint(requestMappingPattern);
-   }
-
-   public void setDefaultSwaggerPathProvider(SwaggerPathProvider defaultSwaggerPathProvider) {
+    public void setDefaultSwaggerPathProvider(SwaggerPathProvider defaultSwaggerPathProvider) {
         this.defaultSwaggerPathProvider = defaultSwaggerPathProvider;
     }
 }

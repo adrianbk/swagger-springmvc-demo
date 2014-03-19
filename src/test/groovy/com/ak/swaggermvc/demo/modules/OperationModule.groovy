@@ -5,10 +5,10 @@ import geb.Module
 class OperationModule extends Module {
 
   static content = {
-    httpMethod { $('.heading > h3 .http_method').text() }
-    path { $('.heading > h3 .path').text() }
+    httpMethod { $('.heading > h3 > span.http_method > a').text() }
+    path { $('.heading > h3 > span.path > a').text() }
     summary { $('.heading .options >li a').text() }
-    expandLink { $('.heading .options >li a') }
+    expandLink { $('.heading > h3 > span.path > a') }
     responseModel { module ModelSchemaModule, $('.content p span.model-signature') }
     }
 

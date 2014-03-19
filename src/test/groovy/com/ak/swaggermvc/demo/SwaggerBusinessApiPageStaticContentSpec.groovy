@@ -21,10 +21,10 @@ public class SwaggerBusinessApiPageStaticContentSpec extends GebSpec {
       page.license.text() == "Apache 2.0"
 
     and: "footer"
-      page.footer.text().replaceAll(' ', '') == "[baseurl:${baseUrl()}/api-docs/business-api,apiversion:1]"
+      page.footer.text().replaceAll(' ', '') == "[baseurl:${baseUrl()}/api-docs/business-controller,apiversion:1]"
 
     and: "contains business resource listing"
-      page.resourceListing('Businesses').name == 'Businesses : Businesses'
+      page.resourceListing('Businesses').name == 'business-controller : Businesses'
    }
 
    private String baseUrl() {

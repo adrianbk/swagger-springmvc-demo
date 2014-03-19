@@ -1,7 +1,7 @@
 import org.openqa.selenium.chrome.ChromeDriver
 
 def chromeDriver = new File('test/drivers/chrome/chromedriver')
-downloadDriver(chromeDriver, "http://chromedriver.storage.googleapis.com/2.9/chromedriver_linux64.zip")
+downloadDriver(chromeDriver, "http://chromedriver.storage.googleapis.com/2.9/chromedriver_mac32.zip")
 
 System.setProperty('webdriver.chrome.driver', chromeDriver.absolutePath)
 

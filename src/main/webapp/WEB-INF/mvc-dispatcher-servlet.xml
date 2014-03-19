@@ -29,8 +29,7 @@
     </mvc:message-converters>
   </mvc:annotation-driven>
 
-  <!-- Standard spring component scanning -->
-  <context:component-scan base-package="com.ak.swaggermvc.demo"/>
+
 
   <!-- Enable scanning of spring @Configuration classes -->
   <context:annotation-config/>
@@ -41,6 +40,8 @@
   <!-- Pick up the bundled spring config-->
   <context:component-scan base-package="com.mangofactory.swagger.configuration"/>
 
+    <!-- Standard spring component scanning -->
+    <context:component-scan base-package="com.ak.swaggermvc.demo"/>
 
   <!-- Direct static mappings -->
   <mvc:resources mapping="o2c.html" location="/" />
