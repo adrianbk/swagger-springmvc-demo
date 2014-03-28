@@ -22,8 +22,6 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
     @Override
     public void addViewControllers(ViewControllerRegistry registry) {
         registry.addViewController("/login").setViewName("login");
-        registry.addViewController("/swaggerBusiness").setViewName("swaggerBusiness");
-        registry.addViewController("/swaggerRelative").setViewName("swaggerRelative");
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 
