@@ -30,8 +30,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
+import org.springframework.context.annotation.ComponentScan;
 
 @Configuration
+@ComponentScan(basePackages = {"com.mangofactory.swagger.controllers", "com.mangofactory.swagger.configuration"})
 public class SwaggerConfig {
 
   public static final List<String> DEFAULT_INCLUDE_PATTERNS = Arrays.asList(new String[]{
