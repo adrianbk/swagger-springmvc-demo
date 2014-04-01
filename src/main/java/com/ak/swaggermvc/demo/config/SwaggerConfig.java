@@ -30,8 +30,10 @@ import java.util.Arrays;
 import java.util.List;
 
 import static com.google.common.collect.Lists.newArrayList;
+import org.springframework.context.annotation.ComponentScan;
 
 @Configuration
+@ComponentScan(basePackages = {"com.mangofactory.swagger.controllers", "com.mangofactory.swagger.configuration"})
 public class SwaggerConfig {
 
   public static final List<String> DEFAULT_INCLUDE_PATTERNS = Arrays.asList(new String[]{
@@ -78,7 +80,7 @@ public class SwaggerConfig {
    */
   private ApiInfo apiInfo() {
     ApiInfo apiInfo = new ApiInfo(
-        "Demo Spring MVC swagger 1.2 api",
+        "Demo Spring MVC swagger API 1.2",
         "Sample spring mvc api based on the swagger 1.2 spec",
         "http://en.wikipedia.org/wiki/Terms_of_service",
         "somecontact@somewhere.com",

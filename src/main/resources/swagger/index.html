@@ -23,7 +23,8 @@
     var realm = "your-realm";
 
     $(function() {
-      var docLocation = window.location.origin + "/swagger-springmvc-demo/api-docs/business-api";
+        
+      var docLocation = document.location.href.split('usage/')[0] + "api-docs/business-api";
       window.swaggerUi = new SwaggerUi({
             url: docLocation,
             dom_id: "swagger-ui-container",

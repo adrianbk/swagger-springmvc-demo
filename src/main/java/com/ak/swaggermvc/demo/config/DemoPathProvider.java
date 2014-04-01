@@ -17,9 +17,10 @@ public class DemoPathProvider implements SwaggerPathProvider {
         return defaultSwaggerPathProvider.getApiResourcePrefix();
     }
 
+    @Override
     public String getAppBasePath() {
         return UriComponentsBuilder
-                .fromHttpUrl("http://127.0.0.1:8097")
+                .fromHttpUrl("http://localhost:8080")
                 .path(servletContext.getContextPath())
                 .build()
                 .toString();
