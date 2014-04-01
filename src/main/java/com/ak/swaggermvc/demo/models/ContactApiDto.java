@@ -2,49 +2,44 @@ package com.ak.swaggermvc.demo.models;
 
 import com.wordnik.swagger.annotations.ApiModel;
 import com.wordnik.swagger.annotations.ApiModelProperty;
-import org.hibernate.validator.constraints.Email;
-import org.hibernate.validator.constraints.Length;
+
 
 import java.util.List;
 
 @ApiModel(description = "This is a description of the model an I do not show on the UI")
 public class ContactApiDto extends ApiDto {
 
-   @Length(min = 0, max = 110)
+   
    @ApiModelProperty(required = true, value = "I should appear on the UI",  notes = "I am a model property note")
    protected String name;
 
    protected List<String> types;
 
-   @Length(min = 0, max = 50)
+
    protected String firstName;
 
-   @Length(min = 0, max = 50)
+
    protected String lastName;
 
-   @Length(min = 0, max = 19)
+
    protected String phone;
 
-   @Length(min = 0, max = 25)
    private String fax;
 
-   @Length(min = 0, max = 30)
    private String position;
 
-   @Length(min = 0, max = 2000)
+
    private String notes;
 
-   @Length(min = 0, max = 12)
+
    protected String mobile;
 
-   @Length(min = 0, max = 76)
-   @Email
+
    protected String email;
 
-   @Length(min = 0, max = 11)
+
    private String abn;
 
-   @Length(min = 0, max = 9)
    private String ird;
 
    private boolean reportable;
