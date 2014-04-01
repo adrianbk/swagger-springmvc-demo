@@ -24,12 +24,6 @@
             <artifactId>swagger-springmvc</artifactId>
             <version>${swagger-springmvc.version}</version>
         </dependency>
-        
-        <dependency>
-            <groupId>org.springframework</groupId>
-            <artifactId>spring-webmvc</artifactId>
-            <version>${spring.version}</version>
-        </dependency>
 
         <dependency>
             <groupId>org.springframework</groupId>
@@ -46,6 +40,7 @@
             <groupId>org.springframework.hateoas</groupId>
             <artifactId>spring-hateoas</artifactId>
             <version>${spring-hateoas.version}</version>
+            
         </dependency>
         <!-- Servlet -->
         <dependency>

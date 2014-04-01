@@ -16,7 +16,7 @@ import org.springframework.web.servlet.view.JstlView;
 @Configuration
 @EnableWebMvc
 @Import({SwaggerConfig.class})
-@ComponentScan(basePackages = {"com.mangofactory.swagger.controllers", "com.mangofactory.swagger.configuration", "com.ak.swaggermvc.demo"})
+@ComponentScan(basePackages = { "com.ak.swaggermvc.demo"})
 public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
 
     @Override
@@ -25,20 +25,11 @@ public class ApplicationConfiguration extends WebMvcConfigurerAdapter {
         registry.setOrder(Ordered.HIGHEST_PRECEDENCE);
     }
 
-    @Bean
-    public InternalResourceViewResolver viewResolver() {
-        InternalResourceViewResolver result = new InternalResourceViewResolver();
-        result.setViewClass(JstlView.class);
-        result.setPrefix("/WEB-INF/pages/");
-        result.setSuffix(".jsp");
-        return result;
-    }    
-    
+ 
     // Maps resources path to webapp/resources
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/resources/**").addResourceLocations("/resources/");
-        registry.addResourceHandler("o2c.html").addResourceLocations("/");
         registry.addResourceHandler("/static/**").addResourceLocations("classpath:static/");
         // map all static resources coming to '/usage/**' to the resource files under the 'swagger' directory
         ResourceHandlerRegistration registration = registry.addResourceHandler("/usage/**");
