@@ -78,7 +78,7 @@ public class SwaggerConfig {
    */
   private ApiInfo apiInfo() {
     ApiInfo apiInfo = new ApiInfo(
-        "Demo Spring MVC swagger 1.2 api",
+        "Demo Spring MVC swagger API",
         "Sample spring mvc api based on the swagger 1.2 spec",
         "http://en.wikipedia.org/wiki/Terms_of_service",
         "somecontact@somewhere.com",
