@@ -108,10 +108,9 @@ public class BusinessController {
         return responseEntity;
     }
 
-    @RequestMapping(value = { "/businesses/byTypes" }, method = POST, consumes = APPLICATION_JSON_VALUE,
-            produces = APPLICATION_JSON_VALUE)
+    @RequestMapping(value = { "/businesses/byTypes" }, method = GET, produces = APPLICATION_JSON_VALUE)
     @ResponseBody
-    public List<Business> businessesByCategories(@RequestBody Business.BusinessType []types) {
+    public List<Business> businessesByCategories(@RequestParam Business.BusinessType []types) {
         return newArrayList();
     }
 }

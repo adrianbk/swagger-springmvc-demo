@@ -74,6 +74,8 @@ public class SwaggerConfig {
         swaggerGlobalSettings.setIgnorableParameterTypes(springSwaggerConfig.defaultIgnorableParameterTypes());
         AlternateTypeProvider alternateTypeProvider = springSwaggerConfig.defaultAlternateTypeProvider();
         TypeResolver typeResolver = new TypeResolver();
+        alternateTypeProvider.addRule(newRule(typeResolver.resolve(ResponseEntity.class),
+                typeResolver.resolve(Void.class)));
         alternateTypeProvider.addRule(newRule(typeResolver.resolve(ResponseEntity.class, WildcardType.class),
                 typeResolver.resolve(WildcardType.class)));
         alternateTypeProvider.addRule(newRule(typeResolver.resolve(HttpEntity.class, WildcardType.class),

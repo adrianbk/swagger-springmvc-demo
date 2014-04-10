@@ -44,8 +44,9 @@ public class ContactController {
   @ApiOperation(value = "Creates an extended contact", notes = "Request body of of ExtendedContactApiDto which not a returned model")
   @ResponseBody
   @RequestMapping(value = "/contacts/extended", method = {RequestMethod.POST})
-  public void createAContact(@PathVariable Integer businessId, @RequestBody ExtendedContactApiDto extendedContactApiDto) {
-
+  public ResponseEntity createAContact(@PathVariable Integer businessId, @RequestBody ExtendedContactApiDto
+          extendedContactApiDto) {
+        return new ResponseEntity(HttpStatus.OK);
   }
 
    @ApiOperation(value = "Gets all of the contacts for a business without response class override" )
