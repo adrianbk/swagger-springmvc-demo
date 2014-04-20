@@ -7,7 +7,7 @@ class ResourceListingModule extends Module {
         name { $('.heading > h2').text() }
         expandLink { $('.heading > h2 a')}
         operations { moduleList OperationModule, $('.endpoints .endpoint .operations') }
-        operationById {id ->  module OperationModule, $(".endpoints .endpoint .operations > li#$id") }
+        operationById {id ->  module OperationModule, $(".endpoints .endpoint .operations > #$id") }
     }
 
     def expand(){

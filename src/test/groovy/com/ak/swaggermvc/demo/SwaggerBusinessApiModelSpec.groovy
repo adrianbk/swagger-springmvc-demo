@@ -15,15 +15,15 @@ class SwaggerBusinessApiModelSpec extends GebSpec {
   def "get list of businesses model"() {
   when:
     SwaggerApiPage swaggerApiPage = page
-    ResourceListingModule resourceListingModule = swaggerApiPage.resourceListing('Businesses')
+    ResourceListingModule resourceListingModule = swaggerApiPage.resourceListing('business-controller')
     resourceListingModule.expand()
 
   then:
     resourceListingModule.operations.size() == 7
-    OperationModule operation = resourceListingModule.operationById('Businesses_list_get_0')
-    operation.httpMethod == 'GET'
+    OperationModule operation = resourceListingModule.operationById("business-controller_list")
     operation.path == '/businesses'
     operation.summary == 'get a list of businesses'
+    operation.httpMethod == 'GET'
 
   when:
     operation.expand()
