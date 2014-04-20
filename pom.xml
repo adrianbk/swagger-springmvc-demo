@@ -23,7 +23,7 @@
       <id>sonatype-snapshots</id>
       <name>Sonatype</name>
       <!--<url>https://oss.sonatype.org/content/repositories/snapshots/</url>-->
-      <url>https://oss.sonatype.org/content/repositories/releases/</url>
+      <url>https://oss.sonatype.org/content/repositories/snapshots/</url>
     </repository>
   </repositories>
 
