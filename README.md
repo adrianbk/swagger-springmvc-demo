@@ -29,5 +29,5 @@ http://127.0.0.1:8097/swagger-springmvc-demo/swaggerBusiness
 http://127.0.0.1:8097/swagger-springmvc-demo/swaggerRelative
 
 ## Functional Tests
-1. Run the app: mvn jetty:tun
+1. Run the app: mvn jetty:run
 2. Run the functional tests: mvn test
