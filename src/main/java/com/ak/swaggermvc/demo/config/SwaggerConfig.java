@@ -1,6 +1,7 @@
 package com.ak.swaggermvc.demo.config;
 
 import com.fasterxml.classmate.TypeResolver;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.mangofactory.swagger.authorization.AuthorizationContext;
 import com.mangofactory.swagger.configuration.JacksonScalaSupport;
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
@@ -8,6 +9,7 @@ import com.mangofactory.swagger.configuration.SwaggerGlobalSettings;
 import com.mangofactory.swagger.core.DefaultSwaggerPathProvider;
 import com.mangofactory.swagger.core.SwaggerApiResourceListing;
 import com.mangofactory.swagger.core.SwaggerPathProvider;
+import com.mangofactory.swagger.models.ModelProvider;
 import com.mangofactory.swagger.models.alternates.AlternateTypeProvider;
 import com.mangofactory.swagger.models.alternates.WildcardType;
 import com.mangofactory.swagger.scanners.ApiListingReferenceScanner;
@@ -26,6 +28,7 @@ import com.wordnik.swagger.model.TokenRequestEndpoint;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.context.annotation.Import;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
 
@@ -37,6 +40,7 @@ import static com.google.common.collect.Lists.*;
 import static com.mangofactory.swagger.models.alternates.Alternates.*;
 
 @Configuration
+@Import(SpringSwaggerConfig.class)
 public class SwaggerConfig {
 
     public static final List<String> DEFAULT_INCLUDE_PATTERNS = Arrays.asList(new String[] {
@@ -49,6 +53,8 @@ public class SwaggerConfig {
 
     @Autowired
     private SpringSwaggerConfig springSwaggerConfig;
+    @Autowired
+    private ModelProvider modelProvider;
 
     /**
      * Adds the jackson scala module to the MappingJackson2HttpMessageConverter registered with spring
@@ -63,6 +69,17 @@ public class SwaggerConfig {
         return jacksonScalaSupport;
     }
 
+
+    /**
+     * Object mapper.
+     *
+     * @return the configured object mapper
+     */
+    @Bean
+    public ObjectMapper objectMapper() {
+        //This is the opportunity to override object mapper behavior
+        return new ObjectMapper();
+    }
 
     /**
      * Global swagger settings
@@ -117,6 +134,9 @@ public class SwaggerConfig {
         //Use a custom path provider or springSwaggerConfig.defaultSwaggerPathProvider()
         swaggerApiResourceListing.setSwaggerPathProvider(demoPathProvider());
 
+        // Set the model provider, uses the default autowired model provider.
+        swaggerApiResourceListing.setModelProvider(modelProvider);
+
         //Supply the API Info as it should appear on swagger-ui web page
         swaggerApiResourceListing.setApiInfo(apiInfo());
 
@@ -146,7 +166,7 @@ public class SwaggerConfig {
         //Excludes any controllers with the supplied annotations
         apiListingReferenceScanner.setExcludeAnnotations(springSwaggerConfig.defaultExcludeAnnotations());
 
-        //
+        // Set the resource grouping strategy
         apiListingReferenceScanner.setResourceGroupingStrategy(springSwaggerConfig.defaultResourceGroupingStrategy());
 
         //Path provider used to generate the appropriate uri's
