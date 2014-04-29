@@ -8,12 +8,12 @@ import java.util.Date;
 
 public class Business {
    //not private - just for testing
-   public int id;
-   public String name;
-   public String owner;
-   public LocalDate inception;
-   public BusinessType businessType = BusinessType.PRODUCT;
-   public Date taxDate = new Date();
+   public int _id;
+   public String _name;
+   public String _owner;
+   public LocalDate _inception;
+   public BusinessType _businessType = BusinessType.PRODUCT;
+   public Date _taxDate = new Date();
 
    public enum BusinessType {
       PRODUCT(1),

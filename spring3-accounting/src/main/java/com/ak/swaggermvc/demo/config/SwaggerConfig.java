@@ -2,6 +2,7 @@ package com.ak.swaggermvc.demo.config;
 
 import com.fasterxml.classmate.TypeResolver;
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.joda.JodaModule;
 import com.mangofactory.swagger.authorization.AuthorizationContext;
 import com.mangofactory.swagger.configuration.JacksonScalaSupport;
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
@@ -42,7 +43,7 @@ import static com.mangofactory.swagger.models.alternates.Alternates.*;
 public class SwaggerConfig {
 
     public static final List<String> DEFAULT_INCLUDE_PATTERNS = Arrays.asList(new String[] {
-            "/business.*",
+            "/api/v1/business.*",
             "/some.*",
             "/contacts.*"
     });
@@ -70,7 +71,14 @@ public class SwaggerConfig {
     }
 
     @Bean
-    public ObjectMapper objectMapper() { return new ObjectMapper(); }
+    //Completely optional! if you've already got an object mapper it will automatically
+    //use the bean that is customized
+    public ObjectMapper customObjectMapper() {
+        ObjectMapper objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JodaModule());
+        //Additional customizations go here
+        return objectMapper;
+    }
 
     @Bean
     public SwaggerGlobalSettings swaggerGlobalSettings() {

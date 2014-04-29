@@ -27,6 +27,7 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 @Api(value = "Businesses")
+@RequestMapping(value = "/api/v1")
 public class BusinessController {
 
     static AtomicInteger businessIdCount = new AtomicInteger(1);
@@ -35,9 +36,9 @@ public class BusinessController {
     static {
         int businessId = businessIdCount.getAndIncrement();
         Business business = new Business();
-        business.name = "HTTP Widgets Ltd.";
-        business.inception = LocalDate.now();
-        business.id = businessId;
+        business._name = "HTTP Widgets Ltd.";
+        business._inception = LocalDate.now();
+        business._id = businessId;
         businessCache.put(businessId, business);
     }
 
@@ -94,8 +95,8 @@ public class BusinessController {
     @ResponseBody
     public ResponseEntity<Business> createBusiness(@RequestBody Business business) {
         int newBusinessId = businessIdCount.getAndIncrement();
-        business.id = newBusinessId;
-        businessCache.put(business.id, business);
+        business._id = newBusinessId;
+        businessCache.put(business._id, business);
         ResponseEntity<Business> responseEntity = new ResponseEntity<Business>(business, OK);
         return responseEntity;
     }
