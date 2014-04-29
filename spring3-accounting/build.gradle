@@ -1,0 +1,44 @@
+apply plugin: 'java'
+apply plugin: 'war'
+apply plugin: 'tomcat'
+
+apply from: "$rootDir/gradle/functionalTest.gradle"
+
+jvmsrc {
+    packageName "com.ak.spring3.accounting"
+}
+
+sourceCompatibility = 1.6
+
+buildscript {
+    dependencies {
+        classpath 'org.gradle.api.plugins:gradle-tomcat-plugin:1.2.2'
+    }
+}
+
+dependencies {
+    compile libs.springWeb.call() //Call the closure - its not a list like the others
+    compile libs.jackson
+    compile libs.logging
+    compile libs.jackson
+    compile libs.swagger
+    compile libs.validation
+
+    compile 'javax.servlet:jstl:1.2'
+    providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
+
+    tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}"
+    tomcat "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
+    tomcat("org.apache.tomcat.embed:tomcat-embed-jasper:${tomcatVersion}") {
+        exclude group: 'org.eclipse.jdt.core.compiler', module: 'ecj'
+    }
+    tomcat  "org.apache.tomcat:tomcat-dbcp:${tomcatVersion}"
+
+}
+
+tomcat {
+    httpPort = 9080
+    ajpPort = 9009
+    stopPort = 9091
+}
+

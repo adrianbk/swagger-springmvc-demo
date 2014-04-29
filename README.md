@@ -1,18 +1,18 @@
 swagger-springmvc-demo
 ======================
 
-A sample app using https://github.com/martypitt/swagger-springmvc/tree/rel-0.8-upgrade-spec-preview
+A sample app using https://github.com/martypitt/swagger-springmvc/
 
 - Running the app:
 
-```mvn jetty:run```
+```./gradlew :spring3-accounting:tomcatRun -i```
 
 - Oauth Support
 
 Update swagger-oauth.js as appropriate to your app
 
 ```javascript
-var redirectUrl = host.protocol + '//' + host.host + "/swagger-springmvc-demo/o2c.html";
+var redirectUrl = host.protocol + '//' + host.host + "/spring3-accounting/o2c.html";
 ```
 
 
@@ -23,11 +23,7 @@ This repo is tagged in the following format in an attempt to keep track of chang
 -- e.g. swagger-springmvc--0.8.2-SNAPSHOT-swagger-ui--oauth
 
 ## Swagger UI Business Example
-http://127.0.0.1:8097/swagger-springmvc-demo/swaggerBusiness
+http://localhost:9080/spring3-accounting/swaggerBusiness
 
 ## Relative URL example (Relative URLS not recommended)
-http://127.0.0.1:8097/swagger-springmvc-demo/swaggerRelative
-
-## Functional Tests
-1. Run the app: mvn jetty:run
-2. Run the functional tests: mvn test
+http://localhost:9080/spring3-accounting/swaggerRelative

@@ -1,8 +1,15 @@
 .idea
 *.iml
+*.ipr
 target
 .settings
 .classpath
 .project
 /test/drivers/
 *.DS_Store
+build/
+.idea
+out
+classes
+*.iws
+.gradle

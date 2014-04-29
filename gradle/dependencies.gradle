@@ -1,0 +1,51 @@
+ext {
+    springVersion = '3.2.8.RELEASE'
+    spockVersion = '0.7-groovy-2.0'
+    gebSpockVersion = '0.9.2'
+    groovyVersion = '2.2.1'
+    log4jVersion = "1.2.17"
+    jacksonVersion = "2.1.5"
+    slf4jVersion = '1.7.5'
+    tomcatVersion = '7.0.53'
+    swaggerSpringMvcVersion = '0.8.4-SNAPSHOT'
+}
+
+ext.libs = [
+        swagger: ["com.mangofactory:swagger-springmvc:$swaggerSpringMvcVersion"],
+
+        springWeb: {String version = springVersion->
+            return [
+                    "org.springframework:spring-web:$version",
+                    "org.springframework:spring-webmvc:$version",
+                    "org.springframework:spring-context-support:$version",
+                    "org.springframework:spring-test:$version",
+                    "org.springframework.hateoas:spring-hateoas:0.10.0.RELEASE"
+            ]
+        },
+
+        jackson:[
+                "com.fasterxml.jackson.core:jackson-core:${jacksonVersion}",
+                "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
+                "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jacksonVersion}",
+                "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:${jacksonVersion}",
+                "com.fasterxml.jackson.module:jackson-module-scala_2.10:${jacksonVersion}"
+        ],
+
+        validation: ['org.hibernate:hibernate-validator:5.0.2.Final'],
+
+        logging:[
+                "org.slf4j:jcl-over-slf4j:${slf4jVersion}",
+                "org.slf4j:slf4j-api:${slf4jVersion}",
+                "org.slf4j:slf4j-log4j12:${slf4jVersion}",
+                "log4j:log4j:${log4jVersion}",
+                "ch.qos.logback:logback-classic:1.0.13"
+        ],
+
+        functionalTest: [
+                "org.codehaus.groovy:groovy-all:${groovyVersion}",
+                "org.spockframework:spock-core:${spockVersion}",
+                "org.gebish:geb-spock:gebSpockVersion",
+                "org.seleniumhq.selenium:selenium-support:2.33.0",
+                "org.seleniumhq.selenium:selenium-chrome-driver:2.37.1"
+        ]
+]
