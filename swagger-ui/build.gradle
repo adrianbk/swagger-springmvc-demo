@@ -1,0 +1,46 @@
+/**
+ * Makes a webjar from the swagger-ui source on github
+ *
+ * Other projects can include with: compile project(':swagger-ui')
+ *
+ */
+
+buildscript {
+   dependencies {
+      classpath 'de.undercouch:gradle-download-task:1.0'
+   }
+}
+
+apply plugin: 'download-task'
+apply plugin: 'java'
+
+ext {
+   swaggerUiVersion = '2.0.16'
+   downloadUrl = "https://github.com/wordnik/swagger-ui/archive/v${swaggerUiVersion}.zip"
+   destinationZip = "$buildDir/zip/${swaggerUiVersion}.zip"
+   internalDir = "swagger-ui-${swaggerUiVersion}"
+}
+
+task swaggerUiDownload << {
+   if (!file(destinationZip)?.exists()) {
+      download {
+         src downloadUrl
+         dest destinationZip
+      }
+   }
+}
+
+task unzip(type: Copy) {
+   from zipTree(file(destinationZip))
+   include "*/dist/**"
+   into file("${buildDir}")
+}
+
+jar {
+   from("${buildDir}/${internalDir}/dist/") {
+      into "META-INF/resources"
+   }
+}
+
+jar.dependsOn(unzip)
+unzip.dependsOn(swaggerUiDownload)

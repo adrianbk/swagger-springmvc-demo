@@ -7,43 +7,35 @@ import com.mangofactory.swagger.authorization.AuthorizationContext;
 import com.mangofactory.swagger.configuration.JacksonScalaSupport;
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
 import com.mangofactory.swagger.configuration.SwaggerGlobalSettings;
-import com.mangofactory.swagger.core.DefaultSwaggerPathProvider;
 import com.mangofactory.swagger.core.SwaggerApiResourceListing;
-import com.mangofactory.swagger.core.SwaggerPathProvider;
 import com.mangofactory.swagger.models.ModelProvider;
 import com.mangofactory.swagger.models.alternates.AlternateTypeProvider;
 import com.mangofactory.swagger.models.alternates.WildcardType;
+import com.mangofactory.swagger.paths.AbsoluteSwaggerPathProvider;
+import com.mangofactory.swagger.paths.RelativeSwaggerPathProvider;
+import com.mangofactory.swagger.paths.SwaggerPathProvider;
 import com.mangofactory.swagger.scanners.ApiListingReferenceScanner;
-import com.wordnik.swagger.model.ApiInfo;
-import com.wordnik.swagger.model.Authorization;
-import com.wordnik.swagger.model.AuthorizationCodeGrant;
-import com.wordnik.swagger.model.AuthorizationScope;
-import com.wordnik.swagger.model.AuthorizationType;
-import com.wordnik.swagger.model.GrantType;
-import com.wordnik.swagger.model.ImplicitGrant;
-import com.wordnik.swagger.model.LoginEndpoint;
-import com.wordnik.swagger.model.OAuth;
-import com.wordnik.swagger.model.OAuthBuilder;
-import com.wordnik.swagger.model.TokenEndpoint;
-import com.wordnik.swagger.model.TokenRequestEndpoint;
+import com.wordnik.swagger.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.util.UriComponentsBuilder;
 
+import javax.servlet.ServletContext;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-import static com.google.common.collect.Lists.*;
-import static com.mangofactory.swagger.models.alternates.Alternates.*;
+import static com.google.common.collect.Lists.newArrayList;
+import static com.mangofactory.swagger.models.alternates.Alternates.newRule;
 
 @Configuration
 public class SwaggerConfig {
 
     public static final List<String> DEFAULT_INCLUDE_PATTERNS = Arrays.asList(new String[] {
-            "/api/v1/business.*",
+            "/business.*",
             "/some.*",
             "/contacts.*"
     });
@@ -56,6 +48,9 @@ public class SwaggerConfig {
 
     @Autowired
     private ModelProvider modelProvider;
+
+    @Autowired
+    private ServletContext servletContext;
 
     /**
      * Adds the jackson scala module to the MappingJackson2HttpMessageConverter registered with spring
@@ -128,7 +123,7 @@ public class SwaggerConfig {
         swaggerApiResourceListing.setSwaggerGlobalSettings(swaggerGlobalSettings());
 
         //Use a custom path provider or springSwaggerConfig.defaultSwaggerPathProvider()
-        swaggerApiResourceListing.setSwaggerPathProvider(demoPathProvider());
+        swaggerApiResourceListing.setSwaggerPathProvider(absoluteSwaggerPathProvider());
 
         //Supply the API Info as it should appear on swagger-ui web page
         swaggerApiResourceListing.setApiInfo(apiInfo());
@@ -168,7 +163,7 @@ public class SwaggerConfig {
         apiListingReferenceScanner.setResourceGroupingStrategy(springSwaggerConfig.defaultResourceGroupingStrategy());
 
         //Path provider used to generate the appropriate uri's
-        apiListingReferenceScanner.setSwaggerPathProvider(demoPathProvider());
+        apiListingReferenceScanner.setSwaggerPathProvider(absoluteSwaggerPathProvider());
 
         //Must match the swagger group set on the SwaggerApiResourceListing
         apiListingReferenceScanner.setSwaggerGroup(SWAGGER_GROUP);
@@ -177,16 +172,6 @@ public class SwaggerConfig {
         apiListingReferenceScanner.setIncludePatterns(DEFAULT_INCLUDE_PATTERNS);
 
         return apiListingReferenceScanner;
-    }
-
-    /**
-     * Example of a custom path provider
-     */
-    @Bean
-    public DemoPathProvider demoPathProvider() {
-        DemoPathProvider demoPathProvider = new DemoPathProvider();
-        demoPathProvider.setDefaultSwaggerPathProvider(springSwaggerConfig.defaultSwaggerPathProvider());
-        return demoPathProvider;
     }
 
 
@@ -256,19 +241,21 @@ public class SwaggerConfig {
 
     @Bean
     public SwaggerPathProvider relativeSwaggerPathProvider() {
-        return new DemoRelativeSwaggerPathProvider();
-    }
-
-    private class DemoRelativeSwaggerPathProvider extends DefaultSwaggerPathProvider {
-        @Override
-        public String getAppBasePath() {
-            return "/spring3-accounting";
-        }
-
-        @Override public String getSwaggerDocumentationBasePath() {
-            return "/api-docs" + "/" + RELATIVE_GROUP;
-        }
+        return new RelativeSwaggerPathProvider();
     }
 
 
+    @Bean
+    public SwaggerPathProvider absoluteSwaggerPathProvider() {
+        return new SwaggerPathProvider() {
+            @Override
+            protected String applicationPath() {
+                return UriComponentsBuilder
+                        .fromHttpUrl("http://localhost:9080")
+                        .path(servletContext.getContextPath())
+                        .build()
+                        .toString();
+            }
+        };
+    }
 }

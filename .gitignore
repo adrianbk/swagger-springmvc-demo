@@ -1,6 +1,7 @@
 .idea
 *.iml
 *.ipr
+*.iws
 target
 .settings
 .classpath
@@ -11,5 +12,4 @@ build/
 .idea
 out
 classes
-*.iws
 .gradle

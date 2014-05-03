@@ -8,6 +8,7 @@ ext {
     slf4jVersion = '1.7.5'
     tomcatVersion = '7.0.53'
     swaggerSpringMvcVersion = '0.8.4-SNAPSHOT'
+    swaggerUiDist = "build/libs/swagger-ui-dist.zip"
 }
 
 ext.libs = [
@@ -44,7 +45,7 @@ ext.libs = [
         functionalTest: [
                 "org.codehaus.groovy:groovy-all:${groovyVersion}",
                 "org.spockframework:spock-core:${spockVersion}",
-                "org.gebish:geb-spock:gebSpockVersion",
+                "org.gebish:geb-spock:${gebSpockVersion}",
                 "org.seleniumhq.selenium:selenium-support:2.33.0",
                 "org.seleniumhq.selenium:selenium-chrome-driver:2.37.1"
         ]

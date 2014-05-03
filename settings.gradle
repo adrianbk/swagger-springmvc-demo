@@ -1,1 +1,3 @@
+include "swagger-ui"
 include "spring3-accounting"
+include "swagger-static"

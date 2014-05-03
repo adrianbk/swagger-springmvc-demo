@@ -27,7 +27,6 @@ import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
 @Api(value = "Businesses")
-@RequestMapping(value = "/api/v1")
 public class BusinessController {
 
     static AtomicInteger businessIdCount = new AtomicInteger(1);
