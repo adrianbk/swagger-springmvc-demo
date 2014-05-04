@@ -37,7 +37,8 @@ public class SwaggerConfig {
     public static final List<String> DEFAULT_INCLUDE_PATTERNS = Arrays.asList(new String[] {
             "/business.*",
             "/some.*",
-            "/contacts.*"
+            "/contacts.*",
+            "/test.*"
     });
 
     public static final String SWAGGER_GROUP = "business-api";

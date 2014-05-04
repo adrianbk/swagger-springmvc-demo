@@ -3,11 +3,12 @@ package com.ak.swaggermvc.demo;
 
 import com.wordnik.swagger.annotations.ApiOperation;
 import org.springframework.http.MediaType;
+import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
-//@RequestMapping(value = "/test")
-//@Controller
+@RequestMapping(value = "/test")
+@Controller
 public class TestController {
 
    @ApiOperation(value = "summary", httpMethod = "GET", position = 1, notes = "some detail on the endpoint")
@@ -36,12 +37,9 @@ public class TestController {
       return "";
    }
 
-//   @RequestMapping(value = {"{businessId:\\d+}", "{businessId:\\w+}"}, method = GET)
-//   @ResponseBody
-//   public Business getBusiness(@PathVariable("businessId") String businessId) {
-//      Business business = new Business();
-//      business.name = "Widgets Ltd.";
-//      return business;
-//   }
+   @RequestMapping("allHttpMethods")
+   public void allHttpMethods(){
+
+   }
 
 }
