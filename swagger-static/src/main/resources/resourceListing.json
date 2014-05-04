@@ -2,5 +2,10 @@
     {
         "path": "/business-controller",
         "description": "Operations about businesses"
+    } ,
+    {
+        "path": "http://localhost:8080/api-docs/absolute-url-controller",
+        "description": "Absolute Documentation url"
     }
+
 ]}
