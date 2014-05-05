@@ -1,5 +1,4 @@
 package com.ak.spring3.testsuite.api
-
 import spock.lang.Specification
 
 @Mixin(RestSupportMixin)
