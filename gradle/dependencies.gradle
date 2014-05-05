@@ -14,7 +14,7 @@ ext {
 ext.libs = [
 
         swagger: [
-                group: "com.mangofactory", name: "swagger-springmvc", version: "$swaggerSpringMvcVersion", changing: true
+                "com.mangofactory:swagger-springmvc:$swaggerSpringMvcVersion"
         ],
 
         springWeb: {String version = springVersion->
@@ -47,6 +47,7 @@ ext.libs = [
 
         functionalTest: [
                 "org.codehaus.groovy:groovy-all:${groovyVersion}",
+                "org.codehaus.groovy.modules.http-builder:http-builder:0.7.1",
                 "org.spockframework:spock-core:${spockVersion}",
                 "org.gebish:geb-spock:${gebSpockVersion}",
                 "org.seleniumhq.selenium:selenium-support:2.33.0",

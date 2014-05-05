@@ -23,4 +23,8 @@ use
 
 `kill -9 $(ps aux | grep 'gradle' | awk '{print $2}')`
 
-`alias killgradle="kill -9 $(ps aux | grep 'gradle' | awk '{print $2}')"`
+```
+
+alias killgradle="kill -9 `ps aux | grep 'gradle' | awk '{print $2}'`"
+
+```

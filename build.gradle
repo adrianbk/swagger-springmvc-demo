@@ -1,7 +1,7 @@
 ext {
    activeRepos = {
       maven { url 'http://localhost:8081/artifactory/repo' }
-//        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
 //        maven { url 'https://oss.sonatype.org/content/repositories/releases' }
       jcenter()
    }
