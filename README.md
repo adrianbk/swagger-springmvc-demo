@@ -15,6 +15,8 @@ Update swagger-oauth.js as appropriate to your app
 var redirectUrl = host.protocol + '//' + host.host + "/spring3-accounting/o2c.html";
 ```
 
+ As of May 4 2014 there is a bug with intellij and gradle 1.12 - the intellij EAP has a fix so use the EAP version
+
 
 ## Versions
 

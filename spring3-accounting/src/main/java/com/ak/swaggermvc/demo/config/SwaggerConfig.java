@@ -38,6 +38,7 @@ public class SwaggerConfig {
             "/business.*",
             "/some.*",
             "/contacts.*",
+            "/pet.*",
             "/test.*"
     });
 

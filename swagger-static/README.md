@@ -14,6 +14,9 @@ http://localhost:8080/index.html
 
 Paste 'http://localhost:8080/api-docs' into the swagger explore text field
 
+http://localhost:8080/api-docs?group=groupA
+
+
 
 Spring boot//gradle/jetty does not stop cleanly and you get a 'Port already in use' error:
 use

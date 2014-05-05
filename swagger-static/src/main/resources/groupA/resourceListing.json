@@ -1,0 +1,11 @@
+{"apiVersion": "1.0.0", "swaggerVersion": "1.2", "apis": [
+    {
+        "path": "/groupA/business-controller",
+        "description": "Businesses Group A"
+    },
+    {
+        "path": "http://localhost:8080/api-docs/groupA/absolute-url-controller",
+        "description": "Absolute Urls Group A"
+    }
+
+]}

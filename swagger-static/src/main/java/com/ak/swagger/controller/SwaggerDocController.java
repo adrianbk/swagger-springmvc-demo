@@ -19,21 +19,23 @@ public class SwaggerDocController {
 
     @RequestMapping(value = "/api-docs", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public String resourceListing() throws IOException {
-        String resourceListing = fileContents("resourceListing.json");
+    public String resourceListing(@RequestParam(value = "group", required = false, defaultValue = "groupA") String swaggerGroup) throws IOException {
+        String resourceListing = fileContents(swaggerGroup, "resourceListing.json");
         return resourceListing;
     }
 
-
-    @RequestMapping(value = "/api-docs/{fileName}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value = "/api-docs/{group}/{apiDeclaration}", method = RequestMethod.GET, produces = MediaType.APPLICATION_JSON_VALUE)
     @ResponseStatus(HttpStatus.OK)
-    public String apiDeclaration(@PathVariable String fileName) throws IOException {
-        String resourceListing = fileContents("apiDeclarations/" + fileName + ".json");
-        return resourceListing;
+    public String apiDeclaration(@PathVariable String group, @PathVariable String apiDeclaration) throws IOException {
+        return resourceListingFromDeclaration(group, apiDeclaration);
     }
 
-    private String fileContents(String fileName) throws IOException {
-        ClassPathResource classPathResource = new ClassPathResource(fileName);
+    private String resourceListingFromDeclaration(String swaggerGroup, String apiDeclaration) throws IOException {
+        return fileContents(swaggerGroup, "apiDeclarations/" + apiDeclaration + ".json");
+    }
+
+    private String fileContents(String swaggerGroup, String fileName) throws IOException {
+        ClassPathResource classPathResource = new ClassPathResource(swaggerGroup + "/" + fileName);
         File file = classPathResource.getFile();
         return FileUtils.readFileToString(file);
     }

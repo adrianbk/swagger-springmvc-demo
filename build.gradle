@@ -38,3 +38,7 @@ subprojects {
 task wrapper(type: Wrapper) {
    gradleVersion = '1.12'
 }
+
+configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 10, 'seconds'
+}

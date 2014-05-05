@@ -12,7 +12,10 @@ ext {
 }
 
 ext.libs = [
-        swagger: ["com.mangofactory:swagger-springmvc:$swaggerSpringMvcVersion"],
+
+        swagger: [
+                group: "com.mangofactory", name: "swagger-springmvc", version: "$swaggerSpringMvcVersion", changing: true
+        ],
 
         springWeb: {String version = springVersion->
             return [
