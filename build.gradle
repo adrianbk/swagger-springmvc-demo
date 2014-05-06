@@ -1,44 +1,51 @@
 ext {
-   activeRepos = {
+  developerMachines = ['adrian']
+
+  activeRepos = {
+    if (developerMachines.contains(System.getenv('USER'))) {
       maven { url 'http://localhost:8081/artifactory/repo' }
-        maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-//        maven { url 'https://oss.sonatype.org/content/repositories/releases' }
-      jcenter()
-   }
+    } else {
+      mavenCentral()
+    }
+
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+    maven { url 'https://oss.sonatype.org/content/repositories/releases' }
+    jcenter()
+  }
 }
 
 
 buildscript {
-   repositories {
-      maven { url 'http://dl.bintray.com/adrianbkelly/maven' }
-   }
+  repositories {
+    maven { url 'http://dl.bintray.com/adrianbkelly/maven' }
+  }
 
-   dependencies {
-      classpath 'org.ajar.gradle:gradle-jvm-src-plugin:0.1'
-   }
+  dependencies {
+    classpath 'org.ajar.gradle:gradle-jvm-src-plugin:0.1'
+  }
 }
 
 apply from: "$rootDir/gradle/dependencies.gradle"
 
 allprojects {
-   buildscript {
-      repositories {
-         configure(activeRepos)
-      }
-   }
-   repositories {
+  buildscript {
+    repositories {
       configure(activeRepos)
-   }
+    }
+  }
+  repositories {
+    configure(activeRepos)
+  }
 }
 
 subprojects {
-   apply plugin: 'jvmsrc'
+  apply plugin: 'jvmsrc'
 }
 
 task wrapper(type: Wrapper) {
-   gradleVersion = '1.12'
+  gradleVersion = '1.12'
 }
 
 configurations.all {
-    resolutionStrategy.cacheDynamicVersionsFor 10, 'seconds'
+  resolutionStrategy.cacheDynamicVersionsFor 10, 'seconds'
 }
