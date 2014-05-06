@@ -4,4 +4,4 @@ jdk:
   - openjdk6
 
 script:
-  - ./gradlew test functionalTest
+  - ./gradlew test functionalTest -i
