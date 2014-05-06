@@ -1,0 +1,6 @@
+/src/main/webapp/lib
+/src/main/webapp/css
+/src/main/webapp/images
+/src/main/webapp/shred
+/src/main/webapp/*.html
+/src/main/webapp/*.js
