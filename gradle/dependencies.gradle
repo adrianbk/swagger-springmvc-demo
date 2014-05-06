@@ -8,7 +8,9 @@ ext {
     slf4jVersion = '1.7.5'
     tomcatVersion = '7.0.53'
     swaggerSpringMvcVersion = '0.8.4-SNAPSHOT'
+    swaggerUiVersion = '2.0.16'
     swaggerUiDist = "build/libs/swagger-ui-dist.zip"
+    swaggerUiExplodedDir = "swagger-ui-${swaggerUiVersion}/dist/"
 }
 
 ext.libs = [
@@ -23,7 +25,8 @@ ext.libs = [
                     "org.springframework:spring-webmvc:$version",
                     "org.springframework:spring-context-support:$version",
                     "org.springframework:spring-test:$version",
-                    "org.springframework.hateoas:spring-hateoas:0.10.0.RELEASE"
+                    "org.springframework.hateoas:spring-hateoas:0.10.0.RELEASE",
+                    "javax.servlet:jstl:1.2"
             ]
         },
 

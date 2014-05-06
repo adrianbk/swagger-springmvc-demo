@@ -1,4 +1,5 @@
 package com.ak.spring3.testsuite.api
+
 import spock.lang.Specification
 
 @Mixin(RestSupportMixin)
@@ -9,6 +10,7 @@ class ResourceListingSpec extends Specification {
       def resp =  rest().get(path: 'api-docs',  query : [group:'business-api'])
 
     then:
+      //http://groovy.codehaus.org/modules/http-builder/apidocs/groovyx/net/http/HttpResponseDecorator.html
       resp.status == 200
       assertJson(resp)
 

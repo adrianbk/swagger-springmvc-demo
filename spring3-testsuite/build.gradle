@@ -3,6 +3,7 @@ apply plugin: 'war'
 apply plugin: 'tomcat'
 
 apply from: "$rootDir/gradle/functionalTest.gradle"
+apply from: "$rootDir/gradle/swaggerUiInclude.gradle"
 
 jvmsrc {
     packageName "com.ak.spring3.accounting"
@@ -25,6 +26,7 @@ dependencies {
     compile libs.validation
 
     compile 'javax.servlet:jstl:1.2'
+
     providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
 
     tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}"

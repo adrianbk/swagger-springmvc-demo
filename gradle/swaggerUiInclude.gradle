@@ -1,0 +1,41 @@
+evaluationDependsOn(':swagger-ui')
+
+
+ext {
+  //Replaces content in swagger-oauth.js
+  oauthRedirect = "spring3-testsuite/o2c.html"
+
+  //Replaces content in index.html
+  apiListingUrl = 'window.location.origin +"/spring3-testsuite/api-docs?group=business-api"'
+}
+/**
+ *
+ * Copies the swagger ui files from the local swagger-ui project.
+ * Replaces the api listing url in index.html and the oauth redirect url in swagger-oauth.js
+ * Projects or modules applying this task can/should override the ext properties as appropriate.
+ *
+ * Assuming the project including this is a jee webapp with a src/main/webapp dir
+ */
+task includeSwaggerUi << {
+  copy {
+    from("${project(':swagger-ui').buildDir}/${swaggerUiExplodedDir}")
+
+    filesMatching('index.html') {
+      filter { line ->
+        line.replaceAll("\"http://petstore.swagger.wordnik.com/api/api-docs\"", apiListingUrl)
+                .replaceAll('/\\*', '')
+                .replaceAll('\\*/', '')
+      }
+    }
+
+    filesMatching('**/swagger-oauth.js') {
+      filter { line ->
+        line.replaceAll("o2c.html", oauthRedirect)
+      }
+    }
+
+    into(file("src/main/webapp"))
+  }
+}
+
+tasks['build'].dependsOn includeSwaggerUi

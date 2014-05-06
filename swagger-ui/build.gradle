@@ -15,10 +15,9 @@ apply plugin: 'download-task'
 apply plugin: 'java'
 
 ext {
-   swaggerUiVersion = '2.0.16'
    downloadUrl = "https://github.com/wordnik/swagger-ui/archive/v${swaggerUiVersion}.zip"
    destinationZip = "$buildDir/zip/${swaggerUiVersion}.zip"
-   internalDir = "swagger-ui-${swaggerUiVersion}"
+
 }
 
 task swaggerUiDownload << {
@@ -37,7 +36,7 @@ task unzip(type: Copy) {
 }
 
 jar {
-   from("${buildDir}/${internalDir}/dist/") {
+   from("${buildDir}/${swaggerUiExplodedDir}") {
       into "META-INF/resources"
    }
 }
