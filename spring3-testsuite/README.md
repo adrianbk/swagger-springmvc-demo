@@ -7,24 +7,22 @@ A suite of tests for the swagger-springmvc project
 - If tests start failing or the oauth integration stops foring the 1st place to look is 'swaggerUiInclude.gradle'
 which does code replacement on some of the swagger ui files
 
-- Running the app:
+#### Running the app:
 
 ```./gradlew :spring3-testsuite:tomcatRun -i```
 
 Browse to: http://localhost:9080/spring3-testsuite/index.html
 
 
-Running functional tests:
+#### Functional tests:
+
+Api level/integration tests that hit a running server to verify http json responses
 
 ```
 ./gradlew :spring3-testsuite:functionalTest -i
 
 ```
 
-- Oauth Support
-
-Update swagger-oauth.js as appropriate to your app
-
-```javascript
-var redirectUrl = host.protocol + '//' + host.host + "/spring3-accounting/o2c.html";
-```
+#### Where is the swagger ui code?
+The swagger ui code is added at runtime via 'swaggerUiInclude.gradle' build the project first if you want to inspect
+the swagger-ui code
