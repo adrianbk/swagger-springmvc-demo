@@ -5,9 +5,9 @@ import spock.lang.Specification
 @Mixin(RestSupportMixin)
 class ResourceListingSpec extends Specification {
 
-  def "Should contain each resource listing"() {
+  def "Should respond with each resource listing"() {
     when:
-      def resp =  rest().get(path: 'api-docs',  query : [group:'business-api'])
+      def resp = rest().get(path: 'api-docs', query: [group: 'business-api'])
 
     then:
       //http://groovy.codehaus.org/modules/http-builder/apidocs/groovyx/net/http/HttpResponseDecorator.html
@@ -30,5 +30,26 @@ class ResourceListingSpec extends Specification {
       apis[3].path == "/business-api/test-controller"
   }
 
+  def "code flow oauth"() {
+    when:
+      def resp = rest().get(path: 'api-docs', query: [group: 'business-api'])
+      def auth = resp.data.authorizations
 
+    then:
+      auth.oauth2.type == 'oauth2'
+
+      auth.oauth2.scopes.size == 1
+      auth.oauth2.scopes[0].scope == 'global'
+      auth.oauth2.scopes[0].description == 'access all'
+
+      auth.oauth2.grantTypes.implicit.loginEndpoint.url == "http://petstore.swagger.wordnik.com/oauth/dialog"
+      auth.oauth2.grantTypes.implicit.tokenName == "access_token"
+
+      auth.oauth2.grantTypes.authorization_code.tokenRequestEndpoint.url == "http://petstore.swagger.wordnik.com/oauth/requestToken"
+      auth.oauth2.grantTypes.authorization_code.tokenRequestEndpoint.clientIdName == "client_id"
+      auth.oauth2.grantTypes.authorization_code.tokenRequestEndpoint.clientSecretName == "client_secret"
+
+      auth.oauth2.grantTypes.authorization_code.tokenEndpoint.url == "http://petstore.swagger.wordnik.com/oauth/token"
+      auth.oauth2.grantTypes.authorization_code.tokenEndpoint.tokenName == "auth_code"
+  }
 }
