@@ -9,11 +9,11 @@ before_install:
 
 before_script:
   - sleep 3 # give xvfb some time to start
-  - ./gradlew tomcatRun # start a Web server
+  - ./gradlew :spring3-testsuite:tomcatRun # start a Web server
   - sleep 3 # give Web server some time to bind to sockets, etc
 
 script:
-- "./gradlew functionalTest acceptanceTest -i"
+- "./gradlew :spring3-testsuite:functionalTest :spring3-testsuite:acceptanceTest -i"
 
 env:
   global:
