@@ -52,4 +52,18 @@ class ResourceListingSpec extends Specification {
       auth.oauth2.grantTypes.authorization_code.tokenEndpoint.url == "http://petstore.swagger.wordnik.com/oauth/token"
       auth.oauth2.grantTypes.authorization_code.tokenEndpoint.tokenName == "auth_code"
   }
+
+  def "api info"(){
+    when:
+      def resp = rest().get(path: 'api-docs', query: [group: 'business-api'])
+      def info = resp.data.info
+
+    then:
+      info.title == "Demo Spring MVC swagger 1.2 api"
+      info.description == "Sample spring mvc api based on the swagger 1.2 spec"
+      info.termsOfServiceUrl == "http://en.wikipedia.org/wiki/Terms_of_service"
+      info.contact == "somecontact@somewhere.com"
+      info.license == "Apache 2.0"
+      info.licenseUrl == "http://www.apache.org/licenses/LICENSE-2.0.html"
+  }
 }
