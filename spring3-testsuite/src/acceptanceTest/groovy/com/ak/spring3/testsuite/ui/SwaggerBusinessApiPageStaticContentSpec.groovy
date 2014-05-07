@@ -6,14 +6,13 @@ import spock.lang.Ignore;
 
 public class SwaggerBusinessApiPageStaticContentSpec extends GebSpec {
 
-   @Ignore
-   def "Swagger UI Static Content"() {
+  def "Swagger UI Static Content"() {
     when:
-      SwaggerApiPage.url = "${baseUrl()}/swaggerBusiness"
       to(SwaggerApiPage)
 
     then: "Title"
       title == "Swagger UI"
+
     and: "API Meta data"
 
       page.heading.text() == "Demo Spring MVC swagger 1.2 api"
@@ -23,13 +22,11 @@ public class SwaggerBusinessApiPageStaticContentSpec extends GebSpec {
       page.license.text() == "Apache 2.0"
 
     and: "footer"
-      page.footer.text().replaceAll(' ', '') == "[baseurl:${baseUrl()}/api-docs/business-controller,apiversion:1]"
+      page.footer.text().replaceAll(' ', '') == "[baseurl:${baseUrl()}api-docs,apiversion:1]"
 
-    and: "contains business resource listing"
-      page.resourceListing('Businesses').name == 'business-controller : Businesses'
-   }
+  }
 
-   private String baseUrl() {
-      return browser.config.rawConfig.baseUrl
-   }
+  private String baseUrl() {
+    return browser.config.rawConfig.baseUrl
+  }
 }

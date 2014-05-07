@@ -27,13 +27,13 @@ ext {
 }
 
 
-task functionalTest(type: Test, dependsOn: tomcatRun) {
+task functionalTest(type: Test) {
     testClassesDir = sourceSets.functionalTest.output.classesDir
     classpath = sourceSets.functionalTest.runtimeClasspath
     reports.html.destination = functionalTestReportDir
     reports.junitXml.destination = functionalTestResultsDir
 
-    finalizedBy tomcatStop
+//    finalizedBy tomcatStop
 }
 
 // lazy as plugin not applied yet - get idea to see the source folders and external dependencies

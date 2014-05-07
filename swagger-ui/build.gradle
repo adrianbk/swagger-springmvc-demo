@@ -25,6 +25,7 @@ task swaggerUiDownload << {
       download {
          src downloadUrl
          dest destinationZip
+         onlyIfNewer true
       }
    }
 }

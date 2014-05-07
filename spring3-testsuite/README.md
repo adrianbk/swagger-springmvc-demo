@@ -26,3 +26,19 @@ Api level/integration tests that hit a running server to verify http json respon
 #### Where is the swagger ui code?
 The swagger ui code is added at runtime via 'swaggerUiInclude.gradle' build the project first if you want to inspect
 the swagger-ui code
+
+#### Acceptance tests
+- Running from ide add a jvm param: `-Dgeb.env=chrome` or `-Dgeb.env=firefox`
+
+```
+ -Dgeb.env=chrome -Dwebdriver.chrome.driver=/home/adrian/development/swagger-springmvc-demo/spring3-testsuite/build/drivers/chrome/chromedriver
+```
+
+
+- Headless
+
+```
+sudo apt-get install xvfb
+
+
+```

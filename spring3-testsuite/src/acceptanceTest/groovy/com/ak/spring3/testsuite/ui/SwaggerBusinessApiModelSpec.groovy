@@ -4,29 +4,26 @@ import com.ak.spring3.testsuite.ui.modules.OperationModule
 import com.ak.spring3.testsuite.ui.modules.ResourceListingModule
 import com.ak.spring3.testsuite.ui.pages.SwaggerApiPage
 import geb.spock.GebSpec
-import spock.lang.Ignore
 
 class SwaggerBusinessApiModelSpec extends GebSpec {
 
-//  def setupSpec() {
-//    SwaggerApiPage.url = "${browser.config.rawConfig.baseUrl}/swaggerBusiness"
-//    to(SwaggerApiPage)
-//  }
+  def setupSpec() {
+    to(SwaggerApiPage)
+  }
 
 
-  @Ignore
   def "get list of businesses model"() {
   when:
     SwaggerApiPage swaggerApiPage = page
-    ResourceListingModule resourceListingModule = swaggerApiPage.resourceListing('business-controller')
+    ResourceListingModule resourceListingModule = swaggerApiPage.resourceListing('businesses')
     resourceListingModule.expand()
 
   then:
-    resourceListingModule.operations.size() == 7
-    OperationModule operation = resourceListingModule.operationById("business-controller_list")
-    operation.path == '/businesses'
-    operation.summary == 'get a list of businesses'
+    resourceListingModule.operations.size() == 10
+    OperationModule operation = resourceListingModule.operationById("businesses_list")
     operation.httpMethod == 'GET'
+    operation.summary == 'get a list of businesses'
+    operation.path == '/businesses'
 
   when:
     operation.expand()

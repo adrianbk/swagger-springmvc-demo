@@ -1,0 +1,61 @@
+apply plugin: 'groovy'
+apply plugin: 'idea'
+
+
+ext {
+  acceptanceTestReportDir = file("$test.reports.html.destination/acceptance")
+  acceptanceTestResultsDir = file("$test.reports.junitXml.destination/acceptance")
+  drivers = ["firefox", "chrome"]
+  chromDriverPath = "http://chromedriver.storage.googleapis.com/2.10/chromedriver_linux64.zip"
+  chromeDriver = "$buildDir/drivers/chrome/chromedriver"
+}
+
+configurations {
+  acceptanceTestCompile.extendsFrom testCompile
+  acceptanceTestRuntime.extendsFrom testRuntime
+}
+
+dependencies {
+  acceptanceTestCompile libs.acceptanceTest
+}
+
+sourceSets {
+  acceptanceTest {
+    resources.srcDir file('src/acceptanceTest/resources')
+    compileClasspath = sourceSets.main.output + configurations.acceptanceTestCompile
+    runtimeClasspath = output + compileClasspath + configurations.acceptanceTestRuntime
+    groovy {
+      srcDir 'src/acceptanceTest/groovy'
+    }
+  }
+}
+
+task acceptanceTest(type: Test) {
+  testClassesDir = sourceSets.acceptanceTest.output.classesDir
+  classpath = sourceSets.acceptanceTest.runtimeClasspath
+  reports.html.destination = acceptanceTestReportDir
+  reports.junitXml.destination = acceptanceTestResultsDir
+//  finalizedBy tomcatStop
+}
+
+task downloadChromeDriver << {
+  def file = file(chromeDriver)
+  if (!file.exists()) {
+    ant.get(src: chromDriverPath, dest: 'driver.zip')
+    ant.unzip(src: 'driver.zip', dest: file.parent)
+    ant.delete(file: 'driver.zip')
+    ant.chmod(file: file, perm: '700')
+  }
+}
+
+// lazy as plugin not applied yet - get idea to see the source folders and external dependencies
+plugins.withType(org.gradle.plugins.ide.idea.IdeaPlugin) {
+  idea {
+    module {
+      testSourceDirs += sourceSets.acceptanceTest.groovy.srcDirs
+      testSourceDirs += sourceSets.acceptanceTest.resources.srcDirs
+      scopes.TEST.plus.add(configurations.acceptanceTestCompile)
+      scopes.TEST.plus.add(configurations.acceptanceTestRuntime)
+    }
+  }
+}
