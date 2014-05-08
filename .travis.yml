@@ -16,3 +16,8 @@ script:
 env:
   global:
     secure: B1hgmACloviepBvXzi+ALNyRoAXsHl0D4/EsQYjkQ2ij+brhcmdV05uMh8RYYEkiCSN0J35SdiC/rAKMuTKb0n163YrERmT+NRHX+AcAIUtQXHbQpQASDPXw740kDzng5hzfeG0A+2lwZRdVY/K6NB+Kh7/3smlycYGBGomBk+o=
+
+notifications:
+  email:
+    - adrianbkelly+travisci@gmail.com
+    - dilip.krishnan+travisci@gmail.com

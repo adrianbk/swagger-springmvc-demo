@@ -4,7 +4,7 @@ import org.openqa.selenium.firefox.FirefoxDriver
 import static org.openqa.selenium.remote.DesiredCapabilities.chrome
 
 waiting {
-  timeout = 4
+  timeout = 10
 }
 baseUrl = "http://localhost:9080/spring3-testsuite/"
 
