@@ -17,6 +17,7 @@ ext {
  * Assuming the project including this is a jee webapp with a src/main/webapp dir
  */
 task includeSwaggerUi << {
+  assert file("${project(':swagger-ui').buildDir}/${swaggerUiExplodedDir}").exists()
   copy {
     from("${project(':swagger-ui').buildDir}/${swaggerUiExplodedDir}")
 
@@ -38,4 +39,6 @@ task includeSwaggerUi << {
   }
 }
 
+
 tasks['build'].dependsOn includeSwaggerUi
+includeSwaggerUi.dependsOn project(':swagger-ui').tasks['unzip']

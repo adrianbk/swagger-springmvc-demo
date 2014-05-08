@@ -11,7 +11,7 @@ before_script:
   - sleep 3 # give xvfb some time to start
 
 script:
-- TERM=dumb ./gradlew build :spring3-testsuite:tomcatRun :spring3-testsuite:functionalTest :spring3-testsuite:acceptanceTest -i --stacktrace
+- TERM=dumb ./gradlew :spring3-testsuite:tomcatRun :spring3-testsuite:functionalTest :spring3-testsuite:acceptanceTest -i --stacktrace
 
 env:
   global:

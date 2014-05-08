@@ -17,7 +17,6 @@ apply plugin: 'java'
 ext {
    downloadUrl = "https://github.com/wordnik/swagger-ui/archive/v${swaggerUiVersion}.zip"
    destinationZip = "$buildDir/zip/${swaggerUiVersion}.zip"
-
 }
 
 task swaggerUiDownload << {
@@ -42,5 +41,5 @@ jar {
    }
 }
 
-jar.dependsOn(unzip)
+compileJava.dependsOn(unzip)
 unzip.dependsOn(swaggerUiDownload)
