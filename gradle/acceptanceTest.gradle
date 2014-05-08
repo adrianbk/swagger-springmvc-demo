@@ -7,7 +7,7 @@ ext {
   acceptanceTestResultsDir = file("$test.reports.junitXml.destination/acceptance")
   drivers = ["firefox", "chrome"]
   chromDriverPath = "http://chromedriver.storage.googleapis.com/2.10/chromedriver_linux64.zip"
-  chromeDriver = "$buildDir/drivers/chrome/chromedriver"
+  chromeDriver = "${parent.buildDir}/drivers/chrome/chromedriver"
 }
 
 configurations {
@@ -41,9 +41,10 @@ task acceptanceTest(type: Test) {
 task downloadChromeDriver << {
   def file = file(chromeDriver)
   if (!file.exists()) {
-    ant.get(src: chromDriverPath, dest: 'driver.zip')
-    ant.unzip(src: 'driver.zip', dest: file.parent)
-    ant.delete(file: 'driver.zip')
+    def driverZip = "${parent.buildDir}/driver.zip"
+    ant.get(src: chromDriverPath, dest: driverZip)
+    ant.unzip(src: driverZip, dest: file.parent)
+    ant.delete(file: driverZip)
     ant.chmod(file: file, perm: '700')
   }
 }

@@ -31,9 +31,10 @@ the swagger-ui code
 - Running from ide add a jvm param: `-Dgeb.env=chrome` or `-Dgeb.env=firefox`
 
 ```
- -Dgeb.env=chrome -Dwebdriver.chrome.driver=/home/adrian/development/swagger-springmvc-demo/spring3-testsuite/build/drivers/chrome/chromedriver
+-Dgeb.env=chrome -Dwebdriver.chrome.driver=/home/adrian/development/swagger-springmvc-demo/build/drivers/chrome/chromedriver
 ```
 
+- Download chrome driver `./gradlew downloadChrome`
 
 - Headless
 

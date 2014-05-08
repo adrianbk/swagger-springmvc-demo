@@ -29,7 +29,7 @@ class SwaggerBusinessApiModelSpec extends GebSpec {
     operation.expand()
 
   then:
-    operation.implementationNotes() == 'Returns all businesses in the cache'
+    operation.implementationNotes == 'Returns all businesses in the cache'
     operation.responseModel.modelLink.text() == 'Model'
     operation.responseModel.description().text().startsWith('Business {')
 

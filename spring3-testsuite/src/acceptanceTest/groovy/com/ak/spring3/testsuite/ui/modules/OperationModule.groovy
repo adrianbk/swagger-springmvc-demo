@@ -5,21 +5,15 @@ import geb.Module
 class OperationModule extends Module {
 
   static content = {
-    httpMethod { $('.heading > h3 > span.http_method > a').text() }
-    path { $('.heading > h3 > span.path > a').text() }
-    summary { $('.heading .options >li a').text() }
-    expandLink { $('.heading > h3 > span.path > a') }
-    responseModel { module ModelSchemaModule, $('.content p span.model-signature') }
-    }
+    httpMethod            (wait: true) { $('.heading > h3 > span.http_method > a').text() }
+    path                  (wait: true) { $('.heading > h3 > span.path > a').text() }
+    summary               (wait: true) { $('.heading .options >li a').text() }
+    expandLink            (wait: true) { $('.heading > h3 > span.path > a') }
+    responseModel         (wait: true) { module ModelSchemaModule, $('.content p span.model-signature') }
+    implementationNotes   (wait: true) { $('.content >p').text() }
+  }
 
   def expand() {
     expandLink.click()
   }
-
-  def implementationNotes() {
-    waitFor {
-      $('.content >p').text()
-    }
-  }
-
 }

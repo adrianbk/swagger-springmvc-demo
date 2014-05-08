@@ -1,4 +1,3 @@
-import org.openqa.selenium.Dimension
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.firefox.FirefoxDriver
 
@@ -9,11 +8,17 @@ waiting {
 }
 baseUrl = "http://localhost:9080/spring3-testsuite/"
 
+driver = {
+  def ffDriver = new FirefoxDriver()
+  ffDriver.manage().window().maximize()//.setSize(new Dimension(1280, 1024))
+  ffDriver
+}
+
 environments {
   chrome {
     driver = {
       def chromeDriver = new ChromeDriver()
-      chromeDriver.manage().window().setSize(new Dimension(1280, 1024))
+      chromeDriver.manage().window().maximize()//.setSize(new Dimension(1280, 1024))
       chromeDriver
     }
   }
@@ -21,7 +26,7 @@ environments {
   firefox {
     driver = {
       def ffDriver = new FirefoxDriver()
-      ffDriver.manage().window().setSize(new Dimension(1280, 1024))
+      ffDriver.manage().window().maximize()//.setSize(new Dimension(1280, 1024))
       ffDriver
     }
   }
