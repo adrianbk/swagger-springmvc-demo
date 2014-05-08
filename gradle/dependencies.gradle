@@ -1,5 +1,6 @@
 ext {
   springVersion = '3.2.8.RELEASE'
+  springSecurityVersion = '3.2.3.RELEASE'
   spockVersion = '0.7-groovy-2.0'
   gebSpockVersion = '0.9.2'
   groovyVersion = '2.2.1'
@@ -29,6 +30,7 @@ ext.libs = [
                   "org.springframework:spring-context-support:$version",
                   "org.springframework:spring-test:$version",
                   "org.springframework.hateoas:spring-hateoas:0.10.0.RELEASE",
+                  "org.springframework.security:spring-security-web:${springSecurityVersion}",
                   "javax.servlet:jstl:1.2"
           ]
         },
