@@ -8,13 +8,13 @@ class SwaggerApiPage extends Page {
    static at = { title == "Swagger UI" }
 
    static content = {
-      heading        { $('div', class: 'info_title') }
-      description    { $('div', class: 'info_description') }
-      termsOfService { $('div', class: 'info_tos') }
-      contact        { $('div', class: 'info_contact') }
-      license        { $('div', class: 'info_license') }
-      footer         { $(".footer h4") }
-      resourceListing(wait: true) { resourceName-> module ResourceListingModule , $("#resources_container  #resources #resource_${resourceName}")}
+      heading        (wait: true)       { $('div', class: 'info_title') }
+      description    (wait: true)       { $('div', class: 'info_description') }
+      termsOfService (wait: true)       { $('div', class: 'info_tos') }
+      contact        (wait: true)       { $('div', class: 'info_contact') }
+      license        (wait: true)       { $('div', class: 'info_license') }
+      footer         (wait: true)       { $(".footer h4") }
+      resourceListing(required: false)  { resourceName-> module ResourceListingModule , $("#resources_container  #resources #resource_${resourceName}")}
    }
 
 }

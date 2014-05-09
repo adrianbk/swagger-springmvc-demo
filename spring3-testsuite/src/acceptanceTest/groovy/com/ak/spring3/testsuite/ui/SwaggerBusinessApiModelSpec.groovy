@@ -11,7 +11,6 @@ class SwaggerBusinessApiModelSpec extends GebSpec {
     to(SwaggerApiPage)
   }
 
-
   def "get list of businesses model"() {
   when:
     SwaggerApiPage swaggerApiPage = page
