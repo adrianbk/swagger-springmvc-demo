@@ -32,9 +32,9 @@ public class BusinessController {
     static {
         int businessId = businessIdCount.getAndIncrement();
         Business business = new Business();
-        business._name = "HTTP Widgets Ltd.";
-        business._inception = LocalDate.now();
-        business._id = businessId;
+        business.name = "HTTP Widgets Ltd.";
+        business.inception = LocalDate.now();
+        business.id = businessId;
         businessCache.put(businessId, business);
     }
 
@@ -98,8 +98,8 @@ public class BusinessController {
     @ResponseBody
     public ResponseEntity<Business> createBusiness(@RequestBody Business business) {
         int newBusinessId = businessIdCount.getAndIncrement();
-        business._id = newBusinessId;
-        businessCache.put(business._id, business);
+        business.id = newBusinessId;
+        businessCache.put(business.id, business);
         ResponseEntity<Business> responseEntity = new ResponseEntity<Business>(business, OK);
         return responseEntity;
     }

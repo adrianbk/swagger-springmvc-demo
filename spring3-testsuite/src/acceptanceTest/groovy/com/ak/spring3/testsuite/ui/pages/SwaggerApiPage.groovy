@@ -1,5 +1,6 @@
 package com.ak.spring3.testsuite.ui.pages
 
+import com.ak.spring3.testsuite.ui.modules.OauthDialogModule
 import com.ak.spring3.testsuite.ui.modules.ResourceListingModule
 import geb.Page
 
@@ -15,6 +16,13 @@ class SwaggerApiPage extends Page {
       license        (wait: true)       { $('div', class: 'info_license') }
       footer         (wait: true)       { $(".footer h4") }
       resourceListing(required: false)  { resourceName-> module ResourceListingModule , $("#resources_container  #resources #resource_${resourceName}")}
+      oauthDialog(required: false) {module OauthDialogModule, $(".api-popup-dialog")}
    }
 
+  def oauthDialog() {
+    waitFor{
+      $(".api-popup-dialog").displayed
+    }
+    oauthDialog
+  }
 }

@@ -2,7 +2,6 @@ package com.ak.spring3.testsuite.ui.modules
 
 import geb.Module
 
-
 class ModelSchemaModule extends Module {
 
   static content = {
