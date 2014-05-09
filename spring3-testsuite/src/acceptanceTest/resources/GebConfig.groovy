@@ -6,7 +6,7 @@ import static org.openqa.selenium.remote.DesiredCapabilities.chrome
 waiting {
 
   //Goggle fonts in swagger ui :(
-  timeout = 4
+  timeout = 20
 }
 baseUrl = "http://localhost:9080/spring3-testsuite/"
 
