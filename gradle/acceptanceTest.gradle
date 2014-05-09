@@ -5,7 +5,7 @@ apply plugin: 'idea'
 ext {
   acceptanceTestReportDir = file("$test.reports.html.destination/acceptance")
   acceptanceTestResultsDir = file("$test.reports.junitXml.destination/acceptance")
-  drivers = ["firefox", "chrome"]
+  drivers = ["Firefox", "Chrome", 'Phantom']
   chromDriverPath = "http://chromedriver.storage.googleapis.com/2.10/chromedriver_linux64.zip"
   chromeDriver = "${parent.buildDir}/drivers/chrome/chromedriver"
 }
@@ -17,6 +17,9 @@ configurations {
 
 dependencies {
   acceptanceTestCompile libs.acceptanceTest
+  acceptanceTestCompile("com.github.detro.ghostdriver:phantomjsdriver:1.1.0") {
+    transitive = false
+  }
 }
 
 sourceSets {
@@ -35,7 +38,24 @@ task acceptanceTest(type: Test) {
   classpath = sourceSets.acceptanceTest.runtimeClasspath
   reports.html.destination = acceptanceTestReportDir
   reports.junitXml.destination = acceptanceTestResultsDir
-//  finalizedBy tomcatStop
+}
+
+
+drivers.each { driver ->
+  task "acceptanceTest${driver}" (type: Test) {
+
+    jvmArgs = ["-Dgeb.env=${driver.toLowerCase()}"]
+
+    testClassesDir = sourceSets.acceptanceTest.output.classesDir
+    classpath = sourceSets.acceptanceTest.runtimeClasspath
+
+    reports.html.destination = acceptanceTestReportDir
+    reports.junitXml.destination = acceptanceTestResultsDir
+  }
+}
+
+acceptanceTestPhantom << {
+
 }
 
 task downloadChromeDriver << {

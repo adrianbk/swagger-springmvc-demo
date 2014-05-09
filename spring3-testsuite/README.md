@@ -36,10 +36,16 @@ the swagger-ui code
 
 - Download chrome driver `./gradlew downloadChrome`
 
-- Headless
+- Headless phantomjs
 
 ```
-sudo apt-get install xvfb
-
+-ea -Dgeb.env=phantom -Dphantomjs.binary.path=/opt/phantomjs-1.9.7-linux-x86_64/bin/phantomjs
 
 ```
+
+Running functional and acceptance test
+
+```
+./gradlew build :spring3-testsuite:tomcatRun :spring3-testsuite:functionalTest :spring3-testsuite:acceptanceTestPhantom -i --stacktrace
+```
+

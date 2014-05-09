@@ -1,20 +1,17 @@
+import org.openqa.selenium.Dimension
 import org.openqa.selenium.chrome.ChromeDriver
 import org.openqa.selenium.firefox.FirefoxDriver
+import org.openqa.selenium.phantomjs.PhantomJSDriver
+import org.openqa.selenium.remote.DesiredCapabilities
 
 import static org.openqa.selenium.remote.DesiredCapabilities.chrome
 
 waiting {
 
-  //Goggle fonts in swagger ui :(
-  timeout = 20
+  timeout = 2
 }
-baseUrl = "http://localhost:9080/spring3-testsuite/"
 
-driver = {
-  def ffDriver = new FirefoxDriver()
-  ffDriver.manage().window().maximize()
-  ffDriver
-}
+baseUrl = "http://localhost:9080/spring3-testsuite/"
 
 environments {
   chrome {
@@ -32,4 +29,13 @@ environments {
       ffDriver
     }
   }
+
+  phantom {
+    driver = {
+      def d = new PhantomJSDriver(new DesiredCapabilities())
+      d.manage().window().setSize(new Dimension(1028, 768))
+      d
+    }
+  }
+
 }
