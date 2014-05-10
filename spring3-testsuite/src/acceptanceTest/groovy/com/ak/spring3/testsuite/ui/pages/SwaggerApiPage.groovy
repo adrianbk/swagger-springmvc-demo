@@ -16,11 +16,12 @@ class SwaggerApiPage extends Page {
       license        (wait: true)       { $('div', class: 'info_license') }
       footer         (wait: true)       { $(".footer h4") }
       resourceListing(required: false)  { resourceName-> module ResourceListingModule , $("#resources_container  #resources #resource_${resourceName}")}
-      oauthDialog(required: false) {module OauthDialogModule, $(".api-popup-dialog")}
+      oauthDialog    (required: false)  {module OauthDialogModule, $(".api-popup-dialog")}
+      allAuthButtons (required: false)  { $('.api-ic.ic-on') }
    }
 
-  def oauthDialog() {
-    waitFor{
+  OauthDialogModule oauthDialog() {
+    waitFor {
       $(".api-popup-dialog").displayed
     }
     oauthDialog

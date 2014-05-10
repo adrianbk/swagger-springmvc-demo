@@ -11,7 +11,7 @@ class OperationModule extends Module {
     expandLink            (wait: true) { $('.heading > h3 > span.path > a') }
     responseModel         (wait: true) { module ModelSchemaModule, $('.content p span.model-signature') }
     implementationNotes   (wait: true) { $('.content >p').text() }
-    _accessLink(required: false) {$('.content .access span')}
+    _accessLink(required: false) {$('.content .access span.ic-off')}
   }
 
   def expand() {
