@@ -17,9 +17,9 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import static com.google.common.collect.Lists.newArrayList;
-import static com.google.common.collect.Maps.*;
-import static org.springframework.http.HttpStatus.*;
-import static org.springframework.http.MediaType.*;
+import static com.google.common.collect.Maps.newHashMap;
+import static org.springframework.http.HttpStatus.OK;
+import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller

@@ -2,7 +2,6 @@ package com.ak.spring3.testsuite.ui
 
 import com.ak.spring3.testsuite.ui.pages.SwaggerApiPage
 import geb.spock.GebSpec
-import spock.lang.Ignore;
 
 public class SwaggerBusinessApiPageInfoSpec extends GebSpec {
 

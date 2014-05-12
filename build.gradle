@@ -21,7 +21,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'org.ajar.gradle:gradle-jvm-src-plugin:0.1'
+    classpath 'org.ajar.gradle:gradle-jvm-src-plugin:0.2'
   }
 }
 

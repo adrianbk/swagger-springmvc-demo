@@ -31,6 +31,7 @@ ext.libs = [
                   "org.springframework:spring-test:$version",
                   "org.springframework.hateoas:spring-hateoas:0.10.0.RELEASE",
                   "org.springframework.security:spring-security-web:${springSecurityVersion}",
+                  "org.springframework.security:spring-security-config:${springSecurityVersion}",
                   "javax.servlet:jstl:1.2"
           ]
         },

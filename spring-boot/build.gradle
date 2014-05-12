@@ -1,0 +1,30 @@
+buildscript{
+  dependencies {
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.2.RELEASE")
+  }
+}
+
+apply plugin: 'war'
+apply plugin: 'spring-boot'
+
+jvmsrc {
+  packageName "com.ak.swagger.boot"
+}
+
+dependencies {
+  compile("org.springframework.boot:spring-boot-starter-web") {
+    exclude module: "spring-boot-starter-tomcat"
+  }
+  compile("org.springframework.boot:spring-boot-starter-jetty")
+  compile("org.springframework.boot:spring-boot-starter-actuator")
+  compile("commons-io:commons-io:2.+")
+
+
+  compile libs.swagger
+  compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jacksonVersion}",
+
+  testCompile("junit:junit")
+
+  //Includes the swagger-ui static resources
+  compile project(':swagger-ui')
+}

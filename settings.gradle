@@ -1,3 +1,4 @@
 include "swagger-ui"
 include "spring3-testsuite"
 include "swagger-static"
+include "spring-boot"
