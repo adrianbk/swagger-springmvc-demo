@@ -44,23 +44,7 @@ public class SwaggerConfig {
     private SpringSwaggerConfig springSwaggerConfig;
 
     @Autowired
-    private ModelProvider modelProvider;
-
-    @Autowired
     private ServletContext servletContext;
-
-    /**
-     * Adds the jackson scala module to the MappingJackson2HttpMessageConverter registered with spring
-     * Swagger core models are scala so we need to be able to convert to JSON
-     * Also registers some custom serializers needed to transform swagger models to swagger-ui required json format
-     */
-    @Bean
-    public JacksonScalaSupport jacksonScalaSupport() {
-        JacksonScalaSupport jacksonScalaSupport = new JacksonScalaSupport();
-        //Set to false to disable
-        jacksonScalaSupport.setRegisterScalaModule(true);
-        return jacksonScalaSupport;
-    }
 
     @Bean
     //Completely optional! if you've already got an object mapper it will automatically
@@ -136,7 +120,7 @@ public class SwaggerConfig {
 
         // Set the model provider, uses the default autowired model provider.
 
-        swaggerApiResourceListing.setModelProvider(modelProvider);
+        swaggerApiResourceListing.setModelProvider(springSwaggerConfig.defaultModelProvider());
 
         return swaggerApiResourceListing;
     }

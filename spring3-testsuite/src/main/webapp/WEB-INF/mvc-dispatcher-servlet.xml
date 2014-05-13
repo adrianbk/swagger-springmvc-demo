@@ -6,31 +6,24 @@
         http://www.springframework.org/schema/beans/spring-beans.xsd
         http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc.xsd">
 
-  <mvc:annotation-driven/>
+    <mvc:annotation-driven/>
 
-  <!-- Enable scanning of spring @Configuration classes -->
-  <context:annotation-config/>
+    <!-- Enable scanning of spring @Configuration classes -->
+    <context:annotation-config/>
 
-  <!-- Enable the default documentation controller-->
-  <context:component-scan base-package="com.mangofactory.swagger.controllers"/>
+    <!-- Enable the default documentation controller-->
+    <context:component-scan base-package="com.mangofactory.swagger.controllers"/>
 
-  <!-- Pick up the bundled spring config-->
-  <context:component-scan base-package="com.mangofactory.swagger.configuration"/>
+    <!-- Pick up the bundled spring config-->
+    <context:component-scan base-package="com.mangofactory.swagger.configuration"/>
 
     <!-- Standard spring component scanning -->
     <context:component-scan base-package="com.ak.spring3.testsuite"/>
 
-  <!-- Direct static mappings -->
-  <mvc:resources mapping="*.html" location="/" />
+    <!-- Direct static mappings -->
+    <mvc:resources mapping="*.html" location="/"/>
 
-  <!--<bean id="viewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
-    <!--<property name="viewClass" value="org.springframework.web.servlet.view.JstlView"/>-->
-    <!--<property name="prefix" value="/WEB-INF/pages/"/>-->
-    <!--<property name="suffix" value=".jsp"/>-->
-  <!--</bean>-->
+    <!-- Serve static content-->
+    <mvc:default-servlet-handler/>
 
-  <!--<mvc:view-controller path="/swaggerBusiness" view-name="swaggerBusiness"/>-->
-  <!--<mvc:view-controller path="/swaggerRelative" view-name="swaggerRelative"/>-->
-
-  <mvc:default-servlet-handler/>
 </beans>
