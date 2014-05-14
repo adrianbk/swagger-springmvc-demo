@@ -4,10 +4,10 @@ ext {
   activeRepos = {
     if (developerMachines.contains(System.getenv('USER'))) {
       maven { url 'http://localhost:8081/artifactory/repo' }
-      maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     } else {
       mavenCentral()
     }
+    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     jcenter()
   }
 }
