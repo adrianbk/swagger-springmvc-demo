@@ -39,17 +39,21 @@ dependencies {
 
 }
 
+/**
+ * Task to run functional and acceptance tests
+ * acceptance run with phantom headless browser
+ */
 task fullTest()
 
 fullTest.dependsOn tomcatRun
 fullTest.dependsOn functionalTest
-fullTest.dependsOn acceptanceTest
+fullTest.dependsOn acceptanceTestPhantom
 
 fullTest.finalizedBy tomcatStop
 
 functionalTest.shouldRunAfter tomcatRun
-acceptanceTest.shouldRunAfter functionalTest
-tomcatStop.shouldRunAfter acceptanceTest
+acceptanceTestPhantom.shouldRunAfter functionalTest
+tomcatStop.shouldRunAfter acceptanceTestPhantom
 
 tomcat {
   httpPort = 9080

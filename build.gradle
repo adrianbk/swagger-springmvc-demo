@@ -4,12 +4,10 @@ ext {
   activeRepos = {
     if (developerMachines.contains(System.getenv('USER'))) {
       maven { url 'http://localhost:8081/artifactory/repo' }
+      maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
     } else {
       mavenCentral()
     }
-
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    maven { url 'https://oss.sonatype.org/content/repositories/releases' }
     jcenter()
   }
 }
@@ -44,8 +42,9 @@ subprojects {
 
 task wrapper(type: Wrapper) {
   gradleVersion = '1.12'
+
+  configurations.all {
+    resolutionStrategy.cacheDynamicVersionsFor 10, 'seconds'
+  }
 }
 
-configurations.all {
-  resolutionStrategy.cacheDynamicVersionsFor 10, 'seconds'
-}

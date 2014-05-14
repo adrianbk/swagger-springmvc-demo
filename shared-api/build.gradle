@@ -1,0 +1,10 @@
+apply plugin: 'java'
+
+jvmsrc {
+  packageName "com.ak.swaggerspringmvc.shared"
+}
+
+dependencies {
+  compile libs.springWeb.call()
+  compile libs.swagger
+}
