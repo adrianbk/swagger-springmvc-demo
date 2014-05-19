@@ -17,6 +17,7 @@ apply plugin: 'java'
 ext {
    downloadUrl = "https://github.com/wordnik/swagger-ui/archive/v${swaggerUiVersion}.zip"
    destinationZip = "$buildDir/zip/${swaggerUiVersion}.zip"
+   replacePath = 'window.location.origin + "\\${pageContext.request.contextPath}/api-docs"'
 }
 
 task swaggerUiDownload << {
@@ -35,11 +36,26 @@ task unzip(type: Copy) {
    into file("${buildDir}")
 }
 
+/**
+ * Creates the jsp from index.html
+ */
+task sdoc(type: Copy){
+  from("${buildDir}/${swaggerUiExplodedDir}/index.html")
+  into("${buildDir}/${swaggerUiExplodedDir}")
+
+  filter { String line ->
+    line.replaceAll("\"http://petstore.swagger.wordnik.com/api/api-docs\"", replacePath)
+  }
+
+  rename('index.html', 'sdoc.jsp')
+}
+
 jar {
    from("${buildDir}/${swaggerUiExplodedDir}") {
       into "META-INF/resources"
    }
 }
 
-compileJava.dependsOn(unzip)
+compileJava.dependsOn(sdoc)
+sdoc.dependsOn(unzip)
 unzip.dependsOn(swaggerUiDownload)

@@ -1,15 +1,9 @@
 apply plugin: 'war'
 apply plugin: 'tomcat'
 
-apply from: "$rootDir/gradle/functionalTest.gradle"
-apply from: "$rootDir/gradle/acceptanceTest.gradle"
-apply from: "$rootDir/gradle/swaggerUiInclude.gradle"
-
 jvmsrc {
-  packageName "com.ak.spring3.testsuite"
+  packageName "com.ak.spring3.music"
 }
-
-sourceCompatibility = 1.6
 
 buildscript {
   dependencies {
@@ -26,8 +20,10 @@ dependencies {
   compile libs.validation
 
   compile 'javax.servlet:jstl:1.2'
-
   providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
+
+  compile project(':swagger-ui')
+  compile project(':shared-api')
 
   tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}"
   tomcat "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
@@ -38,27 +34,9 @@ dependencies {
 
 }
 
-/**
- * Task to run functional and acceptance tests
- * acceptance run with phantom headless browser
- */
-task fullTest()
-
-fullTest.dependsOn tomcatRun
-fullTest.dependsOn functionalTest
-fullTest.dependsOn acceptanceTestPhantom
-
-fullTest.finalizedBy tomcatStop
-
-functionalTest.shouldRunAfter tomcatRun
-acceptanceTestPhantom.shouldRunAfter functionalTest
-tomcatStop.shouldRunAfter acceptanceTestPhantom
-
 tomcat {
   httpPort = 9080
   ajpPort = 9009
   stopPort = 9091
 }
-
-tomcatRun.daemon = true
-
+tomcatRun.contextPath = '/'

@@ -1,5 +1,6 @@
 include "swagger-ui"
 include "spring3-testsuite"
+include "spring3-music"
 include "swagger-static"
 include "spring-boot"
 include "shared-api"

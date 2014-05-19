@@ -9,7 +9,7 @@ A spring boot app with swagger ui integrated.
 ```
 - http://localhost:8080/
 - Uses the swagger-ui jar bundled by the accompanying swagger-ui project
-- Opens the swagger petstore example so change the explore field to `http://localhost:8080//api-docs`
+- Opens the swagger petstore example so change the explore field to `http://localhost:8080/api-docs`
 
 
 #### Configuration
