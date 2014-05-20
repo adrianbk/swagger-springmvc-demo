@@ -15,7 +15,7 @@ apply plugin: 'download-task'
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 
-version = '0.1'
+version = '0.2-SNAPSHOT'
 
 ext {
   downloadUrl = "https://github.com/wordnik/swagger-ui/archive/v${swaggerUiVersion}.zip"
@@ -87,11 +87,8 @@ publishing {
 
   repositories {
     maven {
-//      name 'jcenter'
-//      url "${artifactRepoBase}/oss-${project.version.endsWith('-SNAPSHOT') ? 'snapshot' : 'release'}-local"
-
-      name 'bintray'
-      url "https://api.bintray.com/maven/adrianbkelly/maven/${artifactLabel}"
+      name 'jcenter'
+      url "${artifactRepoBase}/oss-${project.version.endsWith('-SNAPSHOT') ? 'snapshot' : 'release'}-local"
 
       credentials {
         username = 'adrianbkelly'
@@ -99,15 +96,15 @@ publishing {
       }
     }
 
-//    if (!project.version.endsWith('-SNAPSHOT')) {
-//      maven {
-//        name 'bintray'
-//        url "https://api.bintray.com/maven/adrianbkelly/maven/${artifactLabel}"
-//        credentials {
-//          username = 'adrianbkelly'
-//          password = project.hasProperty('bintray_key') ? project.getProperty('bintray_key') : ''
-//        }
-//      }
-//    }
+    if (!project.version.endsWith('-SNAPSHOT')) {
+      maven {
+        name 'bintray'
+        url "https://api.bintray.com/maven/adrianbkelly/maven/${artifactLabel}"
+        credentials {
+          username = 'adrianbkelly'
+          password = project.hasProperty('bintray_key') ? project.getProperty('bintray_key') : ''
+        }
+      }
+    }
   }
 }
