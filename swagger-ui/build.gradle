@@ -6,40 +6,45 @@
  */
 
 buildscript {
-   dependencies {
-      classpath 'de.undercouch:gradle-download-task:1.0'
-   }
+  dependencies {
+    classpath 'de.undercouch:gradle-download-task:1.0'
+  }
 }
 
 apply plugin: 'download-task'
 apply plugin: 'java'
+apply plugin: 'maven-publish'
+
+version = '0.1'
 
 ext {
-   downloadUrl = "https://github.com/wordnik/swagger-ui/archive/v${swaggerUiVersion}.zip"
-   destinationZip = "$buildDir/zip/${swaggerUiVersion}.zip"
-   replacePath = 'window.location.origin + "\\${pageContext.request.contextPath}/api-docs"'
+  downloadUrl = "https://github.com/wordnik/swagger-ui/archive/v${swaggerUiVersion}.zip"
+  destinationZip = "$buildDir/zip/${swaggerUiVersion}.zip"
+  replacePath = 'window.location.origin + "\\${pageContext.request.contextPath}/api-docs"'
+  artifactRepoBase = 'http://oss.jfrog.org/artifactory'
+  artifactLabel = 'swagger-spring-mvc-ui'
 }
 
 task swaggerUiDownload << {
-   if (!file(destinationZip)?.exists()) {
-      download {
-         src downloadUrl
-         dest destinationZip
-         onlyIfNewer true
-      }
-   }
+  if (!file(destinationZip)?.exists()) {
+    download {
+      src downloadUrl
+      dest destinationZip
+      onlyIfNewer true
+    }
+  }
 }
 
 task unzip(type: Copy) {
-   from zipTree(file(destinationZip))
-   include "*/dist/**"
-   into file("${buildDir}")
+  from zipTree(file(destinationZip))
+  include "*/dist/**"
+  into file("${buildDir}")
 }
 
 /**
  * Creates the jsp from index.html
  */
-task sdoc(type: Copy){
+task sdoc(type: Copy) {
   from("${buildDir}/${swaggerUiExplodedDir}/index.html")
   into("${buildDir}/${swaggerUiExplodedDir}")
 
@@ -51,11 +56,58 @@ task sdoc(type: Copy){
 }
 
 jar {
-   from("${buildDir}/${swaggerUiExplodedDir}") {
-      into "META-INF/resources"
-   }
+  from("${buildDir}/${swaggerUiExplodedDir}") {
+    into "META-INF/resources"
+  }
+}
+
+task sourceJar(type: Jar) {
+  from sourceSets.main.allJava
 }
 
 compileJava.dependsOn(sdoc)
 sdoc.dependsOn(unzip)
 unzip.dependsOn(swaggerUiDownload)
+
+
+publishing {
+  publications {
+    mavenJava(MavenPublication) {
+      artifactId artifactLabel
+      groupId 'org.ajar'
+      artifactId "$artifactLabel"
+
+      from components.java
+
+      artifact sourceJar {
+        classifier "sources"
+      }
+    }
+  }
+
+  repositories {
+    maven {
+//      name 'jcenter'
+//      url "${artifactRepoBase}/oss-${project.version.endsWith('-SNAPSHOT') ? 'snapshot' : 'release'}-local"
+
+      name 'bintray'
+      url "https://api.bintray.com/maven/adrianbkelly/maven/${artifactLabel}"
+
+      credentials {
+        username = 'adrianbkelly'
+        password = project.hasProperty('bintray_key') ? project.getProperty('bintray_key') : ''
+      }
+    }
+
+//    if (!project.version.endsWith('-SNAPSHOT')) {
+//      maven {
+//        name 'bintray'
+//        url "https://api.bintray.com/maven/adrianbkelly/maven/${artifactLabel}"
+//        credentials {
+//          username = 'adrianbkelly'
+//          password = project.hasProperty('bintray_key') ? project.getProperty('bintray_key') : ''
+//        }
+//      }
+//    }
+  }
+}

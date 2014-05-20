@@ -13,3 +13,4 @@ build/
 out
 classes
 .gradle
+private.txt
