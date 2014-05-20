@@ -23,6 +23,10 @@ ext.libs = [
                 "com.mangofactory:swagger-springmvc:$swaggerSpringMvcVersion"
         ],
 
+        swaggerSpringMvcUi: [
+                "org.ajar:swagger-spring-mvc-ui:0.1"
+        ],
+
         springWeb     : { String version = springVersion ->
           return [
                   "org.springframework:spring-web:$version",

@@ -22,8 +22,9 @@ dependencies {
   compile 'javax.servlet:jstl:1.2'
   providedCompile 'javax.servlet:javax.servlet-api:3.0.1'
 
-  compile project(':swagger-ui')
+//  compile project(':swagger-ui')
   compile project(':shared-api')
+  compile libs.swaggerSpringMvcUi
 
   tomcat "org.apache.tomcat.embed:tomcat-embed-core:${tomcatVersion}"
   tomcat "org.apache.tomcat.embed:tomcat-embed-logging-juli:${tomcatVersion}"
