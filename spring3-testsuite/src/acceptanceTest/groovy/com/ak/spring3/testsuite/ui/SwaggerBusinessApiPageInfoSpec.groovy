@@ -20,7 +20,7 @@ public class SwaggerBusinessApiPageInfoSpec extends GebSpec {
       page.license.text()         == "Apache 2.0"
 
     and: "footer"
-      page.footer.text().replaceAll(' ', '') == "[baseurl:${baseUrl()}api-docs,apiversion:1]"
+      page.footer.text().replaceAll(' ', '') == "[baseurl:${baseUrl()}api-docs,apiversion:1.0]"
 
   }
 
