@@ -10,6 +10,11 @@ import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
 
+import static org.ajar.swaggermvcui.SwaggerSpringMvcUi.WEB_JAR_RESOURCE_PATTERNS;
+import static org.ajar.swaggermvcui.SwaggerSpringMvcUi.WEB_JAR_RESOURCE_LOCATION;
+import static org.ajar.swaggermvcui.SwaggerSpringMvcUi.WEB_JAR_VIEW_RESOLVER_PREFIX;
+import static org.ajar.swaggermvcui.SwaggerSpringMvcUi.WEB_JAR_VIEW_RESOLVER_SUFFIX;
+
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.ak.swaggerspringmvc.shared.controller", "com.ak.spring3.music"})
@@ -18,15 +23,15 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
 
   @Override
   public void addResourceHandlers(ResourceHandlerRegistry registry) {
-    registry.addResourceHandler( "css/", "images/", "lib/", "swagger-ui.js")
-            .addResourceLocations("classpath:META-INF/resources/").setCachePeriod(0);
+    registry.addResourceHandler(WEB_JAR_RESOURCE_PATTERNS)
+            .addResourceLocations(WEB_JAR_RESOURCE_LOCATION).setCachePeriod(0);
   }
 
   @Bean
   public InternalResourceViewResolver getInternalResourceViewResolver() {
     InternalResourceViewResolver resolver = new InternalResourceViewResolver();
-    resolver.setPrefix("classpath:/resources/");
-    resolver.setSuffix(".jsp");
+    resolver.setPrefix(WEB_JAR_VIEW_RESOLVER_PREFIX);
+    resolver.setSuffix(WEB_JAR_VIEW_RESOLVER_SUFFIX);
     return resolver;
   }
 

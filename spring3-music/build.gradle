@@ -39,4 +39,3 @@ tomcat {
   ajpPort = 9009
   stopPort = 9091
 }
-tomcatRun.contextPath = '/'
