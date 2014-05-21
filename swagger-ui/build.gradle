@@ -58,6 +58,15 @@ task sdoc(type: Copy) {
 jar {
   from("${buildDir}/${swaggerUiExplodedDir}") {
     into "META-INF/resources"
+
+    manifest {
+      attributes(
+              "Implementation-Title":       artifactLabel,
+              "Implementation-Version":     version,
+              "SwaggerUi-Version":          swaggerUiVersion,
+              "Swagger-Spring-MVC-Version": swaggerSpringMvcVersion
+      )
+    }
   }
 }
 

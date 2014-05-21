@@ -9,9 +9,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 
 @Controller
@@ -25,7 +23,7 @@ public class AlbumController {
   public
   @ResponseBody
   List<Album> getAll() {
-    return (List<Album>) albums.values();
+    return new ArrayList(albums.values());
   }
 
   @RequestMapping(value = "/albums/{id}", method = RequestMethod.GET)

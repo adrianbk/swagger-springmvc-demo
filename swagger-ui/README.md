@@ -1,19 +1,14 @@
 ###### swagger-static
 
 - Downloads the swagger-ui code from github and adds its dist directory into the manifest of a jar file.
-Effectively a webjar which can be used by projects using swagger-springmvc.
+- Effectively a webjar which can be used by projects using swagger-springmvc.
 
 The swagger ui version is controlled by the build.gradle file where `swaggerUiVersion` is the git tag of the
-https://github.com/wordnik/swagger-ui repo which is used to package the jar.
+https://github.com/wordnik/swagger-ui repo which is packaged into the jar.
  
-- Bundles a jsp file which should be display the swagger UI at <host>/app/sdoc.jsp
+- Bundles a jsp file which should display the swagger UI at <host>/app/sdoc.jsp
   
 ###### Usage
- 
-```
-ext {
-      swaggerUiVersion = '2.0.16'
-...
 
 Using the web jar:
 "org.ajar:swagger-spring-mvc-ui:0.1"
@@ -21,10 +16,10 @@ Using the web jar:
 Maven
 ```
 <repository>
-        <id>oss-jfrog-artifactory</id>
-        <name>oss-jfrog-artifactory-releases</name>
-        <url>http://oss.jfrog.org/artifactory/oss-release-local</url>
-    </repository>
+    <id>oss-jfrog-artifactory</id>
+    <name>oss-jfrog-artifactory-releases</name>
+    <url>http://oss.jfrog.org/artifactory/oss-release-local</url>
+</repository>
 
 ```
 
