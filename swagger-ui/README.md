@@ -1,4 +1,4 @@
-###### swagger-static
+##### swagger-spring-mvc-ui
 
 - Downloads the swagger-ui code from github and adds its dist directory into the manifest of a jar file.
 - Effectively a webjar which can be used by projects using swagger-springmvc.

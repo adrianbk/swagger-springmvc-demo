@@ -23,9 +23,9 @@ Api level/integration tests that hit a running server to verify http json respon
 
 ```
 
-#### Where is the swagger ui code?
+#### Where is the swagger-ui static content?
 The swagger ui code is added at runtime via 'swaggerUiInclude.gradle' build the project first if you want to inspect
-the swagger-ui code
+the swagger-ui code.
 
 #### Acceptance tests
 - Running from ide add a jvm param: `-Dgeb.env=chrome` or `-Dgeb.env=firefox`
