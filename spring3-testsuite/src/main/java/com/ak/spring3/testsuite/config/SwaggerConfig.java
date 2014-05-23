@@ -8,6 +8,8 @@ import com.wordnik.swagger.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.web.multipart.MultipartResolver;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -94,5 +96,12 @@ public class SwaggerConfig {
     AuthorizationContext authorizationContext =
             new AuthorizationContext.AuthorizationContextBuilder(authorizations).build();
     return authorizationContext;
+  }
+
+  @Bean
+  public MultipartResolver multipartResolver() {
+    CommonsMultipartResolver multipartResolver = new CommonsMultipartResolver();
+    multipartResolver.setMaxUploadSize(500000);
+    return multipartResolver;
   }
 }

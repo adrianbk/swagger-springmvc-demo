@@ -7,6 +7,7 @@ The swagger ui version is controlled by the build.gradle file where `swaggerUiVe
 https://github.com/wordnik/swagger-ui repo which is packaged into the jar.
  
 - Bundles a jsp file which should display the swagger UI at <host>/app/sdoc.jsp
+- http://localhost:8080/sdoc.jsp
   
 ###### Usage
 

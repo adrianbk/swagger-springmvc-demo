@@ -2,6 +2,7 @@ package com.ak.swaggerspringmvc.shared.controller;
 
 import com.ak.swaggerspringmvc.shared.model.Album;
 import com.ak.swaggerspringmvc.shared.model.Artist;
+import com.wordnik.swagger.annotations.Api;
 import org.joda.time.LocalDate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,6 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Controller
 @RequestMapping("/music")
+@Api(value = "Albums")
 public class AlbumController {
 
   private static AtomicLong counter = new AtomicLong(1);
