@@ -61,5 +61,5 @@ tomcat {
   stopPort = 9091
 }
 
-tomcatRun.daemon = false
+tomcatRun.daemon = true
 
