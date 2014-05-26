@@ -9,7 +9,7 @@ ext {
   slf4jVersion = '1.7.5'
   tomcatVersion = '7.0.53'
   swaggerSpringMvcVersion = '0.8.4-SNAPSHOT+'
-  swaggerUiVersion = '2.0.16'
+  swaggerUiVersion = '2.0.17'
   seleniumVersion = '2.41.0'
   chromeDriverVersion = '2.41.0'
   firefoxDriverVersion = '2.41.0'
