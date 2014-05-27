@@ -10,10 +10,6 @@ https://github.com/wordnik/swagger-ui repo which is packaged into the jar.
 - http://localhost:8080/sdoc.jsp
   
 ###### Usage
-
-Using the web jar:
-"org.ajar:swagger-spring-mvc-ui:0.1"
-
 Maven
 ```
 <repository>
@@ -31,6 +27,17 @@ repositories {
 }
 ```
 
+- Add the webjar as compile time dependency
+
+```
+dependencies {
+
+  ...
+  compile "org.ajar:swagger-spring-mvc-ui:0.1"
+
+}
+
+```
 ##### Spring boot
 - Include the web jar as dependency and the boot will take care of the rest
 
