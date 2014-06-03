@@ -15,7 +15,8 @@ apply plugin: 'download-task'
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 
-version = '0.2-SNAPSHOT'
+version = '0.2'
+sourceCompatibility = 1.6
 
 ext {
   downloadUrl = "https://github.com/wordnik/swagger-ui/archive/v${swaggerUiVersion}.zip"

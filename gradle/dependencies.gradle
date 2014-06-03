@@ -24,7 +24,7 @@ ext.libs = [
         ],
 
         swaggerSpringMvcUi: [
-                "org.ajar:swagger-spring-mvc-ui:0.1"
+                "org.ajar:swagger-spring-mvc-ui:0.2"
         ],
 
         springWeb     : { String version = springVersion ->
