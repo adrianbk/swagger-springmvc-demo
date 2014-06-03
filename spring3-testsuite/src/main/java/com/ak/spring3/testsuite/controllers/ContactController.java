@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Map;
 
 @Controller
-@Api(value = "Contacts")
+@Api(value = "Contacts", position = 0)
 public class ContactController {
 
 

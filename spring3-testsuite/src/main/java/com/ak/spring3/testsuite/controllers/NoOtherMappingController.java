@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import static org.springframework.web.bind.annotation.RequestMethod.GET;
 
-@Api(value = "NoOtherMappings")
+@Api(value = "NoOtherMappings", position = 2)
 @Controller
 public class NoOtherMappingController {
 

@@ -26,7 +26,7 @@ import static org.springframework.http.MediaType.APPLICATION_JSON_VALUE;
 import static org.springframework.web.bind.annotation.RequestMethod.*;
 
 @Controller
-@Api(value = "Businesses")
+@Api(value = "Businesses", position = 1)
 public class BusinessController {
 
     static AtomicInteger businessIdCount = new AtomicInteger(1);

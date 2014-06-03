@@ -61,5 +61,6 @@ tomcat {
   stopPort = 9091
 }
 
+//should always be true for ci
 tomcatRun.daemon = true
 
