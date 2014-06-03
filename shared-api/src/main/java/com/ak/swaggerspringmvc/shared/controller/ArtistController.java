@@ -11,7 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Controller
-@Api(value = "Artists")
+@Api(value = "Artists", position = 0)
 public class ArtistController {
 
   @RequestMapping(value = "/artists", method = RequestMethod.GET)

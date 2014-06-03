@@ -42,6 +42,7 @@ public class AnnotatedBusiness {
       }
    }
 
+  @ApiModelProperty(value = "unique identifier", required = true)
    public int getId() {
       return id;
    }

@@ -15,7 +15,7 @@ import java.util.concurrent.atomic.AtomicLong;
 
 @Controller
 @RequestMapping("/music")
-@Api(value = "Albums")
+@Api(value = "Albums", position = 1)
 public class AlbumController {
 
   private static AtomicLong counter = new AtomicLong(1);

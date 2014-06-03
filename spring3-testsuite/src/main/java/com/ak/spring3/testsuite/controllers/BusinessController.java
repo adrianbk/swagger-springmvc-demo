@@ -1,10 +1,13 @@
 package com.ak.spring3.testsuite.controllers;
 
+import com.ak.spring3.testsuite.models.AnnotatedBusiness;
 import com.ak.spring3.testsuite.models.Business;
 import com.wordnik.swagger.annotations.Api;
 import com.wordnik.swagger.annotations.ApiOperation;
 import com.wordnik.swagger.annotations.ApiParam;
 import org.joda.time.LocalDate;
+import org.springframework.beans.BeanUtils;
+import org.springframework.beans.factory.BeanFactoryUtils;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
@@ -86,10 +89,13 @@ public class BusinessController {
     @ApiOperation(value = "Business with annotated model", notes = "Annotated model annotation")
     @RequestMapping(value = { "/businessesAnnotated/{businessId}" }, method = GET, produces = APPLICATION_JSON_VALUE)
     @ResponseBody
-    public Business getBusinessAnnotated(
+    public AnnotatedBusiness getBusinessAnnotated(
             @ApiParam(defaultValue = "1", value = "The id of the business to return")
             @PathVariable Integer businessId) {
-        return businessCache.get(businessId);
+      Business business = businessCache.get(businessId);
+      AnnotatedBusiness annotatedBusiness = new AnnotatedBusiness();
+      BeanUtils.copyProperties(annotatedBusiness, business);
+      return annotatedBusiness;
     }
 
 
