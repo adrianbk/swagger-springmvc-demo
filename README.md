@@ -19,7 +19,7 @@ Some basic spring controllers and models shared with the other sub projects
 #### spring3-music
 Sample spring-web-mvc 3+ project with spring JavaConfig 
 - uses @EnableSwagger for out of the box swagger-springmvc support
-- imports the swagger-ui static content using a webjsr `"org.ajar:swagger-spring-mvc-ui:0.2"`
+- imports the swagger-ui static content using a webjar `"org.ajar:swagger-spring-mvc-ui:0.2"`
 - uses the controllers and models from 'shared-api'
 - uses spring ResourceHandlers and a ViewResolver to serve the swagger-ui content form a webjar
 
