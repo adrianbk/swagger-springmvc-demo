@@ -23,6 +23,15 @@ Api level/integration tests that hit a running server to verify http json respon
 
 ```
 
+
+#### Swagger UI Oauth Support
+
+Update swagger-oauth.js as appropriate for your app
+
+```javascript
+var redirectUrl = host.protocol + '//' + host.host + "/spring3-testsuite/o2c.html";
+```
+
 #### Where is the swagger-ui static content?
 The swagger ui code is added at runtime via 'swaggerUiInclude.gradle' build the project first if you want to inspect
 the swagger-ui code.
