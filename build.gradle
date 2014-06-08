@@ -12,10 +12,9 @@ ext {
   }
 }
 
-
 buildscript {
   repositories {
-    maven { url 'http://dl.bintray.com/adrianbkelly/maven' }
+    jcenter()
   }
 
   dependencies {
