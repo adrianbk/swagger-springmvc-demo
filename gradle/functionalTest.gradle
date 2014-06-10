@@ -2,48 +2,48 @@ apply plugin: 'groovy'
 apply plugin: 'idea'
 
 configurations {
-    functTestCompile.extendsFrom testCompile
-    functTestRuntime.extendsFrom testRuntime
+  functTestCompile.extendsFrom testCompile
+  functTestRuntime.extendsFrom testRuntime
 }
 
 dependencies {
-    functTestCompile libs.functionalTest
+  functTestCompile libs.functionalTest
 }
 
 sourceSets {
-    functionalTest {
-        resources.srcDir file('src/functTest/resources')
-        compileClasspath = sourceSets.main.output + configurations.functTestCompile
-        runtimeClasspath = output + compileClasspath + configurations.functTestRuntime
-        groovy {
-            srcDir 'src/functTest/groovy'
-        }
+  functionalTest {
+    resources.srcDir file('src/functTest/resources')
+    compileClasspath = sourceSets.main.output + configurations.functTestCompile
+    runtimeClasspath = output + compileClasspath + configurations.functTestRuntime
+    groovy {
+      srcDir 'src/functTest/groovy'
     }
+  }
 }
 
 ext {
-    functionalTestReportDir = file("$test.reports.html.destination/functional")
-    functionalTestResultsDir = file("$test.reports.junitXml.destination/functional")
+  functionalTestReportDir = file("$test.reports.html.destination/functional")
+  functionalTestResultsDir = file("$test.reports.junitXml.destination/functional")
 }
 
 
 task functionalTest(type: Test) {
-    testClassesDir = sourceSets.functionalTest.output.classesDir
-    classpath = sourceSets.functionalTest.runtimeClasspath
-    reports.html.destination = functionalTestReportDir
-    reports.junitXml.destination = functionalTestResultsDir
+  testClassesDir = sourceSets.functionalTest.output.classesDir
+  classpath = sourceSets.functionalTest.runtimeClasspath
+  reports.html.destination = functionalTestReportDir
+  reports.junitXml.destination = functionalTestResultsDir
 
 //    finalizedBy tomcatStop
 }
 
 // lazy as plugin not applied yet - get idea to see the source folders and external dependencies
 plugins.withType(org.gradle.plugins.ide.idea.IdeaPlugin) {
-    idea {
-        module {
-            testSourceDirs += sourceSets.functionalTest.groovy.srcDirs
-            testSourceDirs += sourceSets.functionalTest.resources.srcDirs
-            scopes.TEST.plus.add(configurations.functTestCompile)
-            scopes.TEST.plus.add(configurations.functTestRuntime)
-        }
+  idea {
+    module {
+      testSourceDirs += sourceSets.functionalTest.groovy.srcDirs
+      testSourceDirs += sourceSets.functionalTest.resources.srcDirs
+      scopes.TEST.plus.add(configurations.functTestCompile)
+      scopes.TEST.plus.add(configurations.functTestRuntime)
     }
+  }
 }

@@ -15,6 +15,7 @@ ext {
   firefoxDriverVersion = '2.41.0'
   swaggerUiDist = "build/libs/swagger-ui-dist.zip"
   swaggerUiExplodedDir = "swagger-ui-${swaggerUiVersion}/dist/"
+  bootVersion = '1.1.0.RC1'
 }
 
 ext.libs = [
