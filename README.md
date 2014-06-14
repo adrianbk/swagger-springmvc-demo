@@ -42,3 +42,5 @@ Sample spring-web-mvc 3+ project with spring JavaConfig
 - builds a webjar from swagger-ui's static content
 - sdoc.jsp is the packaged into the jar, when rendered the swagger explore field should  be 
 pre-populated with "<your-context-path>/api-docs"
+
+.
