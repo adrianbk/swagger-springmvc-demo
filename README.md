@@ -1,5 +1,6 @@
 swagger-springmvc-demo
 ======================
+[![Build Status](https://travis-ci.org/adrianbk/swagger-springmvc-demo.png?branch=master)](https://travis-ci.org/adrianbk/swagger-springmvc-demo) 
 
 A set of apps that test or demo swagger-spring mvc https://github.com/martypitt/swagger-springmvc/
 

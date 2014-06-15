@@ -1,6 +1,8 @@
 apply plugin: 'war'
 apply plugin: 'tomcat'
 
+apply from: "$rootDir/gradle/functionalTest.gradle"
+
 jvmsrc {
   packageName "com.ak.spring3.music"
 }
@@ -34,8 +36,14 @@ dependencies {
 
 }
 
+functionalTest.dependsOn tomcatRun
+functionalTest.finalizedBy tomcatStop
+
 tomcat {
   httpPort = 9080
   ajpPort = 9009
   stopPort = 9091
+  tomcatStopKey = 'stopKey'
 }
+
+tomcatRun.daemon = project.hasProperty('tcDaemon') ? true : false

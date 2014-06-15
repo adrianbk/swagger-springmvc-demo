@@ -27,3 +27,10 @@ public class Application {
 }
 
 ```
+
+#### Shutdown endpoint
+
+```bash
+
+curl -X POST localhost:8080/shutdown
+```

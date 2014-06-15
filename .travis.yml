@@ -4,7 +4,7 @@ jdk:
 
 script:
 - TERM=dumb ./gradlew build :spring3-testsuite:tomcatRun :spring3-testsuite:functionalTest :spring3-testsuite:acceptanceTestPhantom -i --stacktrace
-
+- TERM=dumb ./gradlew -PtcDaemon=true spring3-music:functionalTest -i
 env:
   global:
     secure: B1hgmACloviepBvXzi+ALNyRoAXsHl0D4/EsQYjkQ2ij+brhcmdV05uMh8RYYEkiCSN0J35SdiC/rAKMuTKb0n163YrERmT+NRHX+AcAIUtQXHbQpQASDPXw740kDzng5hzfeG0A+2lwZRdVY/K6NB+Kh7/3smlycYGBGomBk+o=

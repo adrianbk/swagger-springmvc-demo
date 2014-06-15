@@ -12,11 +12,11 @@ dependencies {
 
 sourceSets {
   functionalTest {
-    resources.srcDir file('src/functTest/resources')
+    resources.srcDir file('src/functionalTest/resources')
     compileClasspath = sourceSets.main.output + configurations.functTestCompile
     runtimeClasspath = output + compileClasspath + configurations.functTestRuntime
     groovy {
-      srcDir 'src/functTest/groovy'
+      srcDir 'src/functionalTest/groovy'
     }
   }
 }
@@ -32,8 +32,6 @@ task functionalTest(type: Test) {
   classpath = sourceSets.functionalTest.runtimeClasspath
   reports.html.destination = functionalTestReportDir
   reports.junitXml.destination = functionalTestResultsDir
-
-//    finalizedBy tomcatStop
 }
 
 // lazy as plugin not applied yet - get idea to see the source folders and external dependencies
