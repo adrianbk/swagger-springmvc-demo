@@ -1,6 +1,6 @@
 buildscript{
    dependencies {
-      classpath("org.springframework.boot:spring-boot-gradle-plugin:1.0.2.RELEASE")
+     classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.1.RELEASE")
    }
 }
 
@@ -12,11 +12,8 @@ jvmsrc {
 }
 
 dependencies {
-   compile("org.springframework.boot:spring-boot-starter-web") {
-      exclude module: "spring-boot-starter-tomcat"
-   }
-   compile("org.springframework.boot:spring-boot-starter-jetty")
-   compile("org.springframework.boot:spring-boot-starter-actuator")
+   compile("org.springframework.boot:spring-boot-starter-web:${bootVersion}")
+   compile("org.springframework.boot:spring-boot-starter-actuator:${bootVersion}")
    compile("commons-io:commons-io:2.+")
    testCompile("junit:junit")
 

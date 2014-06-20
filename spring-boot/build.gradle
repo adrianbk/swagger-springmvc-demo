@@ -1,6 +1,6 @@
 buildscript{
   dependencies {
-    classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.0.RC1")
+    classpath("org.springframework.boot:spring-boot-gradle-plugin:1.1.1.RELEASE")
   }
 }
 
@@ -13,13 +13,9 @@ jvmsrc {
 
 dependencies {
 
-  compile("org.springframework.boot:spring-boot-starter-web:${bootVersion}") {
-    exclude module: "spring-boot-starter-tomcat"
-  }
-  compile("org.springframework.boot:spring-boot-starter-jetty:${bootVersion}")
+  compile("org.springframework.boot:spring-boot-starter-web:${bootVersion}")
   compile("org.springframework.boot:spring-boot-starter-actuator:${bootVersion}")
   compile("commons-io:commons-io:2.+")
-
 
   compile libs.swagger
   compile "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jacksonVersion}",
