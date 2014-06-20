@@ -4,9 +4,10 @@ spring-boot
 A spring boot app with swagger ui integrated.
 - Lists boots endpoints: environment, health, etc.
 
-```
+```bash
 ./gradlew :spring-boot:bootRun
 ```
+
 - http://localhost:8080/
 - Uses the swagger-ui jar bundled by the accompanying swagger-ui project
 - Opens the swagger petstore example so change the explore field to `http://localhost:8080/api-docs`

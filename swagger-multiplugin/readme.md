@@ -13,7 +13,7 @@ $(function () {
       window.swaggerUi = new SwaggerUi({
       url: window.location.origin +"/myapp/api-docs?group=group1",
       dom_id: "swagger-ui-container",
-...
+```
 
 
 ## Run it
@@ -22,14 +22,14 @@ $(function () {
 ./gradlew :swagger-multiplugin:bootRun
 ```
 
-##group1 Resource Listing
+### group1 Resource Listing
 http://localhost:8080/api-docs?group=group1
 
-##group1 Api Declaration 
+#### group1 Api Declaration 
 http://localhost:8080/api-docs/group1/albums
 
-##group2 Resource Listing
+### group2 Resource Listing
 http://localhost:8080/api-docs?group=group2
 
-##group2 Api Declaration
+#### group2 Api Declaration
 http://localhost:8080/api-docs/group2/artists
