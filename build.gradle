@@ -18,7 +18,7 @@ buildscript {
   }
 
   dependencies {
-    classpath 'org.ajar.gradle:gradle-jvm-src-plugin:0.4'
+    classpath "com.github.adrianbk:gradle-jvmsrc-plugin:0.6.1"
   }
 }
 
@@ -36,12 +36,11 @@ allprojects {
 }
 
 subprojects {
-  apply plugin: 'jvmsrc'
+  apply plugin: 'com.github.adrianbk.jvmsrc'
 }
 
 task wrapper(type: Wrapper) {
-  gradleVersion = '1.12'
-
+  gradleVersion = '2.0'
   configurations.all {
     resolutionStrategy.cacheDynamicVersionsFor 10, 'seconds'
   }

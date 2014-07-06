@@ -43,7 +43,7 @@ tomcat {
   httpPort = 9080
   ajpPort = 9009
   stopPort = 9091
-  tomcatStopKey = 'stopKey'
+  stopKey = 'stopKey'
 }
 
 tomcatRun.daemon = project.hasProperty('tcDaemon') ? true : false
