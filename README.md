@@ -46,3 +46,4 @@ pre-populated with "<your-context-path>/api-docs"
 
 #### swagger-multiplugin
 - sample spring boot application using multiple SwaggerSpringMvcPlugin's (aka 'swagger groups')
+- 
