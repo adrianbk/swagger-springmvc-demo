@@ -11,7 +11,7 @@ https://github.com/wordnik/swagger-ui repo which is packaged into the jar.
   
 ###### Usage
 Maven
-```
+```xml
 <repository>
     <id>oss-jfrog-artifactory</id>
     <name>oss-jfrog-artifactory-releases</name>
@@ -21,7 +21,7 @@ Maven
 ```
 
 Gradle
-```
+```groovy
 repositories {
     jcenter()
 }
@@ -29,7 +29,7 @@ repositories {
 
 - Add the webjar as compile time dependency
 
-```
+```groovy
 dependencies {
 
   ...
@@ -42,7 +42,7 @@ dependencies {
 - Include the web jar as dependency and the boot will take care of the rest
 
 ##### Spring web MVC
-```
+```java
 import static org.ajar.swaggermvcui.SwaggerSpringMvcUi.WEB_JAR_RESOURCE_PATTERNS;
 import static org.ajar.swaggermvcui.SwaggerSpringMvcUi.WEB_JAR_RESOURCE_LOCATION;
 import static org.ajar.swaggermvcui.SwaggerSpringMvcUi.WEB_JAR_VIEW_RESOLVER_PREFIX;
