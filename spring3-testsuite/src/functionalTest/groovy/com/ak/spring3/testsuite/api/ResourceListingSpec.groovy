@@ -42,7 +42,7 @@ class ResourceListingSpec extends Specification {
       auth.oauth2.scopes[0].scope == 'global'
       auth.oauth2.scopes[0].description == 'access all'
 
-      auth.oauth2.grantTypes.implicit.loginEndpoint.url == "http://petstore.swagger.wordnik.com/oauth/dialog"
+      auth.oauth2.grantTypes.implicit.loginEndpoint.url == "http://petstore.swagger.wordnik.com/api/oauth/dialog"
       auth.oauth2.grantTypes.implicit.tokenName == "access_token"
 
       auth.oauth2.grantTypes.authorization_code.tokenRequestEndpoint.url == "http://petstore.swagger.wordnik.com/oauth/requestToken"
