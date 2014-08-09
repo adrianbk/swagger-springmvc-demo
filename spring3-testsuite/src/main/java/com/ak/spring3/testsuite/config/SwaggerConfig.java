@@ -68,7 +68,7 @@ public class SwaggerConfig {
 
     List<GrantType> grantTypes = newArrayList();
 
-    LoginEndpoint loginEndpoint = new LoginEndpoint("http://petstore.swagger.wordnik.com/oauth/dialog");
+    LoginEndpoint loginEndpoint = new LoginEndpoint("http://petstore.swagger.wordnik.com/api/oauth/dialog");
     grantTypes.add(new ImplicitGrant(loginEndpoint, "access_token"));
 
     TokenRequestEndpoint tokenRequestEndpoint = new TokenRequestEndpoint("http://petstore.swagger.wordnik.com/oauth/requestToken", "client_id", "client_secret");
