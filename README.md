@@ -44,6 +44,6 @@ Sample spring-web-mvc 3+ project with spring JavaConfig
 - sdoc.jsp is the packaged into the jar, when rendered the swagger explore field should  be 
 pre-populated with "<your-context-path>/api-docs"
 
+
 #### swagger-multiplugin
-- sample spring boot application using multiple SwaggerSpringMvcPlugin's (aka 'swagger groups')
-- 
+- sample spring boot application using multiple SwaggerSpringMvcPlugin's aka 'swagger groups'.
