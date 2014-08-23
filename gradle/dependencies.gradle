@@ -20,6 +20,9 @@ ext {
 
 ext.libs = [
 
+
+
+
         swagger       : [
                 "com.mangofactory:swagger-springmvc:$swaggerSpringMvcVersion"
         ],
