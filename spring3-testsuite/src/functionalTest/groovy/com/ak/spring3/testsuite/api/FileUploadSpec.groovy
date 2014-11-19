@@ -5,7 +5,6 @@ import spock.lang.Specification
 @Mixin(RestSupportMixin)
 class FileUploadSpec extends Specification {
 
-
   def "Should  have file upload attributes"() {
     expect:
       def resp = rest().get(path: 'api-docs/business-api/test-controller')

@@ -16,7 +16,7 @@ class ResourceListingSpec extends Specification {
       def apis = resp.data.apis
 
     and:
-      apis.size == 4
+      apis.size == 5
       apis[0].description == "Businesses"
       apis[0].path == "/business-api/businesses"
 
@@ -28,6 +28,9 @@ class ResourceListingSpec extends Specification {
 
       apis[3].description == "Test Controller"
       apis[3].path == "/business-api/test-controller"
+
+      apis[4].description == "Test Springs Rest Controller"
+      apis[4].path == "/business-api/test-springs-rest-controller"
   }
 
   def "code flow oauth"() {

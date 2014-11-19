@@ -36,6 +36,7 @@ public class SwaggerConfig {
                     "/some.*",
                     "/contacts.*",
                     "/pet.*",
+                    "/springsRestController.*",
                     "/test.*"
             )
             .apiInfo(apiInfo())

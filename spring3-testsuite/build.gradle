@@ -62,5 +62,5 @@ tomcat {
 }
 
 //should always be true for ci
-tomcatRun.daemon = true
+tomcatRun.daemon = project.hasProperty('tcDaemon') ? true : false
 

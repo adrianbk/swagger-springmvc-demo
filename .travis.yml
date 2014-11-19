@@ -3,7 +3,7 @@ jdk:
 - openjdk6
 
 script:
-- TERM=dumb ./gradlew build :spring3-testsuite:tomcatRun :spring3-testsuite:functionalTest :spring3-testsuite:acceptanceTestPhantom -i --stacktrace
+- TERM=dumb ./gradlew -PtcDaemon=true build :spring3-testsuite:tomcatRun :spring3-testsuite:functionalTest :spring3-testsuite:acceptanceTestPhantom -i --stacktrace
 - TERM=dumb ./gradlew -PtcDaemon=true spring3-music:functionalTest -i
 env:
   global:

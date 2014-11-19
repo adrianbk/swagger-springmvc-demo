@@ -1,6 +1,6 @@
 ext {
 
-  springVersion = '3.2.8.RELEASE'
+  springVersion = '4.1.2.RELEASE'
   springSecurityVersion = '3.2.3.RELEASE'
   spockVersion = '0.7-groovy-2.0'
   gebSpockVersion = '0.9.2'
@@ -10,7 +10,7 @@ ext {
   slf4jVersion = '1.7.5'
   logbackVersion = '1.1.2'
   tomcatVersion = '7.0.53'
-  swaggerSpringMvcVersion = System.getenv('LATEST_SSMVC_VERSION') ?:'0.9.2-SNAPSHOT'
+  swaggerSpringMvcVersion = System.getenv('LATEST_SSMVC_VERSION') ?:'0.9.1'
   swaggerUiVersion = '2.0.17'
   seleniumVersion = '2.41.0'
   chromeDriverVersion = '2.41.0'
