@@ -50,7 +50,6 @@ ext.libs = [
                 "com.fasterxml.jackson.core:jackson-databind:${jacksonVersion}",
                 "com.fasterxml.jackson.datatype:jackson-datatype-joda:${jacksonVersion}",
                 "com.fasterxml.jackson.module:jackson-module-jaxb-annotations:${jacksonVersion}",
-                "com.fasterxml.jackson.module:jackson-module-scala_2.10:${jacksonVersion}"
         ],
 
         validation    : ['org.hibernate:hibernate-validator:5.0.2.Final'],
