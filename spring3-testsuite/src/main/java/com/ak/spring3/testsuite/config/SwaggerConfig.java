@@ -2,6 +2,7 @@ package com.ak.spring3.testsuite.config;
 
 import com.mangofactory.swagger.authorization.AuthorizationContext;
 import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
+import com.mangofactory.swagger.models.dto.builder.OAuthBuilder;
 import com.mangofactory.swagger.plugin.EnableSwagger;
 import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
 import com.mangofactory.swagger.models.dto.ApiInfo;
@@ -13,7 +14,6 @@ import com.mangofactory.swagger.models.dto.GrantType;
 import com.mangofactory.swagger.models.dto.ImplicitGrant;
 import com.mangofactory.swagger.models.dto.LoginEndpoint;
 import com.mangofactory.swagger.models.dto.OAuth;
-import com.mangofactory.swagger.models.dto.OAuthBuilder;
 import com.mangofactory.swagger.models.dto.TokenEndpoint;
 import com.mangofactory.swagger.models.dto.TokenRequestEndpoint;
 import org.springframework.beans.factory.annotation.Autowired;
