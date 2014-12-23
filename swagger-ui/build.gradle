@@ -15,7 +15,7 @@ apply plugin: 'download-task'
 apply plugin: 'java'
 apply plugin: 'maven-publish'
 
-version = '0.2'
+version = '0.3'
 sourceCompatibility = 1.6
 
 ext {
@@ -56,15 +56,20 @@ task sdoc(type: Copy) {
   rename('index.html', 'sdoc.jsp')
 }
 
+task removeHtmlIndex(type: Delete) {
+  delete "${buildDir}/${swaggerUiExplodedDir}/index.html"
+}
+
+
 jar {
   from("${buildDir}/${swaggerUiExplodedDir}") {
     into "META-INF/resources"
 
     manifest {
       attributes(
-              "Implementation-Title":       artifactLabel,
-              "Implementation-Version":     version,
-              "SwaggerUi-Version":          swaggerUiVersion,
+              "Implementation-Title": artifactLabel,
+              "Implementation-Version": version,
+              "SwaggerUi-Version": swaggerUiVersion,
               "Swagger-Spring-MVC-Version": swaggerSpringMvcVersion
       )
     }
@@ -75,7 +80,8 @@ task sourceJar(type: Jar) {
   from sourceSets.main.allJava
 }
 
-compileJava.dependsOn(sdoc)
+compileJava.dependsOn(removeHtmlIndex)
+removeHtmlIndex.dependsOn(sdoc)
 sdoc.dependsOn(unzip)
 unzip.dependsOn(swaggerUiDownload)
 
