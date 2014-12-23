@@ -1,7 +1,3 @@
-sudo: false
-cache:
-  directories:
-  - $HOME/.m2
 language: java
 jdk:
 - openjdk6
