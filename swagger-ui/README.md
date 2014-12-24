@@ -33,7 +33,7 @@ repositories {
 dependencies {
 
   ...
-  compile "org.ajar:swagger-spring-mvc-ui:0.3"
+  compile "org.ajar:swagger-spring-mvc-ui:0.4"
 
 }
 
