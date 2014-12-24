@@ -5,7 +5,7 @@ import com.ak.spring3.testsuite.ui.modules.ResourceListingModule
 import geb.Page
 
 class SwaggerApiPage extends Page {
-   static url = "index.html"
+   static url = "sdoc.jsp"
    static at = { title == "Swagger UI" }
 
    static content = {
