@@ -5,6 +5,7 @@ import com.ak.spring3.testsuite.ui.modules.ResourceListingModule
 import com.ak.spring3.testsuite.ui.pages.PetStoreAuthPage
 import com.ak.spring3.testsuite.ui.pages.SwaggerApiPage
 import geb.spock.GebSpec
+import spock.lang.Ignore
 
 class OauthSpec extends GebSpec {
 
@@ -12,6 +13,7 @@ class OauthSpec extends GebSpec {
     to(SwaggerApiPage)
   }
 
+  @Ignore("Ignored until we can fix the oauth problem as the auth service (swagger.io) has been upgraded under the covers")
   def "Should authenticate with petstore server"() {
     when:
       SwaggerApiPage swaggerApiPage = page
