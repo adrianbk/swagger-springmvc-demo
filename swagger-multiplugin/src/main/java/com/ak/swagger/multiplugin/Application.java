@@ -1,40 +1,39 @@
 package com.ak.swagger.multiplugin;
 
-import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
-import com.mangofactory.swagger.plugin.EnableSwagger;
-import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.EnableAutoConfiguration;
-import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
+
+import static springfox.documentation.builders.PathSelectors.*;
 
 @Configuration
 @EnableAutoConfiguration
-@EnableSwagger
+@EnableSwagger2
 @ComponentScan(basePackages = {"com.ak.swaggerspringmvc.shared.controller"})
 public class Application {
 
-  @Autowired
-  private SpringSwaggerConfig swaggerConfig;
-
   public static void main(String[] args) {
-    ApplicationContext ctx = SpringApplication.run(Application.class, args);
+    SpringApplication.run(Application.class, args);
   }
 
   @Bean
-  public SwaggerSpringMvcPlugin groupOnePlugin() {
-    return new SwaggerSpringMvcPlugin(swaggerConfig)
-            .includePatterns("/music.*?")
-            .swaggerGroup("group1");
+  public Docket groupOnePlugin() {
+    return new Docket(DocumentationType.SWAGGER_2)
+            .select()
+              .paths(regex("/music.*?"))
+              .build()
+            .groupName("group1");
   }
 
   @Bean
-  SwaggerSpringMvcPlugin group2Plugin() {
-    return new SwaggerSpringMvcPlugin(swaggerConfig)
-            .includePatterns("/artists")
-            .swaggerGroup("group2");
+  Docket group2Plugin() {
+    return new Docket(DocumentationType.SWAGGER_2)
+            .select().paths(regex("/artists")).build()
+            .groupName("group2");
   }
 }

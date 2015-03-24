@@ -72,7 +72,7 @@ jar {
               "Implementation-Title": artifactLabel,
               "Implementation-Version": version,
               "SwaggerUi-Version": swaggerUiVersion,
-              "Swagger-Spring-MVC-Version": swaggerSpringMvcVersion
+              "Swagger-Spring-MVC-Version": springfoxVersion
       )
     }
   }

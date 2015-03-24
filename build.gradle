@@ -2,13 +2,14 @@ ext {
   developerMachines = ['adrian']
 
   activeRepos = {
-    if (developerMachines.contains(System.getenv('USER'))) {
-      maven { url 'http://localhost:8081/artifactory/repo' }
-    } else {
-      mavenCentral()
-    }
-    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
-    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
+//    if (developerMachines.contains(System.getenv('USER'))) {
+//      maven { url 'http://localhost:8081/artifactory/repo' }
+//    } else {
+//      mavenCentral()
+//    }
+    mavenLocal()
+//    maven { url 'https://oss.sonatype.org/content/repositories/snapshots' }
+//    maven { url 'http://oss.jfrog.org/artifactory/oss-snapshot-local/' }
     jcenter()
   }
 }
@@ -20,6 +21,7 @@ buildscript {
 
   dependencies {
     classpath "com.github.adrianbk:gradle-jvmsrc-plugin:0.6.1"
+    classpath "com.ofg:uptodate-gradle-plugin:1.1.0"
   }
 }
 
@@ -34,10 +36,12 @@ allprojects {
   repositories {
     configure(activeRepos)
   }
+  apply plugin: "idea"
 }
 
 subprojects {
   apply plugin: 'com.github.adrianbk.jvmsrc'
+  apply plugin: "com.ofg.uptodate"
 }
 
 task wrapper(type: Wrapper) {

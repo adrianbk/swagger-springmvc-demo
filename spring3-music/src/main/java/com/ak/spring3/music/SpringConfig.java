@@ -1,11 +1,7 @@
 package com.ak.spring3.music;
 
-import com.mangofactory.swagger.configuration.SpringSwaggerConfig;
-import com.mangofactory.swagger.plugin.EnableSwagger;
-import com.mangofactory.swagger.plugin.SwaggerSpringMvcPlugin;
 import org.joda.time.LocalDate;
 import org.joda.time.LocalDateTime;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
@@ -14,17 +10,17 @@ import org.springframework.web.servlet.config.annotation.EnableWebMvc;
 import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter;
 import org.springframework.web.servlet.view.InternalResourceViewResolver;
+import springfox.documentation.spi.DocumentationType;
+import springfox.documentation.spring.web.plugins.Docket;
+import springfox.documentation.swagger2.annotations.EnableSwagger2;
 
 import static org.ajar.swaggermvcui.SwaggerSpringMvcUi.*;
 
 @Configuration
 @EnableWebMvc
 @ComponentScan(basePackages = {"com.ak.swaggerspringmvc.shared.controller", "com.ak.spring3.music"})
-@EnableSwagger
+@EnableSwagger2
 public class SpringConfig extends WebMvcConfigurerAdapter {
-
-   @Autowired
-   private SpringSwaggerConfig swaggerConfig;
 
    @Override
    public void addResourceHandlers(ResourceHandlerRegistry registry) {
@@ -46,8 +42,8 @@ public class SpringConfig extends WebMvcConfigurerAdapter {
    }
 
    @Bean
-   public SwaggerSpringMvcPlugin groupOnePlugin() {
-      return new SwaggerSpringMvcPlugin(swaggerConfig)
+   public Docket groupOnePlugin() {
+      return new Docket(DocumentationType.SWAGGER_2)
               .directModelSubstitute(LocalDate.class, String.class)
               .directModelSubstitute(LocalDateTime.class, String.class);
    }
