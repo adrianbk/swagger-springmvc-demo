@@ -21,7 +21,7 @@ sourceCompatibility = 1.6
 ext {
   downloadUrl = "https://github.com/wordnik/swagger-ui/archive/v${swaggerUiVersion}.zip"
   destinationZip = "$buildDir/zip/${swaggerUiVersion}.zip"
-  replacePath = 'window.location.origin + "\\${pageContext.request.contextPath}/api-docs"'
+  replacePath = 'window.location.href.substring(0, window.location.href.lastIndexOf("/")) + "/api-docs"'
   artifactRepoBase = 'http://oss.jfrog.org/artifactory'
   artifactLabel = 'swagger-spring-mvc-ui'
 }
@@ -55,7 +55,7 @@ task sdoc(type: Copy) {
             .replaceAll('\\*/', '')
   }
 
-  rename('index.html', 'sdoc.jsp')
+  rename('index.html', 'sdoc.html')
 }
 
 task removeHtmlIndex(type: Delete) {
